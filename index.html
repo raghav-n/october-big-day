@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>October Big Day 2025 - Singapore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Libre+Franklin:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'hanken': ['Hanken Grotesk', 'sans-serif'],
+                        'libre': ['Libre Franklin', 'sans-serif'],
+                        'noto': ['Noto Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#35409a',
+                        'primary-light': '#4D59B6',
+                        'primary-dark': '#0D1462',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Bird hover tooltip styles */
+        .bird-container {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .bird-tooltip {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(53, 64, 154, 0.3);
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 99999;
+            min-width: 220px;
+            max-width: 90vw;
+            text-align: center;
+        }
+        
+        /* Desktop positioning */
+        @media (min-width: 768px) {
+            .bird-tooltip {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                max-width: 300px;
+            }
+            
+            .bird-container:hover .bird-tooltip {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        .bird-container:hover .bird-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Mobile: center tooltip on screen */
+        @media (max-width: 767px) {
+            .bird-container:hover .bird-tooltip {
+                transform: translateX(-50%) translateY(-50%);
+            }
+        }
+        
+        .bird-tooltip::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-bottom-color: rgba(255, 255, 255, 0.98);
+        }
+        
+        /* Hide arrow on mobile since tooltip is centered */
+        @media (max-width: 767px) {
+            .bird-tooltip::before {
+                display: none;
+            }
+        }
+        
+        .bird-tooltip h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #35409a;
+            margin: 0 0 4px 0;
+        }
+        
+        .bird-tooltip p {
+            font-size: 12px;
+            color: #6b7280;
+            margin: 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body class="font-noto bg-gradient-to-br from-slate-50/80 via-green-50/80 to-emerald-50/80 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="container mx-auto px-6 py-0">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="assets/img/birdsoc-logo.png" alt="Bird Society Logo" class="h-8 md:h-10 w-auto mr-1">
+                    <div class="h-8 md:h-10 border-l-2 border-gray-300 mx-2"></div>
+                    <img src="assets/img/logo.png" alt="October Big Day 2025" class="h-14 md:h-16 w-auto">
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-primary transition-colors duration-300 mt-2">About</a>
+                    <a href="#schedule" class="text-gray-600 hover:text-primary transition-colors duration-300 mt-2">Schedule</a>
+                    <a href="#faq" class="text-gray-600 hover:text-primary transition-colors duration-300 mt-2">FAQ</a>
+                    <a href="#register" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition-all duration-300 transform hover:scale-105">Register</a>
+                </div>
+                <!-- Mobile menu button -->
+                <button class="md:hidden" onclick="toggleMenu()">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#about" class="text-gray-600 hover:text-primary transition-colors duration-300">About</a>
+                    <a href="#schedule" class="text-gray-600 hover:text-primary transition-colors duration-300">Schedule</a>
+                    <a href="#faq" class="text-gray-600 hover:text-primary transition-colors duration-300">FAQ</a>
+                    <a href="#register" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition-all duration-300 text-center">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Bird Gallery -->
+    <section class="pt-24 pb-16 px-6 relative overflow-hidden">
+        <div class="container mx-auto">
+            <!-- Birds Gallery Header -->
+            <div class="relative">
+                <!-- Birds + Title Background Container -->
+                <div class="relative backdrop-blur-sm rounded-3xl border border-white/30 p-6 md:p-8 mb-8" style="background: radial-gradient(ellipse 200% 100% at center 20%, white, rgb(251 252 217 / 70%), rgb(240 249 189))">
+                    <!-- Top Row - Decorative Birds -->
+                    <div class="flex justify-center items-center mb-8">
+                        <div id="birdGrid" class="relative z-20 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 max-w-6xl w-full">
+                            <!-- Birds will be dynamically loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Main Title Section -->
+                    <div class="text-center">
+                        <img src="assets/img/octoberbigday-text.png" alt="October Big Day 2025" class="mx-auto max-w-full h-auto max-h-[200px] md:max-h-[300px] drop-shadow-2xl">
+                    </div>
+                </div>
+
+                <!-- Organization Logos Section -->
+                <div class="text-center mb-12 max-w-3xl mx-auto">
+                    <!-- Organized by (top, larger) -->
+                    <div class="mb-8">
+                        <p class="text-gray-700 text-md font-medium mb-3">Organized by</p>
+                        <img src="assets/img/birdsoc-logo.png" alt="Bird Society of Singapore" class="mx-auto h-20 md:h-24 w-auto">
+                    </div>
+                    
+                    <!-- Sponsored by and In support of (bottom row) -->
+                    <div class="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
+                        <div class="text-center">
+                            <p class="text-gray-600 text-sm font-medium mb-3">Sponsored by</p>
+                            <img src="assets/img/mandai-nature.svg" alt="Mandai Nature" class="mx-auto h-16 md:h-18 w-auto">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-gray-600 text-sm font-medium mb-3">In support of</p>
+                            <img src="assets/img/octoberbigday-cornell.svg" alt="Cornell October Big Day" class="mx-auto h-12 md:h-12 w-auto">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtitle and CTA -->
+                <div class="text-center max-w-4xl mx-auto">
+                    <p class="text-xl md:text-2xl text-gray-700 mb-12 leading-relaxed">
+                        Join us on October 11, 2025 for a morning of birding, exciting and informative talks, and a chance to connect with other birders
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#register" class="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary-dark transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            Register Now
+                        </a>
+                        <a href="#about" class="border-2 border-primary text-primary px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-6 bg-white/80">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">About the Event</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                            October Big Day 2025 is a half-day birding event featuring a morning bioblitz followed by informative talks from experienced birders and scientists. Held in conjunction with eBird's global October Big Day, this event aims to promote citizen science and showcase Singapore's incredible biodiversity.
+                        </p>
+                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                            Join qualified ornithologists and experienced birders as you explore five carefully selected birding sites across Singapore. Contribute valuable data to the global eBird platform while learning from experts about local bird species and conservation efforts.
+                        </p>
+                        
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-100 to-green-100 p-8 rounded-3xl">
+                        <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Pricing</h3>
+                        <ul class="space-y-1">
+                            <li class="flex items-start">
+                                <span class="text-gray-700 font-bold">Adult</span> <span class="text-gray-700">&nbsp;·&nbsp;$20</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-gray-700 font-bold">Student (≤18yo)</span> <span class="text-gray-700">&nbsp;·&nbsp;$10</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-16 px-6 bg-gradient-to-br from-slate-50/80 via-green-50/80 to-emerald-50/80">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Event Schedule</h2>
+                <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Morning Bioblitz -->
+                        <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl">
+                            <div class="text-center mb-4">
+                                <h3 class="font-hanken font-bold text-xl text-primary mb-2">Morning Bioblitz</h3>
+                                <p class="text-orange-600 font-semibold">7:30 AM - 10:00 AM</p>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li>• Expert-guided birdwatching</li>
+                                <li>• Five different birding sites</li>
+                                <li>• Data collection for eBird</li>
+                                <li>• Species identification training</li>
+                            </ul>
+                        </div>
+
+                        <!-- Transport & Arrival -->
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl">
+                            <div class="text-center mb-4">
+                                <h3 class="font-hanken font-bold text-xl text-primary mb-2">Transport</h3>
+                                <p class="text-blue-600 font-semibold">10:00 AM - 11:00 AM</p>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li>• Shuttle bus service provided</li>
+                                <li>• Travel to central venue</li>
+                                <li>• Zoo Learning Centre Auditorium</li>
+                            </ul>
+                        </div>
+
+                        <!-- Educational Talks -->
+                        <div class="bg-gradient-to-br from-green-50/80 to-emerald-50/80 p-6 rounded-2xl">
+                            <div class="text-center mb-4">
+                                <h3 class="font-hanken font-bold text-xl text-primary mb-2">Educational Talks</h3>
+                                <p class="text-green-600 font-semibold">11:00 AM - 12:00 PM</p>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li>• Expert presentations</li>
+                                <li>• Avian research insights</li>
+                                <li>• Conservation topics</li>
+                                <li>• Singapore birding focus</li>
+                            </ul>
+                        </div>
+
+                        <!-- Lunch & Networking -->
+                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl md:col-span-3">
+                            <div class="text-center mb-4">
+                                <h3 class="font-hanken font-bold text-xl text-primary mb-2">Lunch & Networking</h3>
+                                <p class="text-purple-600 font-semibold">12:00 PM - 1:00 PM</p>
+                            </div>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <ul class="space-y-3 text-gray-700">
+                                    <li>• Complimentary lunch provided</li>
+                                    <li>• Vegetarian options available</li>
+                                </ul>
+                                <ul class="space-y-3 text-gray-700">
+                                    <li>• Network with fellow birders</li>
+                                    <li>• Meet ornithologists and researchers</li>
+                                </ul>
+                                <ul class="space-y-3 text-gray-700">
+                                    <li>• Share birding experiences</li>
+                                    <li>• Event wrap-up and closing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Birding Sites Section -->
+    <section id="birding-sites" class="py-16 px-6 bg-white/80">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Birding Sites</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Location 1 -->
+                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+                        <h3 class="font-hanken font-bold text-2xl text-primary mb-4">East Coast Park</h3>
+                        <p class="text-gray-700 mb-4">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                        <div class="text-sm text-gray-600">
+                            <div class="flex items-center mb-2">
+                                <span class="text-primary mr-2">📍</span>
+                                <span>Coastal wetlands and beach</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-primary mr-2">🕒</span>
+                                <span>5:30 AM - 8:00 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location 2 -->
+                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+                        <h3 class="font-hanken font-bold text-2xl text-primary mb-4">MacRitchie Reservoir</h3>
+                        <p class="text-gray-700 mb-4">
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                        <div class="text-sm text-gray-600">
+                            <div class="flex items-center mb-2">
+                                <span class="text-primary mr-2">📍</span>
+                                <span>Primary rainforest</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-primary mr-2">🕒</span>
+                                <span>8:30 AM - 11:30 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location 3 -->
+                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+                        <h3 class="font-hanken font-bold text-2xl text-primary mb-4">Singapore Botanic Gardens</h3>
+                        <p class="text-gray-700 mb-4">
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        </p>
+                        <div class="text-sm text-gray-600">
+                            <div class="flex items-center mb-2">
+                                <span class="text-primary mr-2">📍</span>
+                                <span>Urban park and gardens</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-primary mr-2">🕒</span>
+                                <span>12:00 PM - 2:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location 4 -->
+                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+                        <h3 class="font-hanken font-bold text-2xl text-primary mb-4">Gardens by the Bay</h3>
+                        <p class="text-gray-700 mb-4">
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.
+                        </p>
+                        <div class="text-sm text-gray-600">
+                            <div class="flex items-center mb-2">
+                                <span class="text-primary mr-2">📍</span>
+                                <span>Modern urban ecosystem</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-primary mr-2">🕒</span>
+                                <span>2:30 PM - 5:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location 5 -->
+                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+                        <h3 class="font-hanken font-bold text-2xl text-primary mb-4">Sungei Buloh Wetland Reserve</h3>
+                        <p class="text-gray-700 mb-4">
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+                        </p>
+                        <div class="text-sm text-gray-600">
+                            <div class="flex items-center mb-2">
+                                <span class="text-primary mr-2">📍</span>
+                                <span>Mangrove wetlands</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-primary mr-2">🕒</span>
+                                <span>5:30 PM - 7:30 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 px-6 bg-gradient-to-br from-slate-50/80 via-green-50/80 to-emerald-50/80">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                        <h3 class="font-hanken font-bold text-xl text-primary mb-3">What should I bring?</h3>
+                        <p class="text-gray-700">Bring comfortable walking shoes, sun protection, water bottle, and if you have them - binoculars and a camera. We'll provide field guides and equipment for those who need it. Don't forget your smartphone for eBird data entry!</p>
+                    </div>
+                    
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                        <h3 class="font-hanken font-bold text-xl text-primary mb-3">Is this suitable for beginners?</h3>
+                        <p class="text-gray-700">Absolutely! October Big Day welcomes birders of all experience levels. Each birding site will have qualified ornithologists and experienced birders from BirdSoc SG to help beginners identify species and learn birding techniques.</p>
+                    </div>
+                    
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                        <h3 class="font-hanken font-bold text-xl text-primary mb-3">What does the registration fee cover?</h3>
+                        <p class="text-gray-700">The nominal registration fee covers expert-guided birding sessions, transportation to the central venue, educational talks, lunch (including vegetarian options), an event pin, and event merchandise. All honoraria are donated back to BirdSoc SG for conservation efforts.</p>
+                    </div>
+                    
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                        <h3 class="font-hanken font-bold text-xl text-primary mb-3">How many birding sites can I visit?</h3>
+                        <p class="text-gray-700">Participants register for one of five birding sites for the morning bioblitz (7:30-10:00 AM). After the morning session, everyone will be transported to the Zoo Learning Centre Auditorium for talks and lunch together.</p>
+                    </div>
+                    
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                        <h3 class="font-hanken font-bold text-xl text-primary mb-3">What is eBird and why is it important?</h3>
+                        <p class="text-gray-700">eBird is a global citizen science platform where bird observations are recorded and used for scientific research and conservation. Your sightings during October Big Day contribute valuable data that helps track bird populations and migration patterns worldwide.</p>
+                    </div>
+                    
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                        <h3 class="font-hanken font-bold text-xl text-primary mb-3">Where is the central venue located?</h3>
+                        <p class="text-gray-700">The talks and lunch will be held at the Zoo Learning Centre Auditorium at Mandai Nature. Transportation will be provided from all birding sites to this central location, and parking is available for those driving directly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Section -->
+    <section id="register" class="py-16 px-6 bg-white/80">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Register Now</h2>
+                <!-- <div class="bg-gradient-to-br from-primary/5 to-primary-light/5 rounded-3xl p-8 md:p-12"> -->
+                    <!-- <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="font-hanken font-bold text-3xl text-primary mb-6">Join Us for an Unforgettable Day</h3>
+                            <p class="text-lg text-gray-700 mb-6">
+                                Don't miss this opportunity to connect with nature and fellow bird enthusiasts in Singapore's most comprehensive birding event.
+                            </p>
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-center">
+                                    <span class="text-green-500 mr-3 text-xl">✓</span>
+                                    <span class="text-gray-700">Expert guides and equipment provided</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-green-500 mr-3 text-xl">✓</span>
+                                    <span class="text-gray-700">All locations and transport included</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-green-500 mr-3 text-xl">✓</span>
+                                    <span class="text-gray-700">Refreshments and lunch provided</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-green-500 mr-3 text-xl">✓</span>
+                                    <span class="text-gray-700">Digital field guide and certificates</span>
+                                </div>
+                            </div>
+                            <div class="bg-white/80 p-6 rounded-2xl">
+                                <h4 class="font-hanken font-bold text-xl text-primary mb-3">Pricing</h4>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-700">Adults (Early Bird)</span>
+                                        <span class="font-semibold text-primary">S$45</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-700">Students/Seniors</span>
+                                        <span class="font-semibold text-primary">S$25</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-700">Family Package (2+2)</span>
+                                        <span class="font-semibold text-primary">S$120</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        
+                        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl" id="registrationApp">
+                            <div class="mb-6">
+                                <h4 class="font-hanken font-bold text-2xl text-primary">Choose Your Location</h4>
+                                <p class="text-gray-600">Select a location below and complete your registration.</p>
+                            </div>
+                            <div id="eventsError" class="hidden text-red-600 bg-red-50 border border-red-200 rounded-xl p-4 mb-4"></div>
+                            <div id="eventsList" class="space-y-4">
+                                <div class="animate-pulse bg-gray-100 h-24 rounded-xl"></div>
+                                <div class="animate-pulse bg-gray-100 h-24 rounded-xl"></div>
+                                <div class="animate-pulse bg-gray-100 h-24 rounded-xl"></div>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            <!-- </div> -->
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <!-- <section id="partners" class="py-16 px-6 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Our Partners</h2>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl text-center">
+                        <div class="bg-gradient-to-br from-primary/10 to-primary-light/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">🏛️</span>
+                        </div>
+                        <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Organized by</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white/60 rounded-2xl p-4">
+                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Singapore Birding Society</h4>
+                                <p class="text-gray-600 text-sm">Leading community of bird enthusiasts in Singapore</p>
+                            </div>
+                            <div class="bg-white/60 rounded-2xl p-4">
+                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Nature Society Singapore</h4>
+                                <p class="text-gray-600 text-sm">Promoting awareness and conservation of nature</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl text-center">
+                        <div class="bg-gradient-to-br from-green-100 to-emerald-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">🤝</span>
+                        </div>
+                        <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Supported by</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white/60 rounded-2xl p-4">
+                                <h4 class="font-semibold text-lg text-gray-800 mb-2">National Parks Board</h4>
+                                <p class="text-gray-600 text-sm">Singapore's national parks and nature reserves</p>
+                            </div>
+                            <div class="bg-white/60 rounded-2xl p-4">
+                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Wildlife Reserves Singapore</h4>
+                                <p class="text-gray-600 text-sm">Conservation and wildlife education</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl text-center">
+                        <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">⭐</span>
+                        </div>
+                        <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Special Thanks</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white/60 rounded-2xl p-4">
+                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Singapore Tourism Board</h4>
+                                <p class="text-gray-600 text-sm">Promoting Singapore's natural heritage</p>
+                            </div>
+                            <div class="bg-white/60 rounded-2xl p-4">
+                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Local Conservation Groups</h4>
+                                <p class="text-gray-600 text-sm">Grassroots conservation efforts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="py-12 px-6 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Credits</h3>
+                <div class="grid md:grid-cols-2 gap-8 text-sm text-gray-600">
+                    <div>
+                        <h4 class="font-medium text-gray-800 mb-2">Organizing Committee</h4>
+                        <p>Zachary Chong</p>
+                        <p>Collin Chua</p>
+                        <p>Raghav Narayanswamy</p>
+                        <p>Movin Nyanasengeran</p>
+                        <p>Sng Chen Xi</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-800 mb-2">Design and Web Development</h4>
+                        <p>Lynn Tan (illustrations)</p>
+                        <p>Emma Chao (graphic design)</p>
+                        <p>Raghav Narayanswamy (web dev)</p>
+                    </div>
+                </div>
+                <div class="mt-8 pt-8 border-t border-gray-300">
+                    <p class="text-xs text-gray-500">
+                        © 2025 Bird Society of Singapore. All rights reserved. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript for mobile menu -->
+    <script>
+        // Reusable Bird Component Function
+        function createBirdComponent(imageSrc, alt, species, description, hoverClass = '') {
+            return `
+                <div class="bird-container transform hover:scale-105 transition-all duration-500 ${hoverClass}">
+                    <img src="${imageSrc}" alt="${alt}" class="w-full h-auto max-w-[150px] md:max-w-[200px] mx-auto drop-shadow-lg">
+                    <div class="bird-tooltip">
+                        <h3>${species}</h3>
+                        <p>${description}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Bird data
+        const birdData = {
+            cuckoo: {
+                imageSrc: "assets/img/octoberbigday-cuckoo (1).png",
+                alt: "Chestnut-winged Cuckoo",
+                species: "Chestnut-winged Cuckoo",
+                description: "First arrivals of this large cuckoo species are often seen in early October."
+            },
+            starling: {
+                imageSrc: "assets/img/octoberbigday-starling&robin (2).png",
+                alt: "Daurian Starling",
+                species: "Daurian Starling",
+                description: "An elegant starling species known for forming large murmurations during migration."
+            },
+            robin: {
+                imageSrc: "assets/img/octoberbigday-starling&robin (1).png",
+                alt: "Siberian Blue Robin",
+                species: "Siberian Blue Robin",
+                description: "Inhabits dense forest streams, and despite the male's vivid blue upperparts, often heard before being seen."
+            },
+            flycatcher: {
+                imageSrc: "assets/img/octoberbigday-yrfc (1).png",
+                alt: "Yellow-rumped Flycatcher",
+                species: "Yellow-rumped Flycatcher",
+                description: "The brightly-coloured male is a striking sight during the migration season, with peak numbers in mid-October."
+            }
+        };
+
+        // Initialize bird components on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const birdGrid = document.getElementById('birdGrid');
+            if (birdGrid) {
+                birdGrid.innerHTML = `
+                    ${createBirdComponent(birdData.cuckoo.imageSrc, birdData.cuckoo.alt, birdData.cuckoo.species, birdData.cuckoo.description, 'hover:rotate-3')}
+                    ${createBirdComponent(birdData.starling.imageSrc, birdData.starling.alt, birdData.starling.species, birdData.starling.description, 'hover:rotate-2 mt-1')}
+                    ${createBirdComponent(birdData.robin.imageSrc, birdData.robin.alt, birdData.robin.species, birdData.robin.description, 'hover:-rotate-3 mt-2')}
+                    ${createBirdComponent(birdData.flycatcher.imageSrc, birdData.flycatcher.alt, birdData.flycatcher.species, birdData.flycatcher.description, 'hover:-rotate-2 mt-9')}
+                `;
+            }
+        });
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+    <script src="https://shop.birdsociety.sg/static/js/lib/paynowqr.min.js"></script>
+    <script src="https://shop.birdsociety.sg/static/js/qrcode-with-logos.min.js"></script>
+    <script>
+        const API_BASE = (function(){
+            if (window.__API_BASE) return window.__API_BASE;
+            const host = location.hostname;
+            if (host === 'localhost' || host === '127.0.0.1' || host === '') return 'http://localhost:8000/api/v1';
+            return 'https://shop.birdsociety.sg/api/v1';
+        })();
+        function fmtDate(s) {
+            try { return new Date(s).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }); } catch { return s; }
+        }
+        function currency(amount, cur) {
+            const a = typeof amount === 'string' ? parseFloat(amount) : amount;
+            if (!a || a === 0) return 'Free';
+            try { return new Intl.NumberFormat(undefined, { style: 'currency', currency: cur || 'SGD' }).format(a); } catch { return `S$${a.toFixed(2)}`; }
+        }
+        function renderPayNow(canvasEl, amount, reference) {
+            if (!window.PaynowQR || !window.QrCodeWithLogo) return;
+            const qrString = new window.PaynowQR({ uen: 'T23SS0038A', amount: parseFloat(amount), editable: false, refNumber: reference }).output();
+            new window.QrCodeWithLogo({ canvas: canvasEl, content: qrString, width: 240 });
+        }
+        // Generate a client-side reference so users can pay first.
+        // Produces an uppercase, 25-char max, PayNow-safe reference.
+        function generateClientReference(prefix = 'OBD25') {
+            const dt = new Date();
+            const y = String(dt.getFullYear()).slice(-2);
+            const m = String(dt.getMonth() + 1).padStart(2, '0');
+            const d = String(dt.getDate()).padStart(2, '0');
+            const h = String(dt.getHours()).padStart(2, '0');
+            const mi = String(dt.getMinutes()).padStart(2, '0');
+            const s = String(dt.getSeconds()).padStart(2, '0');
+            // Short random suffix for uniqueness
+            const rand = Math.random().toString(36).toUpperCase().slice(2, 6);
+            // Format: PREFIXYYMMDD-HHMMSS-RAND (<=25 chars)
+            const raw = `${prefix}${y}${m}${d}-${h}${mi}${s}-${rand}`.toUpperCase();
+            return raw.replace(/[^A-Z0-9-]/g, '').slice(0, 25);
+        }
+        async function fetchEvents() {
+            const res = await fetch(`${API_BASE}/events`);
+            if (!res.ok) throw new Error('Unable to load events');
+            const data = await res.json();
+            const filtered = (data || []).filter(e => (e.title || '').toLowerCase().includes('october big day'));
+            filtered.sort((a, b) => (a.location||'').localeCompare(b.location||''));
+            return filtered;
+        }
+        async function fetchEventDetail(id) {
+            const res = await fetch(`${API_BASE}/events/${id}`);
+            if (!res.ok) throw new Error('Unable to load event details');
+            return await res.json();
+        }
+        function sentenceCase(key) {
+            return key.replace(/([A-Z])/g, ' $1')
+                .replace(/[_-]+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim()
+                .toLowerCase()
+                .replace(/^\w/, c => c.toUpperCase());
+        }
+        function schemaFieldControl(key, schemaProp, required) {
+            const type = schemaProp.type;
+            const label = schemaProp.title || sentenceCase(key);
+            const desc = schemaProp.description || '';
+            const req = required ? 'required' : '';
+            const common = `data-key="${key}" ${req} class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"`;
+            if (schemaProp.enum) {
+                const emptyOpt = '<option value="">Select...</option>';
+                const opts = schemaProp.enum.map(v => `<option value="${String(v)}">${String(v)}</option>`).join('');
+                return `<div><label class="block text-gray-700 text-sm mb-1">${label}${required?' *':''}</label><select ${common}>${emptyOpt}${opts}</select>${desc?`<div class=\"text-xs text-gray-500 mt-1\">${desc}</div>`:''}</div>`;
+            }
+            if (type === 'integer' || type === 'number') {
+                const step = type === 'integer' ? '1' : 'any';
+                const min = schemaProp.minimum != null ? `min="${schemaProp.minimum}"` : '';
+                return `<div><label class="block text-gray-700 text-sm mb-1">${label}${required?' *':''}</label><input type="number" ${min} step="${step}" ${common} />${desc?`<div class=\"text-xs text-gray-500 mt-1\">${desc}</div>`:''}</div>`;
+            }
+            // const placeholder = (schemaProp.examples && schemaProp.examples[0]) ? `placeholder="${schemaProp.examples[0]}"` : '';
+            return `<div><label class="block text-gray-700 text-sm mb-1">${label}${required?' *':''}</label><input type="text" ${common} />${desc?`<div class=\"text-xs text-gray-500 mt-1\">${desc}</div>`:''}</div>`;
+        }
+        function buildParticipantsUI(schema, count) {
+            const reqSet = new Set(schema.required || []);
+            const keys = Object.keys(schema.properties || {});
+            const sections = [];
+            for (let i = 1; i <= count; i++) {
+                const controls = keys.map(key => {
+                    const prop = schema.properties[key] || {};
+                    return schemaFieldControl(key, prop, reqSet.has(key));
+                }).join('');
+                sections.push(`
+                    <div class="border border-gray-200 rounded-xl p-4" data-part="${i}">
+                        <div class="font-hanken font-semibold text-primary mb-3">Participant ${i}</div>
+                        <div class="grid md:grid-cols-2 gap-3">${controls}</div>
+                    </div>
+                `);
+            }
+            return sections.join('');
+        }
+        function isVisible(el) {
+            if (!el) return false;
+            if (el.closest('.hidden')) return false;
+            const style = window.getComputedStyle ? window.getComputedStyle(el) : null;
+            if (style && (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0')) return false;
+            return el.offsetParent !== null || style == null; // fallback true if can't compute
+        }
+        function isFormComplete(form) {
+            const requiredEls = Array.from(form.querySelectorAll('input[required], select[required], textarea[required]'))
+                .filter(isVisible);
+            if (!requiredEls.length) return false;
+            for (const el of requiredEls) {
+                if (el.type === 'email') {
+                    const v = el.value.trim();
+                    const ok = /.+@.+\..+/.test(v);
+                    if (!ok) return false;
+                    continue;
+                }
+                if (!el.value || String(el.value).trim() === '') return false;
+                if (el.type === 'number') {
+                    const num = el.step === '1' ? parseInt(el.value, 10) : parseFloat(el.value);
+                    if (Number.isNaN(num)) return false;
+                    if (el.hasAttribute('min')) {
+                        const min = parseFloat(el.getAttribute('min'));
+                        if (!Number.isNaN(min) && num < min) return false;
+                    }
+                }
+            }
+            return true;
+        }
+        function debounce(fn, delay = 350) {
+            let t;
+            return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
+        }
+        function parseDonation(inputEl) {
+            if (!inputEl) return { valid: true, value: 0 };
+            const raw = String(inputEl.value || '').trim();
+            if (raw === '') return { valid: true, value: 0 };
+            // Only allow non-negative integers
+            if (!/^\d+$/.test(raw)) return { valid: false, value: 0 };
+            const n = parseInt(raw, 10);
+            if (Number.isNaN(n) || n < 0) return { valid: false, value: 0 };
+            return { valid: true, value: n };
+        }
+        function showDonationValidity(inputEl) {
+            if (!inputEl) return true;
+            const { valid } = parseDonation(inputEl);
+            const errEl = inputEl.parentElement && inputEl.parentElement.querySelector('.donation-error');
+            if (!valid) {
+                if (errEl) { errEl.textContent = 'Enter a whole dollar amount (e.g., 5)'; errEl.classList.remove('hidden'); }
+                inputEl.setCustomValidity('Donation must be a whole dollar amount');
+                return false;
+            }
+            if (errEl) { errEl.textContent = ''; errEl.classList.add('hidden'); }
+            inputEl.setCustomValidity('');
+            return true;
+        }
+        async function computeAndRenderPrice(evId, form) {
+            const box = form.querySelector('.price-preview');
+            if (!box) return;
+            const formComplete = isFormComplete(form);
+            const itemsEl = box.querySelector('.price-items');
+            const totalEl = box.querySelector('.price-total');
+            const capEl = box.querySelector('.price-capacity');
+            const warnEl = box.querySelector('.price-warnings');
+            if (formComplete) {
+                box.classList.remove('hidden');
+                if (itemsEl) itemsEl.innerHTML = '<div class="text-xs text-gray-500">Computing…</div>';
+                if (totalEl) totalEl.textContent = '';
+                if (capEl) capEl.textContent = '';
+                if (warnEl) warnEl.textContent = '';
+            } else {
+                box.classList.add('hidden');
+            }
+            const countInput = form.querySelector('input[name="participants"]');
+            const count = Math.max(1, parseInt((countInput && countInput.value) ? countInput.value : '1', 10));
+            const email = (form.querySelector('input[name="email"]') || { value: '' }).value.trim();
+            // Build participants payload for pricing
+            const items = [];
+            const schemaSections = form.querySelectorAll('.participants > [data-part]');
+            for (let i = 0; i < count; i++) {
+                if (formComplete) {
+                    const sect = schemaSections[i];
+                    const extra = {};
+                    if (sect) {
+                        sect.querySelectorAll('[data-key]').forEach(input => {
+                            const key = input.getAttribute('data-key');
+                            let val = input.value;
+                            if (input.type === 'number') {
+                                val = input.step === '1' ? parseInt(val || '0', 10) : parseFloat(val || '0');
+                            }
+                            extra[key] = val;
+                        });
+                    }
+                    items.push({ quantity: 1, extra_json: extra, email });
+                } else {
+                    items.push({ quantity: 1 });
+                }
+            }
+            try {
+                const res = await fetch(`${API_BASE}/events/${evId}/price-breakdown`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+                        participants: items,
+                        // Send donation as number in JSON
+                        donation: (function(){
+                            const donationInput = form.querySelector('input[name="donation"]');
+                            const parsed = parseDonation(donationInput);
+                            return parsed.valid ? parsed.value : 0;
+                        })()
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.detail || 'Failed to compute price');
+                const cur = data.currency || 'SGD';
+                // Store latest price data for later steps
+                try { form.dataset.priceData = JSON.stringify({
+                    currency: cur,
+                    items: data.items || [],
+                    totals: data.totals || {},
+                    requires_payment: !!data.requires_payment,
+                    capacity: data.capacity || null
+                }); } catch {}
+                // Sync top spots-left with backend capacity
+                if (data.capacity && data.capacity.remaining != null) {
+                    const spotsEl = document.querySelector(`.spots-left[data-ev="${evId}"]`);
+                    if (spotsEl) {
+                        spotsEl.textContent = data.capacity.remaining;
+                        spotsEl.classList.remove('hidden');
+                    }
+                }
+                if (isFormComplete(form)) {
+                    const list = (data.items || []).map(it => {
+                        const idx = (it.index != null ? it.index : 0) + 1;
+                        const tier = it.tier && it.tier.name ? ` – ${it.tier.name}` : '';
+                        const unit = currency(parseFloat(it.unit_price || 0), cur);
+                        const line = currency(parseFloat(it.line_total || 0), cur);
+                        const qty = it.quantity || 1;
+                        return `<div>Participant ${idx}${tier}: ${unit} × ${qty} = <span class=\"font-medium\">${line}</span></div>`;
+                    }).join('');
+                    if (itemsEl) itemsEl.innerHTML = list || '<div class="text-xs text-gray-500">No items</div>';
+                }
+                const subtotalAmt = (data.totals && data.totals.amount) ? parseFloat(data.totals.amount) : 0;
+                const totalQty = (data.totals && data.totals.quantity) ? data.totals.quantity : count;
+                const donationFromApi = (data.totals && data.totals.donation != null) ? parseFloat(data.totals.donation) : 0;
+                const finalAmt = (data.totals && data.totals.amount_with_donation != null)
+                    ? parseFloat(data.totals.amount_with_donation)
+                    : (subtotalAmt + donationFromApi);
+                // Validate donation input (whole dollars)
+                showDonationValidity(form.querySelector('input[name="donation"]'));
+                const lines = [];
+                lines.push(`Subtotal: ${currency(subtotalAmt, cur)} (${totalQty})`);
+                if (donationFromApi > 0) lines.push(`Donation: ${currency(donationFromApi, cur)}`);
+                lines.push(`Total: ${currency(finalAmt, cur)}`);
+                if (totalEl) totalEl.textContent = lines.join(' • ');
+                const submitBtn = form.querySelector('button[type="submit"]');
+                if (data.capacity && data.capacity.available === false) {
+                    if (capEl) {
+                        capEl.className = 'price-capacity text-xs text-red-700';
+                        capEl.textContent = 'Capacity not available for the selected quantity.';
+                    }
+                    if (submitBtn) submitBtn.disabled = true;
+                } else if (data.capacity) {
+                    if (capEl) {
+                        capEl.className = 'price-capacity text-xs text-gray-600';
+                        const rem = data.capacity.remaining != null ? ` • ${data.capacity.remaining} remaining` : '';
+                        capEl.textContent = `Capacity available${rem}`;
+                    }
+                    if (submitBtn) submitBtn.disabled = false;
+                }
+                const warns = [];
+                if (data.warnings) {
+                    if (data.warnings.duplicate_emails && data.warnings.duplicate_emails.length) {
+                        warns.push(`Duplicate emails: ${data.warnings.duplicate_emails.join(', ')}`);
+                    }
+                    if (data.warnings.already_registered_emails && data.warnings.already_registered_emails.length) {
+                        warns.push(`Already registered: ${data.warnings.already_registered_emails.join(', ')}`);
+                    }
+                }
+                if (warnEl) {
+                    warnEl.className = `price-warnings text-xs ${warns.length ? 'text-amber-700' : 'text-gray-500'}`;
+                    warnEl.textContent = warns.join(' • ');
+                }
+            } catch (err) {
+                if (itemsEl) itemsEl.innerHTML = '';
+                if (totalEl) totalEl.textContent = '';
+                if (capEl) capEl.textContent = '';
+                if (warnEl) {
+                    warnEl.className = 'price-warnings text-xs text-red-700';
+                    warnEl.textContent = err.message || 'Failed to compute price';
+                }
+            }
+        }
+        function eventCardHTML(ev) {
+            const left = ev.max_participants != null && ev.participant_count != null ? Math.max(ev.max_participants - ev.participant_count, 0) : null;
+            const full = !!ev.is_full || (left !== null && left <= 0);
+            const price = currency(ev.price_incl_tax, ev.currency);
+            const id = `ev-${ev.id}`;
+            return `
+            <div class="border border-gray-200 rounded-xl p-4">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <div class="font-hanken font-bold text-xl text-primary">${ev.location || ev.title}</div>
+                  <div class="text-sm text-gray-600">${fmtDate(ev.start_date)}${ev.end_date ? ' – ' + fmtDate(ev.end_date) : ''}</div>
+                  <div class="text-sm text-gray-700 mt-1">
+                    ${left !== null
+                      ? ` <span class="spots-left" data-ev="${ev.id}">${left}</span> spots left`
+                      : ` <span class="spots-left hidden" data-ev="${ev.id}"></span>`}
+                  </div>
+                </div>
+                <button ${full ? 'disabled' : ''} data-ev="${ev.id}" class="reg-open bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed">${full ? 'Full' : 'Register'}</button>
+              </div>
+              <div id="${id}-panel" class="hidden mt-4">
+                <!-- Step Progress Indicator (3 steps) -->
+                <div class="flex items-center justify-center mb-6">
+                  <div class="flex items-center space-x-4">
+                    <div class="step-indicator flex items-center">
+                      <div class="step-circle w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center font-semibold" data-step="1">1</div>
+                      <span class="ml-2 text-sm font-medium text-primary">Enter Details</span>
+                    </div>
+                    <div class="w-8 h-0.5 bg-gray-300" data-connector="1-2"></div>
+                    <div class="step-indicator flex items-center">
+                      <div class="step-circle w-8 h-8 rounded-full bg-gray-300 text-gray-600 text-sm flex items-center justify-center font-semibold" data-step="2">2</div>
+                      <span class="ml-2 text-sm font-medium text-gray-600">Review & Pay</span>
+                    </div>
+                    <div class="w-8 h-0.5 bg-gray-300" data-connector="2-3"></div>
+                    <div class="step-indicator flex items-center">
+                      <div class="step-circle w-8 h-8 rounded-full bg-gray-300 text-gray-600 text-sm flex items-center justify-center font-semibold" data-step="3">✓</div>
+                      <span class="ml-2 text-sm font-medium text-gray-600">Confirm</span>
+                    </div>
+                  </div>
+                </div>
+
+                <form data-ev="${ev.id}" class="reg-form space-y-4">
+                  <!-- Step 1: Enter Details -->
+                  <div class="reg-step" data-step="1">
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6">
+                      <h3 class="font-hanken font-bold text-xl text-primary mb-4">Step 1: Enter Your Details</h3>
+                      <div class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-3">
+                          <div>
+                            <label class="block text-gray-700 text-sm mb-1">First name (main contact) *</label>
+                            <input name="first_name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                          </div>
+                          <div>
+                            <label class="block text-gray-700 text-sm mb-1">Last name *</label>
+                            <input name="last_name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                          </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-3">
+                          <div>
+                            <label class="block text-gray-700 text-sm mb-1">Email *</label>
+                            <input type="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                          </div>
+                          <div>
+                            <label class="block text-gray-700 text-sm mb-1">Phone</label>
+                            <input type="tel" name="phone_number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                          </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <div>
+                            <label class="block text-gray-700 text-sm mb-1">Number of participants (max 5) *</label>
+                            <input type="number" name="participants" min="1" value="1" max="5" required class="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                            </div>
+                            <div>
+                            <label class="block text-gray-700 text-sm mb-1">Optional Donation (SGD, whole dollars)</label>
+                            <input type="number" name="donation" min="0" step="1" placeholder="0" class="w-40 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                            <div class="donation-error text-xs text-red-700 mt-1 hidden"></div>
+                            </div>
+                        </div>
+                        <div class="schema-wrap hidden">
+                          <div class="font-hanken font-semibold text-primary mb-2">Participant Details</div>
+                          <div class="text-sm text-gray-600 mb-3">Please provide details for each participant below.</div>
+                          <div class="participants space-y-3"></div>
+                        </div>
+                      </div>
+                      <div class="flex items-center justify-between mt-6">
+                        <button type="button" data-ev="${ev.id}" class="reg-cancel text-gray-600 hover:text-primary">Cancel</button>
+                        <button type="button" class="next-step bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark" data-next="2">Continue to Review</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Step 2: Review + Pay -->
+                  <div class="reg-step hidden" data-step="2">
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6">
+                      <h3 class="font-hanken font-bold text-xl text-primary mb-4">Step 2: Review & Payment</h3>
+                      <div class="space-y-4">
+                        <div class="review-details bg-gray-50 rounded-lg p-4">
+                          <h4 class="font-semibold text-gray-800 mb-2">Registration Details</h4>
+                          <div class="review-content text-sm text-gray-700 space-y-1"></div>
+                        </div>
+                        <div class="price-preview border border-gray-200 bg-white rounded-xl p-4">
+                          <div class="flex items-center justify-between mb-2">
+                            <div class="font-hanken font-semibold text-primary">Price Breakdown</div>
+                          </div>
+                          <div class="price-items text-sm text-gray-800 space-y-1"></div>
+                          <div class="mt-2 flex items-center justify-between text-sm">
+                            <div class="font-semibold text-primary price-total"></div>
+                          </div>
+                          <div class="mt-2 text-xs price-capacity"></div>
+                          <div class="mt-1 text-xs price-warnings"></div>
+                        </div>
+                        <div class="reg-status text-sm"></div>
+                        <div class="group-paid border border-green-200 bg-green-50 rounded-lg p-4 space-y-3">
+                          <div class="font-hanken font-semibold text-primary">Payment for all participants</div>
+                          <div class="text-sm text-gray-800"><span class="font-semibold">Reference:</span> <span class="group-ref"></span></div>
+                          <div class="text-sm text-gray-800"><span class="font-semibold">Total Amount:</span> <span class="group-amt"></span></div>
+                          <canvas class="group-qr mb-2"></canvas>
+                          <div class="flex items-center gap-3">
+                            <input type="file" accept="image/*" class="group-file hidden" />
+                            <button type="button" class="group-upload bg-primary text-white px-3 py-2 rounded-md text-sm hover:bg-primary-dark">Upload Payment Proof</button>
+                            <span class="group-upload-status text-sm text-gray-700"></span>
+                          </div>
+                          <div class="group-items text-xs text-gray-700"></div>
+                        </div>
+                      </div>
+                      <div class="flex items-center justify-between mt-6">
+                        <button type="button" class="prev-step text-gray-600 hover:text-primary" data-prev="1">← Back to Details</button>
+                        <button type="button" class="complete-registration hidden bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark" data-next="3">Done</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+
+                  <!-- Step 3: Confirmation -->
+                  <div class="reg-step hidden" data-step="3">
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
+                      <div class="text-green-600 text-5xl mb-4">✓</div>
+                      <h3 class="font-hanken font-bold text-2xl text-green-800 mb-2">Registration Submitted!</h3>
+                      <p class="text-green-700 mb-4">Thank you for your registration. We'll confirm your registration within 1 working day.</p>
+                      <div class="confirmation-details text-sm text-green-600"></div>
+                    </div>
+                  </div>
+
+                  <!-- Hidden submit for form processing -->
+                  <button type="submit" class="hidden">Submit</button>
+                </form>
+              </div>
+            </div>`;
+        }
+        function updateStepIndicator(form, currentStep) {
+            // Step indicator lives outside the <form>, so use the shared panel container
+            const root = form.parentElement || form;
+            const indicators = root.querySelectorAll('.step-indicator');
+            const connectors = root.querySelectorAll('[data-connector]');
+            
+            indicators.forEach((indicator, index) => {
+                const stepNum = index + 1;
+                const circle = indicator.querySelector('.step-circle');
+                const label = indicator.querySelector('span');
+                const lastStep = indicators.length;
+                
+                if (stepNum < currentStep) {
+                    // Completed step
+                    circle.className = 'step-circle w-8 h-8 rounded-full bg-green-500 text-white text-sm flex items-center justify-center font-semibold';
+                    circle.textContent = '✓';
+                    label.className = 'ml-2 text-sm font-medium text-green-600';
+                } else if (stepNum === currentStep) {
+                    // Current step
+                    circle.className = 'step-circle w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center font-semibold';
+                    circle.textContent = stepNum === lastStep ? '✓' : stepNum;
+                    label.className = 'ml-2 text-sm font-medium text-primary';
+                } else {
+                    // Future step
+                    circle.className = 'step-circle w-8 h-8 rounded-full bg-gray-300 text-gray-600 text-sm flex items-center justify-center font-semibold';
+                    circle.textContent = stepNum === lastStep ? '✓' : stepNum;
+                    label.className = 'ml-2 text-sm font-medium text-gray-600';
+                }
+            });
+
+            // Update connectors
+            connectors.forEach(connector => {
+                const [from, to] = connector.getAttribute('data-connector').split('-').map(Number);
+                if (from < currentStep) {
+                    connector.className = 'w-8 h-0.5 bg-green-500';
+                } else {
+                    connector.className = 'w-8 h-0.5 bg-gray-300';
+                }
+            });
+        }
+
+        function showStep(form, stepNum) {
+            const steps = form.querySelectorAll('.reg-step');
+            steps.forEach(step => {
+                if (parseInt(step.getAttribute('data-step')) === stepNum) {
+                    step.classList.remove('hidden');
+                } else {
+                    step.classList.add('hidden');
+                }
+            });
+            updateStepIndicator(form, stepNum);
+        }
+
+        function populateReviewStep(form) {
+            const reviewContent = form.querySelector('.review-content');
+            const fd = new FormData(form);
+            
+            const details = [];
+            details.push(`<strong>Main Contact:</strong> ${fd.get('first_name')} ${fd.get('last_name')}`);
+            details.push(`<strong>Email:</strong> ${fd.get('email')}`);
+            if (fd.get('phone_number')) {
+                details.push(`<strong>Phone:</strong> ${fd.get('phone_number')}`);
+            }
+            details.push(`<strong>Participants:</strong> ${fd.get('participants')}`);
+            if (fd.get('donation')) {
+                const rawDonation = String(fd.get('donation')).trim();
+                if (/^\d+$/.test(rawDonation)) {
+                    const intDonation = parseInt(rawDonation, 10);
+                    if (intDonation > 0) {
+                        details.push(`<strong>Donation:</strong> ${currency(intDonation, 'SGD')}`);
+                    }
+                }
+            }
+
+            // Add participant details if schema exists
+            const schemaWrap = form.querySelector('.schema-wrap');
+            if (!schemaWrap.classList.contains('hidden')) {
+                const count = parseInt(fd.get('participants') || '1', 10);
+                const schemaSections = form.querySelectorAll('.participants > [data-part]');
+                for (let i = 0; i < count; i++) {
+                    const sect = schemaSections[i];
+                    if (sect) {
+                        const participantDetails = [];
+                        sect.querySelectorAll('[data-key]').forEach(input => {
+                            const key = input.getAttribute('data-key');
+                            const label = input.parentElement.querySelector('label')?.textContent.replace(' *', '') || sentenceCase(key);
+                            if (input.value) {
+                                participantDetails.push(`${label}: ${input.value}`);
+                            }
+                        });
+                        if (participantDetails.length > 0) {
+                            details.push(`<strong>Participant ${i + 1}:</strong> ${participantDetails.join(', ')}`);
+                        }
+                    }
+                }
+            }
+
+            reviewContent.innerHTML = details.join('<br>');
+        }
+
+        function renderEvents(list) {
+            const container = document.getElementById('eventsList');
+            container.innerHTML = list.map(eventCardHTML).join('');
+            container.querySelectorAll('.reg-open').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const id = btn.getAttribute('data-ev');
+                    const panel = document.getElementById(`ev-${id}-panel`);
+                    panel.classList.toggle('hidden');
+                    if (!panel.classList.contains('hidden')) {
+                        const form = panel.querySelector('.reg-form');
+                        showStep(form, 1); // Start at step 1
+                        
+                        const schemaWrap = form.querySelector('.schema-wrap');
+                        const participantsDiv = form.querySelector('.participants');
+                        const countInput = form.querySelector('input[name="participants"]');
+                        const donationInput = form.querySelector('input[name="donation"]');
+                        if (donationInput) {
+                            donationInput.addEventListener('input', () => {
+                                showDonationValidity(donationInput);
+                            });
+                        }
+                        
+                        // Setup step navigation
+                        form.querySelectorAll('.next-step').forEach(nextBtn => {
+                            // Remove any existing listeners to prevent duplicates
+                            nextBtn.replaceWith(nextBtn.cloneNode(true));
+                        });
+                        
+                        form.querySelectorAll('.next-step').forEach(nextBtn => {
+                            nextBtn.addEventListener('click', async () => {
+                                const nextStep = parseInt(nextBtn.getAttribute('data-next'));
+                                if (nextStep === 2) {
+                                    // Validate step 1 before proceeding
+                                    const step1 = form.querySelector('[data-step="1"]');
+                                    const requiredFields = step1.querySelectorAll('input[required], select[required]');
+                                    let valid = true;
+                                    for (const field of requiredFields) {
+                                        if (!field.value.trim()) {
+                                            field.focus();
+                                            valid = false;
+                                            break;
+                                        }
+                                    }
+                                    if (!valid) return;
+                                    // Validate donation as whole dollars
+                                    showDonationValidity(donationInput);
+                                    if (!showDonationValidity(donationInput)) return;
+                                    // Populate review step and show breakdown
+                                    populateReviewStep(form);
+                                    await computeAndRenderPrice(id, form);
+                                    showStep(form, 2);
+                                    // Configure payment UI within Review step
+                                    const price = form.dataset.priceData ? JSON.parse(form.dataset.priceData) : null;
+                                    const requiresPayment = !!(price && price.requires_payment);
+                                    const groupBox = form.querySelector('.group-paid');
+                                    const amtEl = groupBox.querySelector('.group-amt');
+                                    const refEl = groupBox.querySelector('.group-ref');
+                                    const canvas = groupBox.querySelector('.group-qr');
+                                    const completeBtn = form.querySelector('.complete-registration');
+                                    if (!requiresPayment) {
+                                        // Hide payment box and allow direct submission
+                                        groupBox.classList.add('hidden');
+                                        completeBtn.classList.remove('hidden');
+                                    } else {
+                                        groupBox.classList.remove('hidden');
+                                        // Use totals.amount_with_donation as final total
+                                        const totalAmt = price && price.totals && (price.totals.amount_with_donation != null)
+                                            ? parseFloat(price.totals.amount_with_donation)
+                                            : (price && price.totals && price.totals.amount ? parseFloat(price.totals.amount) : 0);
+                                        const ccy = price && price.currency ? price.currency : 'SGD';
+                                        amtEl.textContent = currency(totalAmt, ccy);
+                                        // Generate or reuse the client-side reference
+                                        if (!form.dataset.groupReference) {
+                                            form.dataset.groupReference = generateClientReference('OBD25-');
+                                        }
+                                        const preRef = form.dataset.groupReference;
+                                        refEl.textContent = preRef;
+                                        // Render QR with final amount and the client reference
+                                        renderPayNow(canvas, totalAmt, preRef);
+                                        // Prepare file capture (no upload yet)
+                                        const fileInput = groupBox.querySelector('.group-file');
+                                        const uploadBtn = groupBox.querySelector('.group-upload');
+                                        const uploadStatus = groupBox.querySelector('.group-upload-status');
+                                        uploadBtn.onclick = () => fileInput.click();
+                                        fileInput.onchange = () => {
+                                            if (!fileInput.files || !fileInput.files[0]) return;
+                                            form._paymentProof = fileInput.files[0];
+                                            uploadStatus.className = 'group-upload-status text-sm text-green-700';
+                                            uploadStatus.textContent = 'Payment proof ready to submit.';
+                                            completeBtn.classList.remove('hidden');
+                                        };
+                                    }
+                                }
+                            });
+                        });
+                        
+                        // Setup previous step navigation
+                        form.querySelectorAll('.prev-step').forEach(prevBtn => {
+                            // Remove any existing listeners to prevent duplicates
+                            prevBtn.replaceWith(prevBtn.cloneNode(true));
+                        });
+                        
+                        form.querySelectorAll('.prev-step').forEach(prevBtn => {
+                            prevBtn.addEventListener('click', () => {
+                                const prevStep = parseInt(prevBtn.getAttribute('data-prev'));
+                                showStep(form, prevStep);
+                            });
+                        });
+                        
+                        // Setup completion button
+                        const completeBtn = form.querySelector('.complete-registration');
+                        if (completeBtn) {
+                            // Remove any existing listeners to prevent duplicates
+                            const newCompleteBtn = completeBtn.cloneNode(true);
+                            completeBtn.parentNode.replaceChild(newCompleteBtn, completeBtn);
+                            // On Done, actually submit registration (with client reference and optional proof)
+                            newCompleteBtn.addEventListener('click', async () => {
+                                await submitRegistration(form, id);
+                            });
+                        }
+                        
+                        try {
+                            const ev = await fetchEventDetail(id);
+                            const schema = ev.json_schema;
+                            if (schema && schema.type === 'object' && schema.properties) {
+                                schemaWrap.classList.remove('hidden');
+                                const renderParts = () => {
+                                    const n = Math.max(1, parseInt(countInput.value || '1', 10));
+                                    participantsDiv.innerHTML = buildParticipantsUI(schema, n);
+                                };
+                                renderParts();
+                                countInput.oninput = renderParts;
+                            } else {
+                                schemaWrap.classList.add('hidden');
+                                participantsDiv.innerHTML = '';
+                            }
+                        } catch (e) {
+                            schemaWrap.classList.add('hidden');
+                            participantsDiv.innerHTML = '';
+                        }
+                    }
+                });
+            });
+            container.querySelectorAll('.reg-cancel').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.getAttribute('data-ev');
+                    const panel = document.getElementById(`ev-${id}-panel`);
+                    panel.classList.add('hidden');
+                });
+            });
+        }
+
+        async function submitRegistration(form, evId) {
+            const fd = new FormData(form);
+            const base = {
+                first_name: String(fd.get('first_name') || '').trim(),
+                last_name: String(fd.get('last_name') || '').trim(),
+                email: String(fd.get('email') || '').trim(),
+                phone_number: String(fd.get('phone_number') || '').trim() || undefined,
+            };
+            const count = Math.max(1, parseInt(fd.get('participants') || '1', 10));
+            const statusEl = form.querySelector('.reg-status');
+            const groupBox = form.querySelector('.group-paid');
+            
+            statusEl.className = 'reg-status text-sm text-gray-700';
+            statusEl.textContent = 'Submitting registration…';
+            
+            // Collect per-participant schema fields
+            const parts = [];
+            const schemaSections = form.querySelectorAll('.participants > [data-part]');
+            for (let i = 0; i < count; i++) {
+                const sect = schemaSections[i];
+                const extra = {};
+                if (sect) {
+                    sect.querySelectorAll('[data-key]').forEach(input => {
+                        const key = input.getAttribute('data-key');
+                        let val = input.value;
+                        if (input.type === 'number') {
+                            val = input.step === '1' ? parseInt(val || '0', 10) : parseFloat(val || '0');
+                        }
+                        extra[key] = val;
+                    });
+                }
+                parts.push({
+                    first_name: base.first_name + (i > 0 ? ` (${i+1})` : ''),
+                    last_name: base.last_name,
+                    email: base.email,
+                    phone_number: base.phone_number,
+                    quantity: 1,
+                    extra_json: extra
+                });
+            }
+            
+            // POST bulk registration (JSON)
+            let data;
+            try {
+                const res = await fetch(`${API_BASE}/events/${evId}/register/bulk`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        participants: parts,
+                        payer_name: `${base.first_name} ${base.last_name}`.trim(),
+                        payer_email: base.email,
+                        payer_phone: base.phone_number
+                    })
+                });
+                data = await res.json();
+                if (!res.ok) throw new Error(data.detail || 'Registration failed');
+            } catch (err) {
+                statusEl.className = 'reg-status text-sm text-red-700';
+                statusEl.textContent = err.message || 'Registration failed';
+                return;
+            }
+            
+            // Free events: all_confirmed - go directly to confirmation
+            if (data.all_confirmed) {
+                showStep(form, 3);
+                const confirmationDetails = form.querySelector('.confirmation-details');
+                confirmationDetails.textContent = `Registration confirmed for ${count} participant${count > 1 ? 's' : ''}. See you at October Big Day 2025!`;
+                return;
+            }
+            // For paid events, payment was already handled on the Review step.
+            // Go straight to confirmation with summary and message.
+            showStep(form, 3);
+            {
+                const confirmationDetails = form.querySelector('.confirmation-details');
+                if (confirmationDetails) {
+                    const group = data.group || {};
+                    const totals = data.totals || {};
+                    const ref = group.reference || (form.dataset.groupReference || 'Pending');
+                    const totalAmt = totals.amount || '';
+                    confirmationDetails.innerHTML = `
+                        <div class="space-y-1">
+                          <div><strong>Reference:</strong> ${ref}</div>
+                          <div><strong>Participants:</strong> ${count}</div>
+                          <div><strong>Total Amount:</strong> ${totalAmt}</div>
+                        </div>`;
+                }
+            }
+            return;
+            
+            // Paid events: Show group payment in step 3
+            const group = data.group || {};
+            const totals = data.totals || {};
+            const ref = group.reference || '';
+            // Prefer precomputed tier-aware total from prior price breakdown if available
+            let totalAmt = '';
+            let ccy = 'SGD';
+            try {
+                const priorPrice = form.dataset.priceData ? JSON.parse(form.dataset.priceData) : null;
+                if (priorPrice && priorPrice.totals && priorPrice.totals.amount) {
+                    totalAmt = priorPrice.totals.amount;
+                    ccy = priorPrice.currency || 'SGD';
+                } else {
+                    totalAmt = totals.amount || group.amount_total || '';
+                    ccy = totals.currency || group.currency || 'SGD';
+                }
+            } catch {
+                totalAmt = totals.amount || group.amount_total || '';
+                ccy = totals.currency || group.currency || 'SGD';
+            }
+            const items = data.items || [];
+            
+            statusEl.className = 'reg-status text-sm mb-2';
+            statusEl.textContent = 'Registration created. Please complete payment below.';
+            
+            showStep(form, 3);
+            
+            groupBox.querySelector('.group-ref').textContent = ref;
+            groupBox.querySelector('.group-amt').textContent = currency(parseFloat(totalAmt), ccy);
+            const canvas = groupBox.querySelector('.group-qr');
+            renderPayNow(canvas, totalAmt, ref);
+            
+            // Participants summary
+            const listHtml = items.map((it, i) => {
+                const p = it.participant || {};
+                const reg = it.registration || {};
+                const rref = reg.reference ? ` • Ref: ${reg.reference}` : '';
+                return `<div>Participant ${i+1}: ${p.first_name || ''} ${p.last_name || ''} – <span class="text-purple-700">pending payment</span>${rref}</div>`;
+            }).join('');
+            groupBox.querySelector('.group-items').innerHTML = listHtml;
+            
+            // Upload proof for group
+            const fileInput = groupBox.querySelector('.group-file');
+            const uploadBtn = groupBox.querySelector('.group-upload');
+            const uploadStatus = groupBox.querySelector('.group-upload-status');
+            const completeBtn = form.querySelector('.complete-registration');
+            
+            uploadBtn.onclick = () => fileInput.click();
+            fileInput.onchange = async () => {
+                if (!fileInput.files || !fileInput.files[0]) return;
+                uploadStatus.textContent = 'Uploading…';
+                uploadStatus.className = 'group-upload-status text-sm text-blue-700';
+                const formData = new FormData();
+                formData.append('payment_proof', fileInput.files[0]);
+                try {
+                    const upRes = await fetch(`${API_BASE}/event-registration-groups/${group.id}/payment/paynow-proof`, { method: 'POST', body: formData });
+                    const upData = await upRes.json();
+                    if (!upRes.ok) throw new Error(upData.detail || 'Upload failed');
+                    uploadStatus.className = 'group-upload-status text-sm text-green-700';
+                    uploadStatus.textContent = 'Payment proof uploaded successfully!';
+                    // Show the completion button
+                    completeBtn.classList.remove('hidden');
+                } catch (err) {
+                    uploadStatus.className = 'group-upload-status text-sm text-red-700';
+                    uploadStatus.textContent = err.message || 'Upload failed';
+                    return;
+                }
+            };
+        }
+        
+        async function initRegistration() {
+            const err = document.getElementById('eventsError');
+            try {
+                const events = await fetchEvents();
+                if (!events.length) {
+                    err.classList.remove('hidden');
+                    err.textContent = 'No registration locations are available right now.';
+                    document.getElementById('eventsList').innerHTML = '';
+                    return;
+                }
+                renderEvents(events);
+            } catch (e) {
+                err.classList.remove('hidden');
+                err.textContent = 'Unable to load registration locations. Please try again later.';
+                document.getElementById('eventsList').innerHTML = '';
+            }
+        }
+        // Override submitRegistration to run only after payment proof and Done
+        async function submitRegistration(form, evId) {
+            const fd = new FormData(form);
+            const base = {
+                first_name: String(fd.get('first_name') || '').trim(),
+                last_name: String(fd.get('last_name') || '').trim(),
+                email: String(fd.get('email') || '').trim(),
+                phone_number: String(fd.get('phone_number') || '').trim() || undefined,
+            };
+            const count = Math.max(1, parseInt(fd.get('participants') || '1', 10));
+            const statusEl = form.querySelector('.reg-status');
+            const groupBox = form.querySelector('.group-paid');
+
+            statusEl.className = 'reg-status text-sm text-gray-700';
+            statusEl.textContent = 'Submitting registration…';
+
+            // Collect per-participant schema fields
+            const parts = [];
+            const schemaSections = form.querySelectorAll('.participants > [data-part]');
+            for (let i = 0; i < count; i++) {
+                const sect = schemaSections[i];
+                const extra = {};
+                if (sect) {
+                    sect.querySelectorAll('[data-key]').forEach(input => {
+                        const key = input.getAttribute('data-key');
+                        let val = input.value;
+                        if (input.type === 'number') {
+                            val = input.step === '1' ? parseInt(val || '0', 10) : parseFloat(val || '0');
+                        }
+                        extra[key] = val;
+                    });
+                }
+                parts.push({
+                    first_name: base.first_name + (i > 0 ? ` (${i+1})` : ''),
+                    last_name: base.last_name,
+                    email: base.email,
+                    phone_number: base.phone_number,
+                    quantity: 1,
+                    extra_json: extra
+                });
+            }
+
+            // Payment proof requirement for paid events
+            const priceData = form.dataset.priceData ? JSON.parse(form.dataset.priceData) : null;
+            const requiresPayment = !!(priceData && priceData.requires_payment);
+            const proofFile = form._paymentProof;
+            if (requiresPayment && !proofFile) {
+                const uploadStatus = groupBox.querySelector('.group-upload-status');
+                if (uploadStatus) {
+                    uploadStatus.className = 'group-upload-status text-sm text-red-700';
+                    uploadStatus.textContent = 'Please upload payment proof before submitting.';
+                }
+                statusEl.className = 'reg-status text-sm text-red-700';
+                statusEl.textContent = 'Payment proof required.';
+                return;
+            }
+
+            // POST bulk registration (multipart), optionally including payment proof
+            let data;
+            try {
+                const body = new FormData();
+                body.append('participants', JSON.stringify(parts));
+                body.append('payer_name', `${base.first_name} ${base.last_name}`.trim());
+                body.append('payer_email', base.email);
+                if (base.phone_number) body.append('payer_phone', base.phone_number);
+                if (proofFile) body.append('payment_proof', proofFile);
+                // Include the client-generated reference so backend can use it
+                if (form.dataset.groupReference) body.append('reference', form.dataset.groupReference);
+                // Include donation as string (integer dollars)
+                const donationParsed = parseDonation(form.querySelector('input[name="donation"]'));
+                body.append('donation', String(donationParsed.valid ? donationParsed.value : 0));
+
+                const res = await fetch(`${API_BASE}/events/${evId}/register/bulk`, { method: 'POST', body });
+                data = await res.json();
+                if (!res.ok) throw new Error(data.detail || 'Registration failed');
+            } catch (err) {
+                statusEl.className = 'reg-status text-sm text-red-700';
+                statusEl.textContent = err.message || 'Registration failed';
+                return;
+            }
+
+            // Go to confirmation step
+            showStep(form, 3);
+            const confirmationDetails = form.querySelector('.confirmation-details');
+            if (data.all_confirmed) {
+                if (confirmationDetails) {
+                    confirmationDetails.textContent = `Registration confirmed for ${count} participant${count > 1 ? 's' : ''}. See you at October Big Day 2025!`;
+                }
+                return;
+            }
+            const group = data.group || {};
+            if (confirmationDetails) {
+                const ref = group.reference || 'Pending';
+                const totals = data.totals || {};
+                const finalAmt = (totals.amount_with_donation != null ? totals.amount_with_donation : (group.amount_total_with_donation != null ? group.amount_total_with_donation : (totals.amount || group.amount_total || '')));
+                const donationAmt = (totals.donation != null ? totals.donation : (group.donation_amount != null ? group.donation_amount : null));
+                const donationLine = donationAmt && parseFloat(donationAmt) > 0 ? `<div><strong>Donation:</strong> ${currency(parseFloat(donationAmt), 'SGD')}</div>` : '';
+                const finalLine = finalAmt ? currency(parseFloat(finalAmt), 'SGD') : '';
+                confirmationDetails.innerHTML = `
+                    <div class="space-y-1">
+                      <div><strong>Reference:</strong> ${ref}</div>
+                      <div><strong>Participants:</strong> ${count}</div>
+                      ${donationLine}
+                      <div><strong>Total Amount:</strong> ${finalLine}</div>
+                    </div>`;
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initRegistration);
+        } else {
+            initRegistration();
+        }
+    </script>
+</body>
+</html>
