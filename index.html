@@ -533,24 +533,32 @@
             // e.g., "assets/img/octoberbigday-cuckoo (1).png" -> "octoberbigday-cuckoo (1)"
             const baseFileName = imageSrc.split('/').pop().replace(/\.[^/.]+$/, "");
             const processedPath = `assets/img/processed/${baseFileName}`;
+            
+            // URL encode the paths to handle spaces and special characters in filenames
+            const encodedPath400w = encodeURI(`${processedPath}-400w.webp`);
+            const encodedPath800w = encodeURI(`${processedPath}-800w.webp`);
+            const encodedPath1200w = encodeURI(`${processedPath}-1200w.webp`);
+            const encodedPath400p = encodeURI(`${processedPath}-400w.png`);
+            const encodedPath800p = encodeURI(`${processedPath}-800w.png`);
+            const encodedPath1200p = encodeURI(`${processedPath}-1200w.png`);
 
             return `
                 <div class="bird-container transform hover:scale-105 transition-all duration-500 ${hoverClass}">
                     <picture>
                         <source 
                             type="image/webp"
-                            srcset="${processedPath}-400w.webp 400w,
-                                    ${processedPath}-800w.webp 800w,
-                                    ${processedPath}-1200w.webp 1200w"
+                            srcset="${encodedPath400w} 400w,
+                                    ${encodedPath800w} 800w,
+                                    ${encodedPath1200w} 1200w"
                             sizes="(max-width: 767px) 50vw, 25vw">
                         <source 
                             type="image/png"
-                            srcset="${processedPath}-400w.png 400w,
-                                    ${processedPath}-800w.png 800w,
-                                    ${processedPath}-1200w.png 1200w"
+                            srcset="${encodedPath400p} 400w,
+                                    ${encodedPath800p} 800w,
+                                    ${encodedPath1200p} 1200w"
                             sizes="(max-width: 767px) 50vw, 25vw">
                         <img 
-                            src="${processedPath}-800w.png" 
+                            src="${encodeURI(`${processedPath}-800w.png`)}" 
                             alt="${alt}"
                             class="w-full h-auto max-w-[150px] md:max-w-[200px] mx-auto drop-shadow-lg"
                             loading="eager" 
