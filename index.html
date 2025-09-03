@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Libre+Franklin:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -163,7 +163,29 @@
 
                     <!-- Main Title Section -->
                     <div class="text-center">
-                        <img src="assets/img/octoberbigday-text.png" alt="October Big Day 2025" class="mx-auto max-w-full h-auto max-h-[200px] md:max-h-[300px] drop-shadow-2xl">
+                        <!-- === START: RESPONSIVE IMAGE === -->
+                        <picture>
+                            <source 
+                                type="image/webp"
+                                srcset="assets/img/processed/octoberbigday-text-400w.webp 400w,
+                                        assets/img/processed/octoberbigday-text-800w.webp 800w,
+                                        assets/img/processed/octoberbigday-text-1200w.webp 1200w"
+                                sizes="(max-width: 767px) 90vw, 70vw">
+                            <source 
+                                type="image/png"
+                                srcset="assets/img/processed/octoberbigday-text-400w.png 400w,
+                                        assets/img/processed/octoberbigday-text-800w.png 800w,
+                                        assets/img/processed/octoberbigday-text-1200w.png 1200w"
+                                sizes="(max-width: 767px) 90vw, 70vw">
+                            <img 
+                                src="assets/img/processed/octoberbigday-text-800w.png" 
+                                alt="October Big Day 2025" 
+                                class="mx-auto max-w-full h-auto max-h-[200px] md:max-h-[300px] drop-shadow-2xl"
+                                loading="eager"
+                                width="1200"
+                                height="300">
+                        </picture>
+                        <!-- === END: RESPONSIVE IMAGE === -->
                     </div>
                 </div>
 
@@ -457,129 +479,22 @@
         <div class="container mx-auto">
             <div class="max-w-4xl mx-auto">
                 <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Register Now</h2>
-                <!-- <div class="bg-gradient-to-br from-primary/5 to-primary-light/5 rounded-3xl p-8 md:p-12"> -->
-                    <!-- <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h3 class="font-hanken font-bold text-3xl text-primary mb-6">Join Us for an Unforgettable Day</h3>
-                            <p class="text-lg text-gray-700 mb-6">
-                                Don't miss this opportunity to connect with nature and fellow bird enthusiasts in Singapore's most comprehensive birding event.
-                            </p>
-                            <div class="space-y-4 mb-8">
-                                <div class="flex items-center">
-                                    <span class="text-green-500 mr-3 text-xl">✓</span>
-                                    <span class="text-gray-700">Expert guides and equipment provided</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-green-500 mr-3 text-xl">✓</span>
-                                    <span class="text-gray-700">All locations and transport included</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-green-500 mr-3 text-xl">✓</span>
-                                    <span class="text-gray-700">Refreshments and lunch provided</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-green-500 mr-3 text-xl">✓</span>
-                                    <span class="text-gray-700">Digital field guide and certificates</span>
-                                </div>
-                            </div>
-                            <div class="bg-white/80 p-6 rounded-2xl">
-                                <h4 class="font-hanken font-bold text-xl text-primary mb-3">Pricing</h4>
-                                <div class="space-y-2">
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-700">Adults (Early Bird)</span>
-                                        <span class="font-semibold text-primary">S$45</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-700">Students/Seniors</span>
-                                        <span class="font-semibold text-primary">S$25</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-700">Family Package (2+2)</span>
-                                        <span class="font-semibold text-primary">S$120</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        
-                        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl" id="registrationApp">
-                            <div class="mb-6">
-                                <h4 class="font-hanken font-bold text-2xl text-primary">Choose Your Location</h4>
-                                <p class="text-gray-600">Select a location below and complete your registration.</p>
-                            </div>
-                            <div id="eventsError" class="hidden text-red-600 bg-red-50 border border-red-200 rounded-xl p-4 mb-4"></div>
-                            <div id="eventsList" class="space-y-4">
-                                <div class="animate-pulse bg-gray-100 h-24 rounded-xl"></div>
-                                <div class="animate-pulse bg-gray-100 h-24 rounded-xl"></div>
-                                <div class="animate-pulse bg-gray-100 h-24 rounded-xl"></div>
-                            </div>
-                        <!-- </div> -->
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl" id="registrationApp">
+                    <div class="mb-6">
+                        <h4 class="font-hanken font-bold text-2xl text-primary">Choose Your Location</h4>
+                        <p class="text-gray-600">Select a location below and complete your registration.</p>
                     </div>
-                </div>
-            <!-- </div> -->
-        </div>
-    </section>
-
-    <!-- Partners Section -->
-    <!-- <section id="partners" class="py-16 px-6 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80">
-        <div class="container mx-auto">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Our Partners</h2>
-                <div class="grid md:grid-cols-3 gap-12">
-                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl text-center">
-                        <div class="bg-gradient-to-br from-primary/10 to-primary-light/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                            <span class="text-3xl">🏛️</span>
-                        </div>
-                        <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Organized by</h3>
-                        <div class="space-y-4">
-                            <div class="bg-white/60 rounded-2xl p-4">
-                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Singapore Birding Society</h4>
-                                <p class="text-gray-600 text-sm">Leading community of bird enthusiasts in Singapore</p>
-                            </div>
-                            <div class="bg-white/60 rounded-2xl p-4">
-                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Nature Society Singapore</h4>
-                                <p class="text-gray-600 text-sm">Promoting awareness and conservation of nature</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl text-center">
-                        <div class="bg-gradient-to-br from-green-100 to-emerald-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                            <span class="text-3xl">🤝</span>
-                        </div>
-                        <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Supported by</h3>
-                        <div class="space-y-4">
-                            <div class="bg-white/60 rounded-2xl p-4">
-                                <h4 class="font-semibold text-lg text-gray-800 mb-2">National Parks Board</h4>
-                                <p class="text-gray-600 text-sm">Singapore's national parks and nature reserves</p>
-                            </div>
-                            <div class="bg-white/60 rounded-2xl p-4">
-                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Wildlife Reserves Singapore</h4>
-                                <p class="text-gray-600 text-sm">Conservation and wildlife education</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl text-center">
-                        <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                            <span class="text-3xl">⭐</span>
-                        </div>
-                        <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Special Thanks</h3>
-                        <div class="space-y-4">
-                            <div class="bg-white/60 rounded-2xl p-4">
-                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Singapore Tourism Board</h4>
-                                <p class="text-gray-600 text-sm">Promoting Singapore's natural heritage</p>
-                            </div>
-                            <div class="bg-white/60 rounded-2xl p-4">
-                                <h4 class="font-semibold text-lg text-gray-800 mb-2">Local Conservation Groups</h4>
-                                <p class="text-gray-600 text-sm">Grassroots conservation efforts</p>
-                            </div>
-                        </div>
+                    <div id="eventsError" class="hidden text-red-600 bg-red-50 border border-red-200 rounded-xl p-4 mb-4"></div>
+                    <div id="eventsList" class="space-y-4">
+                        <div class="animate-pulse bg-gray-100 h-24 rounded-xl"></div>
+                        <div class="animate-pulse bg-gray-100 h-24 rounded-xl"></div>
+                        <div class="animate-pulse bg-gray-100 h-24 rounded-xl"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </section> -->
-
+    </section>
+    
     <section class="py-12 px-6 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80">
         <div class="container mx-auto">
             <div class="max-w-4xl mx-auto text-center">
@@ -611,11 +526,37 @@
 
     <!-- JavaScript for mobile menu -->
     <script>
-        // Reusable Bird Component Function
+        // === START: UPDATED BIRD COMPONENT FUNCTION ===
+        // This function now generates a responsive <picture> element.
         function createBirdComponent(imageSrc, alt, species, description, hoverClass = '') {
+            // Extract the base filename without the extension to build paths for processed images.
+            // e.g., "assets/img/octoberbigday-cuckoo (1).png" -> "octoberbigday-cuckoo (1)"
+            const baseFileName = imageSrc.split('/').pop().replace(/\.[^/.]+$/, "");
+            const processedPath = `assets/img/processed/${baseFileName}`;
+
             return `
                 <div class="bird-container transform hover:scale-105 transition-all duration-500 ${hoverClass}">
-                    <img src="${imageSrc}" alt="${alt}" class="w-full h-auto max-w-[150px] md:max-w-[200px] mx-auto drop-shadow-lg">
+                    <picture>
+                        <source 
+                            type="image/webp"
+                            srcset="${processedPath}-400w.webp 400w,
+                                    ${processedPath}-800w.webp 800w,
+                                    ${processedPath}-1200w.webp 1200w"
+                            sizes="(max-width: 767px) 50vw, 25vw">
+                        <source 
+                            type="image/png"
+                            srcset="${processedPath}-400w.png 400w,
+                                    ${processedPath}-800w.png 800w,
+                                    ${processedPath}-1200w.png 1200w"
+                            sizes="(max-width: 767px) 50vw, 25vw">
+                        <img 
+                            src="${processedPath}-800w.png" 
+                            alt="${alt}"
+                            class="w-full h-auto max-w-[150px] md:max-w-[200px] mx-auto drop-shadow-lg"
+                            loading="eager" 
+                            width="800" 
+                            height="800">
+                    </picture>
                     <div class="bird-tooltip">
                         <h3>${species}</h3>
                         <p>${description}</p>
@@ -623,8 +564,9 @@
                 </div>
             `;
         }
+        // === END: UPDATED BIRD COMPONENT FUNCTION ===
 
-        // Bird data
+        // Bird data (uses original source paths, the function handles the rest)
         const birdData = {
             cuckoo: {
                 imageSrc: "assets/img/octoberbigday-cuckoo (1).png",
@@ -699,6 +641,7 @@
     <script src="https://shop.birdsociety.sg/static/js/lib/paynowqr.min.js"></script>
     <script src="https://shop.birdsociety.sg/static/js/qrcode-with-logos.min.js"></script>
     <script>
+        // The extensive registration logic below is unchanged.
         const API_BASE = (function(){
             if (window.__API_BASE) return window.__API_BASE;
             const host = location.hostname;
