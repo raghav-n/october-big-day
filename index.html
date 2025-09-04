@@ -1283,6 +1283,10 @@
                 .filter(isVisible);
             if (!requiredEls.length) return false;
             for (const el of requiredEls) {
+                if (el.type === 'checkbox') {
+                    if (!el.checked) return false;
+                    continue;
+                }
                 if (el.type === 'email') {
                     const v = el.value.trim();
                     const ok = /.+@.+\..+/.test(v);
@@ -1365,7 +1369,21 @@
                             extra[key] = val;
                         });
                     }
-                    items.push({ quantity: 1, extra_json: extra, email });
+                    
+                    // Get emergency contact fields
+                    const emergencyName = form.querySelector('input[name="emergency_contact_name"]')?.value?.trim() || '';
+                    const emergencyPhone = form.querySelector('input[name="emergency_contact_phone"]')?.value?.trim() || '';
+                    
+                    items.push({
+                        first_name: form.querySelector('input[name="first_name"]')?.value?.trim() || '',
+                        last_name: form.querySelector('input[name="last_name"]')?.value?.trim() || '',
+                        email: email,
+                        phone_number: form.querySelector('input[name="phone_number"]')?.value?.trim() || '',
+                        emergency_contact_name: emergencyName,
+                        emergency_contact_phone: emergencyPhone,
+                        quantity: 1,
+                        extra_json: extra
+                    });
                 } else {
                     items.push({ quantity: 1 });
                 }
@@ -1528,8 +1546,18 @@
                             <input type="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
                           </div>
                           <div>
-                            <label class="block text-gray-700 text-sm mb-1">Phone</label>
-                            <input type="tel" name="phone_number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                            <label class="block text-gray-700 text-sm mb-1">Phone *</label>
+                            <input type="tel" name="phone_number" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                          </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label class="block text-gray-700 text-sm mb-1">Emergency contact name *</label>
+                            <input type="text" name="emergency_contact_name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                          </div>
+                          <div>
+                            <label class="block text-gray-700 text-sm mb-1">Emergency contact phone *</label>
+                            <input type="tel" name="emergency_contact_phone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
                           </div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1547,6 +1575,24 @@
                           <div class="font-hanken font-semibold text-primary mb-2">Participant Details</div>
                           <div class="text-sm text-gray-600 mb-3">Please provide details for each participant below.</div>
                           <div class="participants space-y-2 md:space-y-3"></div>
+                        </div>
+                        
+                        <!-- Agreement Checkboxes -->
+                        <div class="agreement-checkboxes mt-6 space-y-4 pt-4 border-t border-gray-200">
+                          <div class="flex items-start gap-3">
+                            <input type="checkbox" name="liability_waiver" required id="liabilityWaiver"
+                                   class="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+                            <label for="liabilityWaiver" class="text-sm text-gray-700 flex-1">
+                              I agree that I will not hold the Bird Society of Singapore or its members liable for any injuries, loss, damage, or other incidents that take place during the event. *
+                            </label>
+                          </div>
+                          <div class="flex items-start gap-3">
+                            <input type="checkbox" name="data_protection_agreement" required id="dataProtectionAgreement"
+                                   class="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+                            <label for="dataProtectionAgreement" class="text-sm text-gray-700 flex-1">
+                              I have read and agree to the <a href='https://birdsociety.sg/data-protection-notice/' class="text-primary hover:underline">data protection notice</a> and consent to being contacted via email and phone, as needed. *
+                            </label>
+                          </div>
                         </div>
                       </div>
                       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 md:mt-6 gap-3 sm:gap-0">
@@ -1689,6 +1735,15 @@
             if (fd.get('phone_number')) {
                 details.push(`<strong>Phone:</strong> ${fd.get('phone_number')}`);
             }
+            
+            // Add emergency contact information to review
+            if (fd.get('emergency_contact_name') || fd.get('emergency_contact_phone')) {
+                details.push(`<strong>Emergency Contact:</strong> ${fd.get('emergency_contact_name') || 'Not provided'}`);
+                if (fd.get('emergency_contact_phone')) {
+                    details.push(`<strong>Emergency Phone:</strong> ${fd.get('emergency_contact_phone')}`);
+                }
+            }
+            
             details.push(`<strong>Participants:</strong> ${fd.get('participants')}`);
             if (fd.get('donation')) {
                 const rawDonation = String(fd.get('donation')).trim();
@@ -1766,7 +1821,13 @@
                                     const requiredFields = step1.querySelectorAll('input[required], select[required]');
                                     let valid = true;
                                     for (const field of requiredFields) {
-                                        if (!field.value.trim()) {
+                                        if (field.type === 'checkbox') {
+                                            if (!field.checked) {
+                                                field.focus();
+                                                valid = false;
+                                                break;
+                                            }
+                                        } else if (!field.value.trim()) {
                                             field.focus();
                                             valid = false;
                                             break;
@@ -1966,6 +2027,8 @@
                 last_name: String(fd.get('last_name') || '').trim(),
                 email: String(fd.get('email') || '').trim(),
                 phone_number: String(fd.get('phone_number') || '').trim() || undefined,
+                emergency_contact_name: String(fd.get('emergency_contact_name') || '').trim() || undefined,
+                emergency_contact_phone: String(fd.get('emergency_contact_phone') || '').trim() || undefined,
             };
             const count = Math.max(1, parseInt(fd.get('participants') || '1', 10));
             const statusEl = form.querySelector('.reg-status');
@@ -1995,6 +2058,8 @@
                     last_name: base.last_name,
                     email: base.email,
                     phone_number: base.phone_number,
+                    emergency_contact_name: base.emergency_contact_name,
+                    emergency_contact_phone: base.emergency_contact_phone,
                     quantity: 1,
                     extra_json: extra,
                     is_main_contact: i === 0
@@ -2144,6 +2209,8 @@
                 last_name: String(fd.get('last_name') || '').trim(),
                 email: String(fd.get('email') || '').trim(),
                 phone_number: String(fd.get('phone_number') || '').trim() || undefined,
+                emergency_contact_name: String(fd.get('emergency_contact_name') || '').trim() || undefined,
+                emergency_contact_phone: String(fd.get('emergency_contact_phone') || '').trim() || undefined,
             };
             const count = Math.max(1, parseInt(fd.get('participants') || '1', 10));
             const statusEl = form.querySelector('.reg-status');
@@ -2173,6 +2240,8 @@
                     last_name: base.last_name,
                     email: base.email,
                     phone_number: base.phone_number,
+                    emergency_contact_name: base.emergency_contact_name,
+                    emergency_contact_phone: base.emergency_contact_phone,
                     quantity: 1,
                     extra_json: extra,
                     is_main_contact: i === 0
