@@ -14,7 +14,6 @@
                 extend: {
                     fontFamily: {
                         'hanken': ['Hanken Grotesk', 'sans-serif'],
-                        'libre': ['Libre Franklin', 'sans-serif'],
                         'noto': ['Noto Sans', 'sans-serif'],
                     },
                     colors: {
@@ -198,7 +197,7 @@
                     <!-- Organized by (top, larger) -->
                     <div class="mb-8">
                         <p class="text-gray-700 text-md font-bold mb-3">Organized by</p>
-                        <img src="assets/img/birdsoc-logo.png" alt="Bird Society of Singapore" class="mx-auto h-20 md:h-24 w-auto">
+                        <a href="https://birdsociety.sg/" target="_blank"><img src="assets/img/birdsoc-logo.png" alt="Bird Society of Singapore" class="mx-auto h-20 md:h-24 w-auto"></a>
                     </div>
                     
                     <!-- Sponsored by and In support of (bottom row) -->
@@ -236,7 +235,7 @@
     <section id="about" class="py-16 px-6 bg-white/80">
         <div class="container mx-auto">
             <div class="max-w-4xl mx-auto">
-                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">About the Event</h2>
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12 tracking-tight">About the Event</h2>
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div>
                         <p class="text-lg text-gray-700 mb-6 leading-relaxed">
@@ -249,14 +248,30 @@
                     </div>
                     <div class="bg-gradient-to-br from-purple-100 to-green-100 p-8 rounded-3xl">
                         <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Pricing</h3>
-                        <ul class="space-y-1">
-                            <li class="flex items-start">
-                                <span class="text-gray-700 font-bold">Adult</span> <span class="text-gray-700">&nbsp;·&nbsp;$20</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-gray-700 font-bold">Student (≤18yo)</span> <span class="text-gray-700">&nbsp;·&nbsp;$10</span>
-                            </li>
-                        </ul>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-hanken font-semibold text-lg text-primary mb-2">Early Bird (before 10 Sep)</h4>
+                                <ul class="space-y-1 ml-2">
+                                    <li class="flex items-start">
+                                        <span class="text-gray-700 font-bold">Adult</span> <span class="text-gray-700">&nbsp;·&nbsp;$20</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-gray-700 font-bold">Student (≤18yo)</span> <span class="text-gray-700">&nbsp;·&nbsp;$10</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-hanken font-semibold text-lg text-primary mb-2">Regular (from 11 Sep onwards)</h4>
+                                <ul class="space-y-1 ml-2">
+                                    <li class="flex items-start">
+                                        <span class="text-gray-700 font-bold">Adult</span> <span class="text-gray-700">&nbsp;·&nbsp;$28</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-gray-700 font-bold">Student (≤18yo)</span> <span class="text-gray-700">&nbsp;·&nbsp;$14</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -267,70 +282,46 @@
     <section id="schedule" class="py-16 px-6 bg-gradient-to-br from-slate-50/80 via-green-50/80 to-emerald-50/80">
         <div class="container mx-auto">
             <div class="max-w-6xl mx-auto">
-                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Event Schedule</h2>
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12 tracking-tight">Event Schedule</h2>
                 <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
-                    <div class="grid md:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <!-- Morning Bioblitz -->
-                        <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl">
+                        <div class="bg-gray-50/80 border border-gray-200/50 p-6 rounded-2xl hover:bg-gray-100/80 transition-colors duration-300">
                             <div class="text-center mb-4">
                                 <h3 class="font-hanken font-bold text-xl text-primary mb-2">Morning Bioblitz</h3>
-                                <p class="text-orange-600 font-semibold">7:30 AM - 10:00 AM</p>
+                                <p class="text-gray-600 font-semibold">7:30 AM - 10:00 AM</p>
                             </div>
-                            <ul class="space-y-3 text-gray-700">
-                                <li>• Expert-guided birdwatching</li>
-                                <li>• Five different birding sites</li>
-                                <li>• Data collection for eBird</li>
-                                <li>• Species identification training</li>
-                            </ul>
-                        </div>
-
-                        <!-- Transport & Arrival -->
-                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl">
-                            <div class="text-center mb-4">
-                                <h3 class="font-hanken font-bold text-xl text-primary mb-2">Transport</h3>
-                                <p class="text-blue-600 font-semibold">10:00 AM - 11:00 AM</p>
-                            </div>
-                            <ul class="space-y-3 text-gray-700">
-                                <li>• Shuttle bus service provided</li>
-                                <li>• Travel to central venue</li>
-                                <li>• Zoo Learning Centre Auditorium</li>
+                            <ul class="space-y-3 text-gray-700 list-disc list-outside ml-4">
+                                <li>Five different <a href="#birding-sites" class="text-primary hover:text-primary-dark underline">birding sites</a></li>
+                                <li>Data collection for eBird</li>
+                                <li>Sharing about eBird best practices</li>
                             </ul>
                         </div>
 
                         <!-- Educational Talks -->
-                        <div class="bg-gradient-to-br from-green-50/80 to-emerald-50/80 p-6 rounded-2xl">
+                        <div class="bg-gray-50/80 border border-gray-200/50 p-6 rounded-2xl hover:bg-gray-100/80 transition-colors duration-300">
                             <div class="text-center mb-4">
                                 <h3 class="font-hanken font-bold text-xl text-primary mb-2">Educational Talks</h3>
-                                <p class="text-green-600 font-semibold">11:00 AM - 12:00 PM</p>
+                                <p class="text-gray-600 font-semibold">11:00 AM - 12:00 PM</p>
                             </div>
-                            <ul class="space-y-3 text-gray-700">
-                                <li>• Expert presentations</li>
-                                <li>• Avian research insights</li>
-                                <li>• Conservation topics</li>
-                                <li>• Singapore birding focus</li>
+                            <ul class="space-y-3 text-gray-700 list-disc list-outside ml-4">
+                                <li>Shuttle bus service provided from birding sites</li>
+                                <li>Talks on the role of citizen science in ornithology and conservation</li>
+                                <li>Singapore birding focus</li>
+                                <li>Event wrap-up and closing</li>
                             </ul>
                         </div>
 
                         <!-- Lunch & Networking -->
-                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl md:col-span-3">
+                        <div class="bg-gray-50/80 border border-gray-200/50 p-6 rounded-2xl hover:bg-gray-100/80 transition-colors duration-300">
                             <div class="text-center mb-4">
                                 <h3 class="font-hanken font-bold text-xl text-primary mb-2">Lunch & Networking</h3>
-                                <p class="text-purple-600 font-semibold">12:00 PM - 1:00 PM</p>
+                                <p class="text-gray-600 font-semibold">12:00 PM - 1:00 PM</p>
                             </div>
-                            <div class="grid md:grid-cols-3 gap-4">
-                                <ul class="space-y-3 text-gray-700">
-                                    <li>• Complimentary lunch provided</li>
-                                    <li>• Vegetarian options available</li>
-                                </ul>
-                                <ul class="space-y-3 text-gray-700">
-                                    <li>• Network with fellow birders</li>
-                                    <li>• Meet ornithologists and researchers</li>
-                                </ul>
-                                <ul class="space-y-3 text-gray-700">
-                                    <li>• Share birding experiences</li>
-                                    <li>• Event wrap-up and closing</li>
-                                </ul>
-                            </div>
+                            <ul class="space-y-3 text-gray-700 list-disc list-outside ml-4">
+                                <li>Complimentary lunch provided</li>
+                                <li>Vegetarian options available</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -342,7 +333,7 @@
     <section id="birding-sites" class="py-16 px-6 bg-white/80">
         <div class="container mx-auto">
             <div class="max-w-6xl mx-auto">
-                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Birding Sites</h2>
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12 tracking-tight">Birding Sites</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Location 1 -->
                     <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
@@ -442,11 +433,11 @@
     <section id="faq" class="py-16 px-6 bg-gradient-to-br from-slate-50/80 via-green-50/80 to-emerald-50/80">
         <div class="container mx-auto">
             <div class="max-w-4xl mx-auto">
-                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Frequently Asked Questions</h2>
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12 tracking-tight">Frequently Asked Questions</h2>
                 <div class="space-y-6">
                     <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
                         <h3 class="font-hanken font-bold text-xl text-primary mb-3">What should I bring?</h3>
-                        <p class="text-gray-700">Bring comfortable walking shoes, sun protection, water bottle, and if you have them - binoculars and a camera. We'll provide field guides and equipment for those who need it. Don't forget your smartphone for eBird data entry!</p>
+                        <p class="text-gray-700">Bring comfortable walking shoes, sun protection, water bottle, and if you have them – binoculars and a camera. </p>
                     </div>
                     
                     <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
@@ -456,12 +447,12 @@
                     
                     <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
                         <h3 class="font-hanken font-bold text-xl text-primary mb-3">What does the registration fee cover?</h3>
-                        <p class="text-gray-700">The nominal registration fee covers expert-guided birding sessions, transportation to the central venue, educational talks, lunch (including vegetarian options), an event pin, and event merchandise. All honoraria are donated back to BirdSoc SG for conservation efforts.</p>
+                        <p class="text-gray-700">The registration fee includes the morning birding sessions, transportation to the central venue, educational talks, lunch (including vegetarian options), and event merchandise (a shirt and stickers). All proceeds from the event are donated back to BirdSoc SG for its signature projects.</p>
                     </div>
                     
                     <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
                         <h3 class="font-hanken font-bold text-xl text-primary mb-3">How many birding sites can I visit?</h3>
-                        <p class="text-gray-700">Participants register for one of five birding sites for the morning bioblitz (7:30-10:00 AM). After the morning session, everyone will be transported to the Zoo Learning Centre Auditorium for talks and lunch together.</p>
+                        <p class="text-gray-700">Participants register for one of five birding sites for the morning bioblitz (7:30-10:00 AM). After the morning session, everyone will be transported to the Zoo Learning Centre Auditorium for talks and lunch together. If you will be driving, you can meet us there after the walk is over.</p>
                     </div>
                     
                     <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
@@ -482,7 +473,7 @@
     <section id="register" class="py-8 md:py-16 px-3 md:px-6 bg-white/80">
         <div class="container mx-auto">
             <div class="max-w-4xl mx-auto">
-                <h2 class="font-hanken font-bold text-3xl md:text-5xl text-primary text-center mb-8 md:mb-12">Register Now</h2>
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12 tracking-tight">Register Now</h2>
                 <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-4 md:p-8 shadow-xl" id="registrationApp">
                     <div class="mb-6">
                         <h4 class="font-hanken font-bold text-2xl text-primary">Choose Your Location</h4>
@@ -503,10 +494,10 @@
     <section id="contact" class="py-16 px-6 bg-gradient-to-br from-green-50/80 via-emerald-50/80 to-teal-50/80">
         <div class="container mx-auto">
             <div class="max-w-3xl mx-auto">
-                <h2 class="font-hanken font-bold text-3xl md:text-5xl text-primary text-center mb-8 md:mb-12">Get in Touch</h2>
+                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12 tracking-tight">Get in Touch</h2>
                 <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="mb-6">
-                        <h4 class="font-hanken font-bold text-xl text-primary mb-2">Have Questions?</h4>
+                        <h4 class="font-hanken font-bold text-2xl text-primary mb-2">Have Questions?</h4>
                         <p class="text-gray-600">Send us a message and we'll get back to you as soon as possible.</p>
                     </div>
                     
@@ -604,7 +595,7 @@
                 <h3 class="font-hanken font-bold text-2xl text-primary mb-6">Credits</h3>
                 <div class="grid md:grid-cols-2 gap-8 text-sm text-gray-600">
                     <div>
-                        <h4 class="font-medium text-gray-800 mb-2">Organizing Committee</h4>
+                        <h4 class="font-medium text-black-800 mb-2">Organizing Committee</h4>
                         <p>Sandra Chia</p>
                         <p>Zachary Chong</p>
                         <p>Collin Chua</p>
@@ -613,7 +604,7 @@
                         <p>Sng Chen Xi</p>
                     </div>
                     <div>
-                        <h4 class="font-medium text-gray-800 mb-2">Design and Web Development</h4>
+                        <h4 class="font-medium text-black-800 mb-2">Design and Web Development</h4>
                         <p>Lynn Tan (illustrations)</p>
                         <p>Emma Chao (graphic design)</p>
                         <p>Raghav Narayanswamy (web dev)</p>
