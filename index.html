@@ -125,7 +125,9 @@
                 <div class="hidden md:flex space-x-8">
                     <a href="#about" class="text-gray-600 hover:text-primary transition-colors duration-300 mt-2">About</a>
                     <a href="#schedule" class="text-gray-600 hover:text-primary transition-colors duration-300 mt-2">Schedule</a>
+                    <a href="#birding-sites" class="text-gray-600 hover:text-primary transition-colors duration-300 mt-2">Sites</a>
                     <a href="#faq" class="text-gray-600 hover:text-primary transition-colors duration-300 mt-2">FAQ</a>
+                    <a href="#contact" class="text-gray-600 hover:text-primary transition-colors duration-300 mt-2">Contact</a>
                     <a href="#register" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition-all duration-300 transform hover:scale-105">Register</a>
                 </div>
                 <!-- Mobile menu button -->
@@ -140,7 +142,9 @@
                 <div class="flex flex-col space-y-4">
                     <a href="#about" class="text-gray-600 hover:text-primary transition-colors duration-300">About</a>
                     <a href="#schedule" class="text-gray-600 hover:text-primary transition-colors duration-300">Schedule</a>
+                    <a href="#birding-sites" class="text-gray-600 hover:text-primary transition-colors duration-300">Birding Sites</a>
                     <a href="#faq" class="text-gray-600 hover:text-primary transition-colors duration-300">FAQ</a>
+                    <a href="#contact" class="text-gray-600 hover:text-primary transition-colors duration-300">Contact</a>
                     <a href="#register" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition-all duration-300 text-center">Register</a>
                 </div>
             </div>
@@ -193,18 +197,18 @@
                 <div class="text-center mb-12 max-w-3xl mx-auto">
                     <!-- Organized by (top, larger) -->
                     <div class="mb-8">
-                        <p class="text-gray-700 text-md font-medium mb-3">Organized by</p>
+                        <p class="text-gray-700 text-md font-bold mb-3">Organized by</p>
                         <img src="assets/img/birdsoc-logo.png" alt="Bird Society of Singapore" class="mx-auto h-20 md:h-24 w-auto">
                     </div>
                     
                     <!-- Sponsored by and In support of (bottom row) -->
                     <div class="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
                         <div class="text-center">
-                            <p class="text-gray-600 text-sm font-medium mb-3">Sponsored by</p>
+                            <p class="text-gray-600 text-sm font-bold mb-3">Sponsored by</p>
                             <img src="assets/img/mandai-nature.svg" alt="Mandai Nature" class="mx-auto h-16 md:h-18 w-auto">
                         </div>
                         <div class="text-center">
-                            <p class="text-gray-600 text-sm font-medium mb-3">In support of</p>
+                            <p class="text-gray-600 text-sm font-bold mb-3">In support of</p>
                             <img src="assets/img/octoberbigday-cornell.svg" alt="Cornell October Big Day" class="mx-auto h-12 md:h-12 w-auto">
                         </div>
                     </div>
@@ -475,11 +479,11 @@
     </section>
 
     <!-- Register Section -->
-    <section id="register" class="py-16 px-6 bg-white/80">
+    <section id="register" class="py-8 md:py-16 px-3 md:px-6 bg-white/80">
         <div class="container mx-auto">
             <div class="max-w-4xl mx-auto">
-                <h2 class="font-hanken font-bold text-5xl text-primary text-center mb-12">Register Now</h2>
-                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl" id="registrationApp">
+                <h2 class="font-hanken font-bold text-3xl md:text-5xl text-primary text-center mb-8 md:mb-12">Register Now</h2>
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-4 md:p-8 shadow-xl" id="registrationApp">
                     <div class="mb-6">
                         <h4 class="font-hanken font-bold text-2xl text-primary">Choose Your Location</h4>
                         <p class="text-gray-600">Select a location below and complete your registration.</p>
@@ -494,6 +498,105 @@
             </div>
         </div>
     </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="py-16 px-6 bg-gradient-to-br from-green-50/80 via-emerald-50/80 to-teal-50/80">
+        <div class="container mx-auto">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="font-hanken font-bold text-3xl md:text-5xl text-primary text-center mb-8 md:mb-12">Get in Touch</h2>
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
+                    <div class="mb-6">
+                        <h4 class="font-hanken font-bold text-xl text-primary mb-2">Have Questions?</h4>
+                        <p class="text-gray-600">Send us a message and we'll get back to you as soon as possible.</p>
+                    </div>
+                    
+                    <form id="contactForm" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-2">Name *</label>
+                                <input type="text" name="name" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+                                <div class="error-message text-xs text-red-600 mt-1 hidden"></div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-2">Email *</label>
+                                <input type="email" name="email" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+                                <div class="error-message text-xs text-red-600 mt-1 hidden"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2">Subject *</label>
+                            <input type="text" name="subject" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+                            <div class="error-message text-xs text-red-600 mt-1 hidden"></div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2">Message *</label>
+                            <textarea name="body" required rows="5" 
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors resize-y"></textarea>
+                            <div class="error-message text-xs text-red-600 mt-1 hidden"></div>
+                        </div>
+                        
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" name="pdpa_agreement" required id="pdpaCheck"
+                                   class="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+                            <label for="pdpaCheck" class="text-sm text-gray-600 flex-1">
+                                I have read and agree to the <a href='https://birdsociety.sg/data-protection-notice/' class="text-primary hover:underline">data protection notice</a> and consent to being contacted via email. *
+                            </label>
+                        </div>
+                        <div class="error-message text-xs text-red-600 mt-1 hidden" data-field="pdpa_agreement"></div>
+                        
+                        <div class="pt-4">
+                            <button type="submit" id="contactSubmitBtn"
+                                    class="w-full bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                                <span class="btn-text">Send Message</span>
+                                <span class="btn-loading hidden">
+                                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Sending...
+                                </span>
+                            </button>
+                        </div>
+                        
+                        <!-- Success Message -->
+                        <div id="contactSuccess" class="hidden bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
+                            <div class="flex items-center">
+                                <div class="text-green-400 mr-3">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-green-800">
+                                    <p class="font-medium">Message sent successfully!</p>
+                                    <p class="text-sm">Thank you for your message. We'll respond via email as soon as possible.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Error Message -->
+                        <div id="contactError" class="hidden bg-red-50 border border-red-200 rounded-lg p-4 mt-4">
+                            <div class="flex items-center">
+                                <div class="text-red-400 mr-3">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-red-800">
+                                    <p class="font-medium">Failed to send message</p>
+                                    <p class="text-sm" id="contactErrorText">Please try again later or contact us directly.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <section class="py-12 px-6 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80">
         <div class="container mx-auto">
@@ -502,6 +605,7 @@
                 <div class="grid md:grid-cols-2 gap-8 text-sm text-gray-600">
                     <div>
                         <h4 class="font-medium text-gray-800 mb-2">Organizing Committee</h4>
+                        <p>Sandra Chia</p>
                         <p>Zachary Chong</p>
                         <p>Collin Chua</p>
                         <p>Raghav Narayanswamy</p>
@@ -657,7 +761,38 @@
             return 'https://shop.birdsociety.sg/api/v1';
         })();
         function fmtDate(s) {
-            try { return new Date(s).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }); } catch { return s; }
+            try {
+                return new Date(s).toLocaleString("en-SG", {
+                    dateStyle: "medium",
+                    timeStyle: "short",
+                    timeZone: "Asia/Singapore"
+                });
+            } catch {
+                return s;
+            }
+        }
+        function fmtDates(start, end) {
+            try {
+                const optsDate = { dateStyle: "medium", timeZone: "Asia/Singapore" };
+                const optsTime = { timeStyle: "short", timeZone: "Asia/Singapore" };
+
+                const d1 = new Date(start);
+                const d2 = new Date(end);
+
+                const date1 = d1.toLocaleDateString("en-SG", optsDate);
+                const date2 = d2.toLocaleDateString("en-SG", optsDate);
+
+                const time1 = d1.toLocaleTimeString("en-SG", optsTime);
+                const time2 = d2.toLocaleTimeString("en-SG", optsTime);
+
+                if (date1 === date2) {
+                    return `${date1}, ${time1} – ${time2}`;
+                } else {
+                    return `${date1}, ${time1} – ${date2}, ${time2}`;
+                }
+            } catch {
+                return `${start} – ${end}`;
+            }
         }
         function currency(amount, cur) {
             const a = typeof amount === 'string' ? parseFloat(amount) : amount;
@@ -676,13 +811,13 @@
             const y = String(dt.getFullYear()).slice(-2);
             const m = String(dt.getMonth() + 1).padStart(2, '0');
             const d = String(dt.getDate()).padStart(2, '0');
-            const h = String(dt.getHours()).padStart(2, '0');
-            const mi = String(dt.getMinutes()).padStart(2, '0');
-            const s = String(dt.getSeconds()).padStart(2, '0');
+            // const h = String(dt.getHours()).padStart(2, '0');
+            // const mi = String(dt.getMinutes()).padStart(2, '0');
+            // const s = String(dt.getSeconds()).padStart(2, '0');
             // Short random suffix for uniqueness
             const rand = Math.random().toString(36).toUpperCase().slice(2, 6);
             // Format: PREFIXYYMMDD-HHMMSS-RAND (<=25 chars)
-            const raw = `${prefix}${y}${m}${d}-${h}${mi}${s}-${rand}`.toUpperCase();
+            const raw = `${prefix}${y}${m}${d}-${rand}`.toUpperCase();
             return raw.replace(/[^A-Z0-9-]/g, '').slice(0, 25);
         }
         async function fetchEvents() {
@@ -712,18 +847,27 @@
             const desc = schemaProp.description || '';
             const req = required ? 'required' : '';
             const common = `data-key="${key}" ${req} class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"`;
+            
+            // Check if description contains "shirt size chart" and wrap with modal link
+            const hasSizeChart = desc.toLowerCase().includes('shirt size chart');
+            const descriptionHtml = desc ? 
+                `<div class="text-xs text-gray-500 mt-1">${hasSizeChart ? 
+                    `<button type="button" onclick="openSizeChartModal()" class="text-blue-600 hover:text-blue-800 underline">${desc}</button>` : 
+                    desc
+                }</div>` : '';
+            
             if (schemaProp.enum) {
                 const emptyOpt = '<option value="">Select...</option>';
                 const opts = schemaProp.enum.map(v => `<option value="${String(v)}">${String(v)}</option>`).join('');
-                return `<div><label class="block text-gray-700 text-sm mb-1">${label}${required?' *':''}</label><select ${common}>${emptyOpt}${opts}</select>${desc?`<div class=\"text-xs text-gray-500 mt-1\">${desc}</div>`:''}</div>`;
+                return `<div><label class="block text-gray-700 text-sm mb-1">${label}${required?' *':''}</label><select ${common}>${emptyOpt}${opts}</select>${descriptionHtml}</div>`;
             }
             if (type === 'integer' || type === 'number') {
                 const step = type === 'integer' ? '1' : 'any';
                 const min = schemaProp.minimum != null ? `min="${schemaProp.minimum}"` : '';
-                return `<div><label class="block text-gray-700 text-sm mb-1">${label}${required?' *':''}</label><input type="number" ${min} step="${step}" ${common} />${desc?`<div class=\"text-xs text-gray-500 mt-1\">${desc}</div>`:''}</div>`;
+                return `<div><label class="block text-gray-700 text-sm mb-1">${label}${required?' *':''}</label><input type="number" ${min} step="${step}" ${common} />${descriptionHtml}</div>`;
             }
             // const placeholder = (schemaProp.examples && schemaProp.examples[0]) ? `placeholder="${schemaProp.examples[0]}"` : '';
-            return `<div><label class="block text-gray-700 text-sm mb-1">${label}${required?' *':''}</label><input type="text" ${common} />${desc?`<div class=\"text-xs text-gray-500 mt-1\">${desc}</div>`:''}</div>`;
+            return `<div><label class="block text-gray-700 text-sm mb-1">${label}${required?' *':''}</label><input type="text" ${common} />${descriptionHtml}</div>`;
         }
         function buildParticipantsUI(schema, count) {
             const reqSet = new Set(schema.required || []);
@@ -869,8 +1013,13 @@
                 if (data.capacity && data.capacity.remaining != null) {
                     const spotsEl = document.querySelector(`.spots-left[data-ev="${evId}"]`);
                     if (spotsEl) {
-                        spotsEl.textContent = data.capacity.remaining;
-                        spotsEl.classList.remove('hidden');
+                        const remaining = data.capacity.remaining;
+                        if (remaining < 5) {
+                            spotsEl.textContent = `${remaining} spots left`;
+                            spotsEl.className = 'spots-left inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800';
+                        } else {
+                            spotsEl.classList.add('hidden');
+                        }
                     }
                 }
                 if (isFormComplete(form)) {
@@ -944,11 +1093,11 @@
             <div class="border border-gray-200 rounded-xl p-4">
               <div class="flex items-start justify-between gap-4">
                 <div>
-                  <div class="font-hanken font-bold text-xl text-primary">${ev.location || ev.title}</div>
-                  <div class="text-sm text-gray-600">${fmtDate(ev.start_date)}${ev.end_date ? ' – ' + fmtDate(ev.end_date) : ''}</div>
+                  <div class="font-hanken font-bold text-xl text-primary font-hanken font-bold leading-[1.25] mb-2">${ev.location || ev.title}</div>
+                  <div class="text-sm text-gray-600 leading-[1.25]">${fmtDates(ev.start_date, ev.end_date)}</div>
                   <div class="text-sm text-gray-700 mt-1">
-                    ${left !== null
-                      ? ` <span class="spots-left" data-ev="${ev.id}">${left}</span> spots left`
+                    ${left !== null && left < 5
+                      ? ` <span class="spots-left inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800" data-ev="${ev.id}">${left} spots left</span>`
                       : ` <span class="spots-left hidden" data-ev="${ev.id}"></span>`}
                   </div>
                 </div>
@@ -956,21 +1105,24 @@
               </div>
               <div id="${id}-panel" class="hidden mt-4">
                 <!-- Step Progress Indicator (3 steps) -->
-                <div class="flex items-center justify-center mb-6">
-                  <div class="flex items-center space-x-4">
-                    <div class="step-indicator flex items-center">
-                      <div class="step-circle w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center font-semibold" data-step="1">1</div>
-                      <span class="ml-2 text-sm font-medium text-primary">Enter Details</span>
+                <div class="flex items-center justify-center mb-4 md:mb-6">
+                  <!-- Mobile: Vertical layout, Desktop: Horizontal layout -->
+                  <div class="flex flex-col space-y-1 md:flex-row md:items-center md:space-y-0 md:space-x-4 w-full max-w-sm md:max-w-max md:justify-center">
+                    <div class="step-indicator flex items-center justify-center">
+                      <div class="step-circle w-7 h-7 md:w-8 md:h-8 rounded-full bg-primary text-white text-xs md:text-sm flex items-center justify-center font-semibold" data-step="1">1</div>
+                      <span class="ml-2 text-xs md:text-sm font-medium text-primary">Enter Details</span>
                     </div>
-                    <div class="w-8 h-0.5 bg-gray-300" data-connector="1-2"></div>
-                    <div class="step-indicator flex items-center">
-                      <div class="step-circle w-8 h-8 rounded-full bg-gray-300 text-gray-600 text-sm flex items-center justify-center font-semibold" data-step="2">2</div>
-                      <span class="ml-2 text-sm font-medium text-gray-600">Review & Pay</span>
+                    <div class="w-px h-2 bg-gray-300 mx-auto md:hidden" data-connector="1-2"></div>
+                    <div class="hidden md:block w-8 h-0.5 bg-gray-300" data-connector="1-2"></div>
+                    <div class="step-indicator flex items-center justify-center">
+                      <div class="step-circle w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-300 text-gray-600 text-xs md:text-sm flex items-center justify-center font-semibold" data-step="2">2</div>
+                      <span class="ml-2 text-xs md:text-sm font-medium text-gray-600">Review & Pay</span>
                     </div>
-                    <div class="w-8 h-0.5 bg-gray-300" data-connector="2-3"></div>
-                    <div class="step-indicator flex items-center">
-                      <div class="step-circle w-8 h-8 rounded-full bg-gray-300 text-gray-600 text-sm flex items-center justify-center font-semibold" data-step="3">✓</div>
-                      <span class="ml-2 text-sm font-medium text-gray-600">Confirm</span>
+                    <div class="w-px h-2 bg-gray-300 mx-auto md:hidden" data-connector="2-3"></div>
+                    <div class="hidden md:block w-8 h-0.5 bg-gray-300" data-connector="2-3"></div>
+                    <div class="step-indicator flex items-center justify-center">
+                      <div class="step-circle w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-300 text-gray-600 text-xs md:text-sm flex items-center justify-center font-semibold" data-step="3">✓</div>
+                      <span class="ml-2 text-xs md:text-sm font-medium text-gray-600">Confirm</span>
                     </div>
                   </div>
                 </div>
@@ -978,10 +1130,10 @@
                 <form data-ev="${ev.id}" class="reg-form space-y-4">
                   <!-- Step 1: Enter Details -->
                   <div class="reg-step" data-step="1">
-                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6">
-                      <h3 class="font-hanken font-bold text-xl text-primary mb-4">Step 1: Enter Your Details</h3>
-                      <div class="space-y-4">
-                        <div class="grid md:grid-cols-2 gap-3">
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-3 md:p-6">
+                      <h3 class="font-hanken font-bold text-lg md:text-xl text-primary mb-3 md:mb-4">Step 1: Enter Your Details</h3>
+                      <div class="space-y-3 md:space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div>
                             <label class="block text-gray-700 text-sm mb-1">First name (main contact) *</label>
                             <input name="first_name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
@@ -991,7 +1143,7 @@
                             <input name="last_name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
                           </div>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div>
                             <label class="block text-gray-700 text-sm mb-1">Email *</label>
                             <input type="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
@@ -1001,7 +1153,7 @@
                             <input type="tel" name="phone_number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
                           </div>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                             <label class="block text-gray-700 text-sm mb-1">Number of participants (max 5) *</label>
                             <input type="number" name="participants" min="1" value="1" max="5" required class="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
@@ -1015,26 +1167,26 @@
                         <div class="schema-wrap hidden">
                           <div class="font-hanken font-semibold text-primary mb-2">Participant Details</div>
                           <div class="text-sm text-gray-600 mb-3">Please provide details for each participant below.</div>
-                          <div class="participants space-y-3"></div>
+                          <div class="participants space-y-2 md:space-y-3"></div>
                         </div>
                       </div>
-                      <div class="flex items-center justify-between mt-6">
-                        <button type="button" data-ev="${ev.id}" class="reg-cancel text-gray-600 hover:text-primary">Cancel</button>
-                        <button type="button" class="next-step bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark" data-next="2">Continue to Review</button>
+                      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 md:mt-6 gap-3 sm:gap-0">
+                        <button type="button" data-ev="${ev.id}" class="reg-cancel text-gray-600 hover:text-primary order-2 sm:order-1">Cancel</button>
+                        <button type="button" class="next-step bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark order-1 sm:order-2" data-next="2">Continue to Review</button>
                       </div>
                     </div>
                   </div>
 
                   <!-- Step 2: Review + Pay -->
                   <div class="reg-step hidden" data-step="2">
-                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6">
-                      <h3 class="font-hanken font-bold text-xl text-primary mb-4">Step 2: Review & Payment</h3>
-                      <div class="space-y-4">
-                        <div class="review-details bg-gray-50 rounded-lg p-4">
+                    <div class="bg-white/70 backdrop-blur-sm rounded-xl p-3 md:p-6">
+                      <h3 class="font-hanken font-bold text-lg md:text-xl text-primary mb-3 md:mb-4">Step 2: Review & Payment</h3>
+                      <div class="space-y-3 md:space-y-4">
+                        <div class="review-details bg-gray-50 rounded-lg p-3 md:p-4">
                           <h4 class="font-semibold text-gray-800 mb-2">Registration Details</h4>
                           <div class="review-content text-sm text-gray-700 space-y-1"></div>
                         </div>
-                        <div class="price-preview border border-gray-200 bg-white rounded-xl p-4">
+                        <div class="price-preview border border-gray-200 bg-white rounded-xl p-3 md:p-4">
                           <div class="flex items-center justify-between mb-2">
                             <div class="font-hanken font-semibold text-primary">Price Breakdown</div>
                           </div>
@@ -1046,12 +1198,12 @@
                           <div class="mt-1 text-xs price-warnings"></div>
                         </div>
                         <div class="reg-status text-sm"></div>
-                        <div class="group-paid border border-green-200 bg-green-50 rounded-lg p-4 space-y-3">
+                        <div class="group-paid border border-green-200 bg-green-50 rounded-lg p-3 md:p-4 space-y-3">
                           <div class="font-hanken font-semibold text-primary">Payment for all participants</div>
                           <div class="text-sm text-gray-800"><span class="font-semibold">Reference:</span> <span class="group-ref"></span></div>
                           <div class="text-sm text-gray-800"><span class="font-semibold">Total Amount:</span> <span class="group-amt"></span></div>
                           <canvas class="group-qr mb-2"></canvas>
-                          <div class="flex items-center gap-3">
+                          <div class="flex flex-col sm:flex-row sm:items-center gap-3">
                             <input type="file" accept="image/*" class="group-file hidden" />
                             <button type="button" class="group-upload bg-primary text-white px-3 py-2 rounded-md text-sm hover:bg-primary-dark">Upload Payment Proof</button>
                             <span class="group-upload-status text-sm text-gray-700"></span>
@@ -1059,9 +1211,9 @@
                           <div class="group-items text-xs text-gray-700"></div>
                         </div>
                       </div>
-                      <div class="flex items-center justify-between mt-6">
-                        <button type="button" class="prev-step text-gray-600 hover:text-primary" data-prev="1">← Back to Details</button>
-                        <button type="button" class="complete-registration hidden bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark" data-next="3">Done</button>
+                      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 md:mt-6 gap-3 sm:gap-0">
+                        <button type="button" class="prev-step text-gray-600 hover:text-primary order-2 sm:order-1" data-prev="1">← Back to Details</button>
+                        <button type="button" class="complete-registration hidden bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark order-1 sm:order-2" data-next="3">Done</button>
                       </div>
                     </div>
                   </div>
@@ -1070,10 +1222,10 @@
 
                   <!-- Step 3: Confirmation -->
                   <div class="reg-step hidden" data-step="3">
-                    <div class="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-4 md:p-6 text-center">
                       <div class="text-green-600 text-5xl mb-4">✓</div>
                       <h3 class="font-hanken font-bold text-2xl text-green-800 mb-2">Registration Submitted!</h3>
-                      <p class="text-green-700 mb-4">Thank you for your registration. We'll confirm your registration within 1 working day.</p>
+                      <p class="text-green-700 mb-4">Thank you for your registration. We'll confirm your registration via email within 1 working day.</p>
                       <div class="confirmation-details text-sm text-green-600"></div>
                     </div>
                   </div>
@@ -1098,29 +1250,40 @@
                 
                 if (stepNum < currentStep) {
                     // Completed step
-                    circle.className = 'step-circle w-8 h-8 rounded-full bg-green-500 text-white text-sm flex items-center justify-center font-semibold';
+                    circle.className = 'step-circle w-7 h-7 md:w-8 md:h-8 rounded-full bg-green-500 text-white text-xs md:text-sm flex items-center justify-center font-semibold';
                     circle.textContent = '✓';
-                    label.className = 'ml-2 text-sm font-medium text-green-600';
+                    label.className = 'ml-2 text-xs md:text-sm font-medium text-green-600';
                 } else if (stepNum === currentStep) {
                     // Current step
-                    circle.className = 'step-circle w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center font-semibold';
+                    circle.className = 'step-circle w-7 h-7 md:w-8 md:h-8 rounded-full bg-primary text-white text-xs md:text-sm flex items-center justify-center font-semibold';
                     circle.textContent = stepNum === lastStep ? '✓' : stepNum;
-                    label.className = 'ml-2 text-sm font-medium text-primary';
+                    label.className = 'ml-2 text-xs md:text-sm font-medium text-primary';
                 } else {
                     // Future step
-                    circle.className = 'step-circle w-8 h-8 rounded-full bg-gray-300 text-gray-600 text-sm flex items-center justify-center font-semibold';
+                    circle.className = 'step-circle w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-300 text-gray-600 text-xs md:text-sm flex items-center justify-center font-semibold';
                     circle.textContent = stepNum === lastStep ? '✓' : stepNum;
-                    label.className = 'ml-2 text-sm font-medium text-gray-600';
+                    label.className = 'ml-2 text-xs md:text-sm font-medium text-gray-600';
                 }
             });
 
             // Update connectors
             connectors.forEach(connector => {
                 const [from, to] = connector.getAttribute('data-connector').split('-').map(Number);
+                const isMobileConnector = connector.classList.contains('w-px');
+                const isDesktopConnector = connector.classList.contains('w-8');
+                
                 if (from < currentStep) {
-                    connector.className = 'w-8 h-0.5 bg-green-500';
+                    if (isMobileConnector) {
+                        connector.className = 'w-px h-2 bg-green-500 mx-auto md:hidden';
+                    } else if (isDesktopConnector) {
+                        connector.className = 'hidden md:block w-8 h-0.5 bg-green-500';
+                    }
                 } else {
-                    connector.className = 'w-8 h-0.5 bg-gray-300';
+                    if (isMobileConnector) {
+                        connector.className = 'w-px h-2 bg-gray-300 mx-auto md:hidden';
+                    } else if (isDesktopConnector) {
+                        connector.className = 'hidden md:block w-8 h-0.5 bg-gray-300';
+                    }
                 }
             });
         }
@@ -1214,6 +1377,9 @@
                         
                         form.querySelectorAll('.next-step').forEach(nextBtn => {
                             nextBtn.addEventListener('click', async () => {
+                                // Prevent duplicate submissions
+                                if (nextBtn.disabled) return;
+                                
                                 const nextStep = parseInt(nextBtn.getAttribute('data-next'));
                                 if (nextStep === 2) {
                                     // Validate step 1 before proceeding
@@ -1231,50 +1397,79 @@
                                     // Validate donation as whole dollars
                                     showDonationValidity(donationInput);
                                     if (!showDonationValidity(donationInput)) return;
-                                    // Populate review step and show breakdown
-                                    populateReviewStep(form);
-                                    await computeAndRenderPrice(id, form);
-                                    showStep(form, 2);
-                                    // Configure payment UI within Review step
-                                    const price = form.dataset.priceData ? JSON.parse(form.dataset.priceData) : null;
-                                    const requiresPayment = !!(price && price.requires_payment);
-                                    const groupBox = form.querySelector('.group-paid');
-                                    const amtEl = groupBox.querySelector('.group-amt');
-                                    const refEl = groupBox.querySelector('.group-ref');
-                                    const canvas = groupBox.querySelector('.group-qr');
-                                    const completeBtn = form.querySelector('.complete-registration');
-                                    if (!requiresPayment) {
-                                        // Hide payment box and allow direct submission
-                                        groupBox.classList.add('hidden');
-                                        completeBtn.classList.remove('hidden');
-                                    } else {
-                                        groupBox.classList.remove('hidden');
-                                        // Use totals.amount_with_donation as final total
-                                        const totalAmt = price && price.totals && (price.totals.amount_with_donation != null)
-                                            ? parseFloat(price.totals.amount_with_donation)
-                                            : (price && price.totals && price.totals.amount ? parseFloat(price.totals.amount) : 0);
-                                        const ccy = price && price.currency ? price.currency : 'SGD';
-                                        amtEl.textContent = currency(totalAmt, ccy);
-                                        // Generate or reuse the client-side reference
-                                        if (!form.dataset.groupReference) {
-                                            form.dataset.groupReference = generateClientReference('OBD25-');
-                                        }
-                                        const preRef = form.dataset.groupReference;
-                                        refEl.textContent = preRef;
-                                        // Render QR with final amount and the client reference
-                                        renderPayNow(canvas, totalAmt, preRef);
-                                        // Prepare file capture (no upload yet)
-                                        const fileInput = groupBox.querySelector('.group-file');
-                                        const uploadBtn = groupBox.querySelector('.group-upload');
-                                        const uploadStatus = groupBox.querySelector('.group-upload-status');
-                                        uploadBtn.onclick = () => fileInput.click();
-                                        fileInput.onchange = () => {
-                                            if (!fileInput.files || !fileInput.files[0]) return;
-                                            form._paymentProof = fileInput.files[0];
-                                            uploadStatus.className = 'group-upload-status text-sm text-green-700';
-                                            uploadStatus.textContent = 'Payment proof ready to submit.';
+                                    
+                                    // Show spinner and disable button
+                                    const originalText = nextBtn.innerHTML;
+                                    nextBtn.disabled = true;
+                                    nextBtn.innerHTML = `
+                                        <div class="flex items-center justify-center">
+                                            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Loading...
+                                        </div>
+                                    `;
+                                    nextBtn.classList.add('cursor-not-allowed', 'opacity-75');
+                                    
+                                    try {
+                                        // Populate review step and show breakdown
+                                        populateReviewStep(form);
+                                        await computeAndRenderPrice(id, form);
+                                        showStep(form, 2);
+                                        
+                                        // Re-enable button after successful transition
+                                        nextBtn.disabled = false;
+                                        nextBtn.innerHTML = originalText;
+                                        nextBtn.classList.remove('cursor-not-allowed', 'opacity-75');
+                                        
+                                        // Configure payment UI within Review step
+                                        const price = form.dataset.priceData ? JSON.parse(form.dataset.priceData) : null;
+                                        const requiresPayment = !!(price && price.requires_payment);
+                                        const groupBox = form.querySelector('.group-paid');
+                                        const amtEl = groupBox.querySelector('.group-amt');
+                                        const refEl = groupBox.querySelector('.group-ref');
+                                        const canvas = groupBox.querySelector('.group-qr');
+                                        const completeBtn = form.querySelector('.complete-registration');
+                                        if (!requiresPayment) {
+                                            // Hide payment box and allow direct submission
+                                            groupBox.classList.add('hidden');
                                             completeBtn.classList.remove('hidden');
-                                        };
+                                        } else {
+                                            groupBox.classList.remove('hidden');
+                                            // Use totals.amount_with_donation as final total
+                                            const totalAmt = price && price.totals && (price.totals.amount_with_donation != null)
+                                                ? parseFloat(price.totals.amount_with_donation)
+                                                : (price && price.totals && price.totals.amount ? parseFloat(price.totals.amount) : 0);
+                                            const ccy = price && price.currency ? price.currency : 'SGD';
+                                            amtEl.textContent = currency(totalAmt, ccy);
+                                            // Generate or reuse the client-side reference
+                                            if (!form.dataset.groupReference) {
+                                                form.dataset.groupReference = generateClientReference('OBD25-');
+                                            }
+                                            const preRef = form.dataset.groupReference;
+                                            refEl.textContent = preRef;
+                                            // Render QR with final amount and the client reference
+                                            renderPayNow(canvas, totalAmt, preRef);
+                                            // Prepare file capture (no upload yet)
+                                            const fileInput = groupBox.querySelector('.group-file');
+                                            const uploadBtn = groupBox.querySelector('.group-upload');
+                                            const uploadStatus = groupBox.querySelector('.group-upload-status');
+                                            uploadBtn.onclick = () => fileInput.click();
+                                            fileInput.onchange = () => {
+                                                if (!fileInput.files || !fileInput.files[0]) return;
+                                                form._paymentProof = fileInput.files[0];
+                                                uploadStatus.className = 'group-upload-status text-sm text-green-700';
+                                                uploadStatus.textContent = 'Payment proof ready to submit.';
+                                                completeBtn.classList.remove('hidden');
+                                            };
+                                        }
+                                    } catch (error) {
+                                        // Re-enable button on error
+                                        nextBtn.disabled = false;
+                                        nextBtn.innerHTML = originalText;
+                                        nextBtn.classList.remove('cursor-not-allowed', 'opacity-75');
+                                        console.error('Error in next step:', error);
                                     }
                                 }
                             });
@@ -1301,7 +1496,31 @@
                             completeBtn.parentNode.replaceChild(newCompleteBtn, completeBtn);
                             // On Done, actually submit registration (with client reference and optional proof)
                             newCompleteBtn.addEventListener('click', async () => {
-                                await submitRegistration(form, id);
+                                // Prevent duplicate submissions
+                                if (newCompleteBtn.disabled) return;
+                                
+                                // Show spinner and disable button
+                                const originalText = newCompleteBtn.innerHTML;
+                                newCompleteBtn.disabled = true;
+                                newCompleteBtn.innerHTML = `
+                                    <div class="flex items-center justify-center">
+                                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Submitting...
+                                    </div>
+                                `;
+                                newCompleteBtn.classList.add('cursor-not-allowed', 'opacity-75');
+                                
+                                try {
+                                    await submitRegistration(form, id);
+                                } catch (error) {
+                                    // Re-enable button on error
+                                    newCompleteBtn.disabled = false;
+                                    newCompleteBtn.innerHTML = originalText;
+                                    newCompleteBtn.classList.remove('cursor-not-allowed', 'opacity-75');
+                                }
                             });
                         }
                         
@@ -1312,7 +1531,32 @@
                                 schemaWrap.classList.remove('hidden');
                                 const renderParts = () => {
                                     const n = Math.max(1, parseInt(countInput.value || '1', 10));
+                                    
+                                    // Store existing form data before rebuilding
+                                    const existingData = {};
+                                    participantsDiv.querySelectorAll('[data-part]').forEach((section, partIndex) => {
+                                        existingData[partIndex + 1] = {};
+                                        section.querySelectorAll('[data-key]').forEach(input => {
+                                            const key = input.getAttribute('data-key');
+                                            existingData[partIndex + 1][key] = input.value;
+                                        });
+                                    });
+                                    
+                                    // Rebuild UI
                                     participantsDiv.innerHTML = buildParticipantsUI(schema, n);
+                                    
+                                    // Restore existing data
+                                    participantsDiv.querySelectorAll('[data-part]').forEach((section, partIndex) => {
+                                        const partNum = partIndex + 1;
+                                        if (existingData[partNum]) {
+                                            section.querySelectorAll('[data-key]').forEach(input => {
+                                                const key = input.getAttribute('data-key');
+                                                if (existingData[partNum][key] !== undefined) {
+                                                    input.value = existingData[partNum][key];
+                                                }
+                                            });
+                                        }
+                                    });
                                 };
                                 renderParts();
                                 countInput.oninput = renderParts;
@@ -1622,11 +1866,267 @@
             }
         }
 
+        // Contact form functionality
+        function clearContactErrors() {
+            const errorElements = document.querySelectorAll('#contactForm .error-message');
+            errorElements.forEach(el => {
+                el.textContent = '';
+                el.classList.add('hidden');
+            });
+            
+            // Clear input error states
+            const inputs = document.querySelectorAll('#contactForm input, #contactForm textarea');
+            inputs.forEach(input => {
+                input.classList.remove('border-red-500');
+            });
+        }
+
+        function showContactErrors(errors) {
+            clearContactErrors();
+            
+            Object.entries(errors).forEach(([field, message]) => {
+                // Find the input field
+                const input = document.querySelector(`#contactForm [name="${field}"]`);
+                if (input) {
+                    input.classList.add('border-red-500');
+                    
+                    // Find the corresponding error message element
+                    let errorEl = input.parentElement.querySelector('.error-message');
+                    if (!errorEl && field === 'pdpa_agreement') {
+                        errorEl = document.querySelector('[data-field="pdpa_agreement"]');
+                    }
+                    
+                    if (errorEl) {
+                        errorEl.textContent = message;
+                        errorEl.classList.remove('hidden');
+                    }
+                }
+            });
+        }
+
+        function validateContactForm(formData) {
+            const errors = {};
+            
+            // Name validation
+            const name = formData.get('name')?.trim();
+            if (!name) {
+                errors.name = 'Name is required';
+            } else if (name.length < 2) {
+                errors.name = 'Name must be at least 2 characters';
+            }
+            
+            // Email validation
+            const email = formData.get('email')?.trim();
+            if (!email) {
+                errors.email = 'Email is required';
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                errors.email = 'Please enter a valid email address';
+            }
+            
+            // Subject validation
+            const subject = formData.get('subject')?.trim();
+            if (!subject) {
+                errors.subject = 'Subject is required';
+            } else if (subject.length < 5) {
+                errors.subject = 'Subject must be at least 5 characters';
+            }
+            
+            // Body validation
+            const body = formData.get('body')?.trim();
+            if (!body) {
+                errors.body = 'Message is required';
+            } else if (body.length < 10) {
+                errors.body = 'Message must be at least 10 characters';
+            }
+            
+            // PDPA agreement validation
+            const pdpaAgreement = formData.get('pdpa_agreement');
+            if (!pdpaAgreement) {
+                errors.pdpa_agreement = 'You must agree to the data protection notice to continue';
+            }
+            
+            return errors;
+        }
+
+        async function submitContactForm(formData) {
+            const submitBtn = document.getElementById('contactSubmitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            const successMsg = document.getElementById('contactSuccess');
+            const errorMsg = document.getElementById('contactError');
+            const errorText = document.getElementById('contactErrorText');
+            
+            // Hide previous messages
+            successMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+            clearContactErrors();
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+            
+            try {
+                // Prepare data for API
+                const contactData = {
+                    name: formData.get('name')?.trim(),
+                    email: formData.get('email')?.trim(),
+                    subject: formData.get('subject')?.trim(),
+                    body: formData.get('body')?.trim(),
+                    pdpa_agreement: !!formData.get('pdpa_agreement')
+                };
+                
+                const response = await fetch(`${API_BASE}/contact`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(contactData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Success
+                    successMsg.classList.remove('hidden');
+                    document.getElementById('contactForm').reset();
+                    
+                    // Scroll to success message
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    // Handle validation errors or server errors
+                    if (result.errors) {
+                        showContactErrors(result.errors);
+                    } else {
+                        errorText.textContent = result.message || 'Failed to send message. Please try again later.';
+                        errorMsg.classList.remove('hidden');
+                    }
+                }
+            } catch (error) {
+                // Network or other errors
+                errorText.textContent = 'Network error. Please check your connection and try again.';
+                errorMsg.classList.remove('hidden');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+            }
+        }
+
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            if (!contactForm) return;
+            
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(contactForm);
+                
+                // Client-side validation
+                const errors = validateContactForm(formData);
+                if (Object.keys(errors).length > 0) {
+                    showContactErrors(errors);
+                    return;
+                }
+                
+                // Submit to API
+                await submitContactForm(formData);
+            });
+            
+            // Real-time validation feedback
+            const inputs = contactForm.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('blur', () => {
+                    const formData = new FormData(contactForm);
+                    const errors = validateContactForm(formData);
+                    
+                    // Clear previous error for this field
+                    input.classList.remove('border-red-500');
+                    const errorEl = input.parentElement.querySelector('.error-message') || 
+                                   (input.name === 'pdpa_agreement' ? document.querySelector('[data-field="pdpa_agreement"]') : null);
+                    if (errorEl) {
+                        errorEl.classList.add('hidden');
+                    }
+                    
+                    // Show error if exists for this field
+                    if (errors[input.name]) {
+                        input.classList.add('border-red-500');
+                        if (errorEl) {
+                            errorEl.textContent = errors[input.name];
+                            errorEl.classList.remove('hidden');
+                        }
+                    }
+                });
+            });
+        }
+
+        // Size chart modal functions
+        function openSizeChartModal() {
+            const modal = document.getElementById('sizeChartModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSizeChartModal() {
+            const modal = document.getElementById('sizeChartModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initRegistration);
+            document.addEventListener('DOMContentLoaded', () => {
+                initRegistration();
+                initContactForm();
+            });
         } else {
             initRegistration();
+            initContactForm();
         }
     </script>
+
+    <!-- Size Chart Modal -->
+    <div id="sizeChartModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity" onclick="closeSizeChartModal()"></div>
+
+            <!-- Center modal -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+
+            <!-- Modal panel -->
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="w-full">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                    Shirt Size Chart
+                                </h3>
+                                <button type="button" class="text-gray-400 hover:text-gray-600" onclick="closeSizeChartModal()">
+                                    <span class="sr-only">Close</span>
+                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="text-center">
+                                <img src="assets/img/size-chart.png" alt="Shirt Size Chart" class="max-w-full h-auto mx-auto rounded-lg shadow-md">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm" onclick="closeSizeChartModal()">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
