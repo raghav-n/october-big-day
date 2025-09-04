@@ -174,12 +174,12 @@
             top: 50%;
             left: 50%;
             transform: translateX(-50%) translateY(-50%);
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(53, 64, 154, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             padding: 16px 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -223,7 +223,7 @@
             left: 50%;
             transform: translateX(-50%);
             border: 6px solid transparent;
-            border-bottom-color: rgba(255, 255, 255, 0.98);
+            border-bottom-color: rgba(0, 0, 0, 0.9);
         }
         
         /* Hide arrow on mobile since tooltip is centered */
@@ -236,13 +236,13 @@
         .bird-tooltip h3 {
             font-size: 14px;
             font-weight: 700;
-            color: #35409a;
+            color: #ffffff;
             margin: 0 0 4px 0;
         }
         
         .bird-tooltip p {
             font-size: 12px;
-            color: #6b7280;
+            color: #d1d5db;
             margin: 0;
             line-height: 1.4;
         }
@@ -306,7 +306,95 @@
                 <div class="relative backdrop-blur-sm rounded-3xl border border-white/30 p-6 md:p-8 mb-8" style="background: radial-gradient(ellipse 200% 100% at center 20%, white, rgb(251 252 217 / 70%), rgb(240 249 189))">
                     <!-- Top Row - Decorative Birds -->
                     <div class="flex justify-center items-center mb-8">
-                        <div id="birdGrid" class="relative z-20 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 max-w-6xl w-full">
+                        <!-- Combined image for small screens -->
+                        <div class="md:hidden w-full max-w-md mx-auto relative">
+                            <picture>
+                                <source 
+                                    type="image/webp"
+                                    srcset="assets/img/processed/octoberbigday-all-400w.webp 400w,
+                                            assets/img/processed/octoberbigday-all-800w.webp 800w"
+                                    sizes="(max-width: 480px) 90vw, 400px">
+                                <source 
+                                    type="image/png"
+                                    srcset="assets/img/processed/octoberbigday-all-400w.png 400w,
+                                            assets/img/processed/octoberbigday-all-800w.png 800w"
+                                    sizes="(max-width: 480px) 90vw, 400px">
+                                <img 
+                                    id="combinedBirdImage"
+                                    src="assets/img/processed/octoberbigday-all-400w.png" 
+                                    alt="October Big Day 2025 - Featured Birds" 
+                                    class="w-full h-auto mx-auto drop-shadow-lg"
+                                    loading="eager"
+                                    width="800"
+                                    height="800">
+                            </picture>
+                            
+                            <!-- Interactive circular hotspots overlay -->
+                            <div class="absolute inset-0">
+                                <!-- Daurian Starling: 654,501 -->
+                                <div class="absolute w-12 h-12 rounded-full cursor-pointer group transition-all duration-200 hover:bg-white hover:bg-opacity-20 hover:scale-110" 
+                                     style="left: 654px; top: 501px; transform: translate(-50%, -50%);" 
+                                     data-bird="starling">
+                                    <div class="absolute w-3 h-3 bg-white bg-opacity-60 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:bg-opacity-100 transition-all duration-200"></div>
+                                    <div class="bird-hotspot-tooltip absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-black bg-opacity-90 backdrop-blur-sm border border-white border-opacity-20 text-center p-4 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 w-64 pointer-events-none shadow-xl">
+                                        <h4 class="font-bold text-sm text-white mb-1">Daurian Starling</h4>
+                                        <p class="text-xs text-gray-300 leading-relaxed">An elegant starling species known for forming large murmurations during migration.</p>
+                                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 border-6 border-transparent border-b-black border-b-opacity-90"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Siberian Blue Robin: 453,1115 (first circle) -->
+                                <div class="absolute w-12 h-12 rounded-full cursor-pointer group transition-all duration-200 hover:bg-white hover:bg-opacity-20 hover:scale-110" 
+                                     style="left: 453px; top: 1115px; transform: translate(-50%, -50%);" 
+                                     data-bird="robin">
+                                    <div class="absolute w-3 h-3 bg-white bg-opacity-60 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:bg-opacity-100 transition-all duration-200"></div>
+                                    <div class="bird-hotspot-tooltip absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-black bg-opacity-90 backdrop-blur-sm border border-white border-opacity-20 text-center p-4 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 w-64 pointer-events-none shadow-xl">
+                                        <h4 class="font-bold text-sm text-white mb-1">Siberian Blue Robin</h4>
+                                        <p class="text-xs text-gray-300 leading-relaxed">Inhabits dense forest streams, and despite the male's vivid blue upperparts, often heard before being seen.</p>
+                                        <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-6 border-transparent border-t-black border-t-opacity-90"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Siberian Blue Robin: 990,1231 (second circle) -->
+                                <div class="absolute w-12 h-12 rounded-full cursor-pointer group transition-all duration-200 hover:bg-white hover:bg-opacity-20 hover:scale-110" 
+                                     style="left: 990px; top: 1231px; transform: translate(-50%, -50%);" 
+                                     data-bird="robin">
+                                    <div class="absolute w-3 h-3 bg-white bg-opacity-60 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:bg-opacity-100 transition-all duration-200"></div>
+                                    <div class="bird-hotspot-tooltip absolute bottom-full right-0 mb-2 bg-black bg-opacity-90 backdrop-blur-sm border border-white border-opacity-20 text-center p-4 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 w-64 pointer-events-none shadow-xl">
+                                        <h4 class="font-bold text-sm text-white mb-1">Siberian Blue Robin</h4>
+                                        <p class="text-xs text-gray-300 leading-relaxed">Inhabits dense forest streams, and despite the male's vivid blue upperparts, often heard before being seen.</p>
+                                        <div class="absolute top-full right-6 border-6 border-transparent border-t-black border-t-opacity-90"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Yellow-rumped Flycatcher: 332,1726 -->
+                                <div class="absolute w-12 h-12 rounded-full cursor-pointer group transition-all duration-200 hover:bg-white hover:bg-opacity-20 hover:scale-110" 
+                                     style="left: 332px; top: 1726px; transform: translate(-50%, -50%);" 
+                                     data-bird="flycatcher">
+                                    <div class="absolute w-3 h-3 bg-white bg-opacity-60 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:bg-opacity-100 transition-all duration-200"></div>
+                                    <div class="bird-hotspot-tooltip absolute bottom-full left-0 mb-2 bg-black bg-opacity-90 backdrop-blur-sm border border-white border-opacity-20 text-center p-4 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 w-64 pointer-events-none shadow-xl">
+                                        <h4 class="font-bold text-sm text-white mb-1">Yellow-rumped Flycatcher</h4>
+                                        <p class="text-xs text-gray-300 leading-relaxed">The brightly-coloured male is a striking sight during the migration season, with peak numbers in mid-October.</p>
+                                        <div class="absolute top-full left-6 border-6 border-transparent border-t-black border-t-opacity-90"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Chestnut-winged Cuckoo: 780,2121 -->
+                                <div class="absolute w-12 h-12 rounded-full cursor-pointer group transition-all duration-200 hover:bg-white hover:bg-opacity-20 hover:scale-110" 
+                                     style="left: 780px; top: 2121px; transform: translate(-50%, -50%);" 
+                                     data-bird="cuckoo">
+                                    <div class="absolute w-3 h-3 bg-white bg-opacity-60 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:bg-opacity-100 transition-all duration-200"></div>
+                                    <div class="bird-hotspot-tooltip absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-black bg-opacity-90 backdrop-blur-sm border border-white border-opacity-20 text-center p-4 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 w-64 pointer-events-none shadow-xl">
+                                        <h4 class="font-bold text-sm text-white mb-1">Chestnut-winged Cuckoo</h4>
+                                        <p class="text-xs text-gray-300 leading-relaxed">First arrivals of this large cuckoo species are often seen in early October.</p>
+                                        <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-6 border-transparent border-t-black border-t-opacity-90"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Individual bird grid for medium+ screens -->
+                        <div id="birdGrid" class="hidden md:grid relative z-20 grid-cols-4 gap-2 md:gap-4 max-w-6xl w-full">
                             <!-- Birds will be dynamically loaded here -->
                         </div>
                     </div>
@@ -596,7 +684,7 @@
                     
                     <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg" style="animation-delay: 0.3s;">
                         <h3 class="font-hanken font-bold text-xl text-primary mb-3">What does the registration fee cover?</h3>
-                        <p class="text-gray-700">The registration fee includes the morning birding sessions, transportation to the central venue, educational talks, lunch (including vegetarian options), and event merchandise (a shirt and stickers). All proceeds from the event are donated back to BirdSoc SG for its signature projects.</p>
+                        <p class="text-gray-700">The registration fee includes the morning birding sessions, transportation to the central venue, educational talks, lunch (including vegetarian options), and event merchandise (a shirt and stickers). All proceeds from the event will go towards funding BirdSoc SG's signature projects.</p>
                     </div>
                     
                     <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg" style="animation-delay: 0.4s;">
@@ -866,6 +954,9 @@
                 });
             }
 
+            // Initialize bird hotspots for mobile combined image
+            initBirdHotspots();
+
             // Initialize intersection observer for fade-in animations
             initFadeInAnimations();
         });
@@ -890,6 +981,125 @@
             // Observe all fade-in sections
             document.querySelectorAll('.fade-in-section').forEach(section => {
                 observer.observe(section);
+            });
+        }
+
+        // Initialize bird hotspots for the combined image on mobile
+        function initBirdHotspots() {
+            const combinedImage = document.getElementById('combinedBirdImage');
+            const hotspots = document.querySelectorAll('[data-bird]');
+            let activeTooltip = null;
+            
+            // Original image dimensions (based on your coordinates)
+            const originalWidth = 1281; // Assuming this based on coordinate scale
+            const originalHeight = 2937; // Assuming this based on coordinate scale
+            
+            // Bird positions in original image coordinates
+            const birdPositions = {
+                starling: { x: 654, y: 501 },
+                robin1: { x: 453, y: 1115 },
+                robin2: { x: 970, y: 1231 },
+                flycatcher: { x: 332, y: 1726 },
+                cuckoo: { x: 780, y: 2121 }
+            };
+            
+            function updateHotspotPositions() {
+                if (!combinedImage) return;
+                
+                const rect = combinedImage.getBoundingClientRect();
+                const scaleX = rect.width / originalWidth;
+                const scaleY = rect.height / originalHeight;
+                
+                // Update positions for each hotspot
+                const starlingHotspot = document.querySelector('[data-bird="starling"]');
+                const robinHotspots = document.querySelectorAll('[data-bird="robin"]');
+                const flycatcherHotspot = document.querySelector('[data-bird="flycatcher"]');
+                const cuckooHotspot = document.querySelector('[data-bird="cuckoo"]');
+                
+                if (starlingHotspot) {
+                    starlingHotspot.style.left = (birdPositions.starling.x * scaleX) + 'px';
+                    starlingHotspot.style.top = (birdPositions.starling.y * scaleY) + 'px';
+                }
+                
+                if (robinHotspots[0]) {
+                    robinHotspots[0].style.left = (birdPositions.robin1.x * scaleX) + 'px';
+                    robinHotspots[0].style.top = (birdPositions.robin1.y * scaleY) + 'px';
+                }
+                
+                if (robinHotspots[1]) {
+                    robinHotspots[1].style.left = (birdPositions.robin2.x * scaleX) + 'px';
+                    robinHotspots[1].style.top = (birdPositions.robin2.y * scaleY) + 'px';
+                }
+                
+                if (flycatcherHotspot) {
+                    flycatcherHotspot.style.left = (birdPositions.flycatcher.x * scaleX) + 'px';
+                    flycatcherHotspot.style.top = (birdPositions.flycatcher.y * scaleY) + 'px';
+                }
+                
+                if (cuckooHotspot) {
+                    cuckooHotspot.style.left = (birdPositions.cuckoo.x * scaleX) + 'px';
+                    cuckooHotspot.style.top = (birdPositions.cuckoo.y * scaleY) + 'px';
+                }
+            }
+            
+            // Update positions when image loads and on window resize
+            if (combinedImage.complete) {
+                updateHotspotPositions();
+            } else {
+                combinedImage.addEventListener('load', updateHotspotPositions);
+            }
+            
+            window.addEventListener('resize', updateHotspotPositions);
+            
+            hotspots.forEach(hotspot => {
+                const birdType = hotspot.getAttribute('data-bird');
+                const tooltip = hotspot.querySelector('.bird-hotspot-tooltip');
+                
+                // Handle click events for mobile devices
+                hotspot.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Hide any currently active tooltip
+                    if (activeTooltip && activeTooltip !== tooltip) {
+                        activeTooltip.classList.remove('opacity-100');
+                        activeTooltip.classList.add('opacity-0');
+                    }
+                    
+                    // Toggle the clicked tooltip
+                    if (tooltip.classList.contains('opacity-100')) {
+                        tooltip.classList.remove('opacity-100');
+                        tooltip.classList.add('opacity-0');
+                        activeTooltip = null;
+                    } else {
+                        tooltip.classList.remove('opacity-0');
+                        tooltip.classList.add('opacity-100');
+                        activeTooltip = tooltip;
+                    }
+                });
+                
+                // Handle touch events to prevent conflicts
+                hotspot.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                });
+            });
+            
+            // Close tooltips when clicking outside
+            document.addEventListener('click', function() {
+                if (activeTooltip) {
+                    activeTooltip.classList.remove('opacity-100');
+                    activeTooltip.classList.add('opacity-0');
+                    activeTooltip = null;
+                }
+            });
+            
+            // Close tooltips when touching outside on mobile
+            document.addEventListener('touchstart', function(e) {
+                if (activeTooltip && !e.target.closest('[data-bird]')) {
+                    activeTooltip.classList.remove('opacity-100');
+                    activeTooltip.classList.add('opacity-0');
+                    activeTooltip = null;
+                }
             });
         }
 
