@@ -246,6 +246,35 @@
             margin: 0;
             line-height: 1.4;
         }
+        
+        /* Form validation error styles */
+        .border-red-500 {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 1px #ef4444;
+        }
+        
+        .border-red-500:focus {
+            outline: none;
+            border-color: #dc2626 !important;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+        }
+        
+        .form-errors {
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                max-height: 200px;
+            }
+        }
     </style>
 </head>
 <body class="font-noto bg-gradient-to-br from-slate-50/80 via-green-50/80 to-emerald-50/80 min-h-screen">
@@ -1278,6 +1307,161 @@
             if (style && (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0')) return false;
             return el.offsetParent !== null || style == null; // fallback true if can't compute
         }
+        
+        function showFormValidationErrors(form, errors) {
+            const errorContainer = form.querySelector('.form-errors');
+            const errorList = form.querySelector('.error-list');
+            
+            if (!errorContainer || !errorList) return;
+            
+            if (errors.length === 0) {
+                errorContainer.classList.add('hidden');
+                return;
+            }
+            
+            // Clear previous errors
+            errorList.innerHTML = '';
+            
+            // Add new errors
+            errors.forEach(error => {
+                const li = document.createElement('li');
+                li.textContent = error;
+                errorList.appendChild(li);
+            });
+            
+            // Show error container
+            errorContainer.classList.remove('hidden');
+            
+            // Scroll to error container
+            errorContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        function validateFormStep(form, stepNumber) {
+            const errors = [];
+            const step = form.querySelector(`[data-step="${stepNumber}"]`);
+            
+            if (!step) return { valid: true, errors: [] };
+            
+            // Get all visible required fields in this step
+            const requiredFields = Array.from(step.querySelectorAll('input[required], select[required], textarea[required]'))
+                .filter(isVisible);
+            
+            // Mark all fields as attempted when validation runs
+            requiredFields.forEach(field => {
+                field.dataset.attempted = 'true';
+            });
+            
+            for (const field of requiredFields) {
+                const fieldName = getFieldDisplayName(field);
+                const fieldValid = isFieldValid(field);
+                
+                if (!fieldValid) {
+                    // Get specific error message for the field
+                    const errorMessage = getFieldErrorMessage(field, fieldName);
+                    errors.push(errorMessage);
+                    field.classList.add('border-red-500');
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            }
+            
+            // Special validation for donation field
+            const donationInput = form.querySelector('input[name="donation"]');
+            if (donationInput && isVisible(donationInput) && donationInput.value.trim()) {
+                const { valid } = parseDonation(donationInput);
+                if (!valid) {
+                    errors.push('Donation must be a whole dollar amount (e.g., 5)');
+                    donationInput.classList.add('border-red-500');
+                } else {
+                    donationInput.classList.remove('border-red-500');
+                }
+            }
+            
+            return {
+                valid: errors.length === 0,
+                errors: errors
+            };
+        }
+        
+        function isFieldValid(field) {
+            if (field.type === 'checkbox') {
+                return field.checked;
+            } else if (field.type === 'email') {
+                const value = field.value.trim();
+                return value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            } else if (field.type === 'number') {
+                const value = field.value.trim();
+                if (!value) return false;
+                const num = field.step === '1' ? parseInt(value, 10) : parseFloat(value);
+                if (Number.isNaN(num)) return false;
+                if (field.hasAttribute('min')) {
+                    const min = parseFloat(field.getAttribute('min'));
+                    if (!Number.isNaN(min) && num < min) return false;
+                }
+                return true;
+            } else {
+                return field.value.trim() !== '';
+            }
+        }
+        
+        function getFieldErrorMessage(field, fieldName) {
+            if (field.type === 'checkbox') {
+                return `${fieldName} must be checked`;
+            } else if (field.type === 'email') {
+                const value = field.value.trim();
+                if (!value) {
+                    return `${fieldName} is required`;
+                } else {
+                    return `${fieldName} must be a valid email address`;
+                }
+            } else if (field.type === 'number') {
+                const value = field.value.trim();
+                if (!value) {
+                    return `${fieldName} is required`;
+                } else {
+                    const num = field.step === '1' ? parseInt(value, 10) : parseFloat(value);
+                    if (Number.isNaN(num)) {
+                        return `${fieldName} must be a valid number`;
+                    } else if (field.hasAttribute('min')) {
+                        const min = parseFloat(field.getAttribute('min'));
+                        if (!Number.isNaN(min) && num < min) {
+                            return `${fieldName} must be at least ${min}`;
+                        }
+                    }
+                }
+            } else {
+                return `${fieldName} is required`;
+            }
+        }
+        
+        function areAttemptedFieldsValid(form) {
+            const requiredFields = Array.from(form.querySelectorAll('input[required], select[required], textarea[required]'))
+                .filter(isVisible)
+                .filter(field => field.dataset.attempted === 'true');
+            
+            return requiredFields.every(field => isFieldValid(field));
+        }
+        
+        function getFieldDisplayName(field) {
+            // Try to get the field name from its label
+            const label = field.closest('div')?.querySelector('label');
+            if (label) {
+                let text = label.textContent.trim();
+                // Remove asterisk if present
+                text = text.replace(/\s*\*\s*$/, '');
+                return text;
+            }
+            
+            // Fallback to field name or placeholder
+            const name = field.name || field.getAttribute('data-key') || field.placeholder;
+            if (name) {
+                return sentenceCase(name);
+            }
+            
+            // Final fallback
+            return 'This field';
+        }
+        
         function isFormComplete(form) {
             const requiredEls = Array.from(form.querySelectorAll('input[required], select[required], textarea[required]'))
                 .filter(isVisible);
@@ -1595,6 +1779,24 @@
                           </div>
                         </div>
                       </div>
+                      
+                      <!-- Form validation errors -->
+                      <div class="form-errors hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                        <div class="flex items-start">
+                          <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                            </svg>
+                          </div>
+                          <div class="ml-3">
+                            <h3 class="text-sm font-medium text-red-800">Please fix the following errors:</h3>
+                            <div class="mt-2 text-sm text-red-700">
+                              <ul class="error-list list-disc pl-5 space-y-1"></ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
                       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 md:mt-6 gap-3 sm:gap-0">
                         <button type="button" data-ev="${ev.id}" class="reg-cancel text-gray-600 hover:text-primary order-2 sm:order-1">Cancel</button>
                         <button type="button" class="next-step bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark order-1 sm:order-2" data-next="2">Continue to Review</button>
@@ -1803,6 +2005,37 @@
                             });
                         }
                         
+                        // Setup smart validation for required fields
+                        const allRequiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+                        allRequiredFields.forEach(field => {
+                            // Track if this field has been touched or had validation attempted
+                            field.dataset.touched = 'false';
+                            field.dataset.attempted = 'false';
+                            
+                            const handleFieldInteraction = () => {
+                                field.dataset.touched = 'true';
+                                
+                                // Only clear red styling if field is now valid
+                                if (field.classList.contains('border-red-500')) {
+                                    if (isFieldValid(field)) {
+                                        field.classList.remove('border-red-500');
+                                        
+                                        // If all previously-attempted fields are now valid, hide error container
+                                        if (areAttemptedFieldsValid(form)) {
+                                            showFormValidationErrors(form, []);
+                                        }
+                                    }
+                                }
+                            };
+                            
+                            if (field.type === 'checkbox') {
+                                field.addEventListener('change', handleFieldInteraction);
+                            } else {
+                                field.addEventListener('input', handleFieldInteraction);
+                                field.addEventListener('blur', handleFieldInteraction);
+                            }
+                        });
+                        
                         // Setup step navigation
                         form.querySelectorAll('.next-step').forEach(nextBtn => {
                             // Remove any existing listeners to prevent duplicates
@@ -1816,27 +2049,15 @@
                                 
                                 const nextStep = parseInt(nextBtn.getAttribute('data-next'));
                                 if (nextStep === 2) {
+                                    // Clear any previous error styling
+                                    showFormValidationErrors(form, []);
+                                    
                                     // Validate step 1 before proceeding
-                                    const step1 = form.querySelector('[data-step="1"]');
-                                    const requiredFields = step1.querySelectorAll('input[required], select[required]');
-                                    let valid = true;
-                                    for (const field of requiredFields) {
-                                        if (field.type === 'checkbox') {
-                                            if (!field.checked) {
-                                                field.focus();
-                                                valid = false;
-                                                break;
-                                            }
-                                        } else if (!field.value.trim()) {
-                                            field.focus();
-                                            valid = false;
-                                            break;
-                                        }
+                                    const validation = validateFormStep(form, 1);
+                                    if (!validation.valid) {
+                                        showFormValidationErrors(form, validation.errors);
+                                        return;
                                     }
-                                    if (!valid) return;
-                                    // Validate donation as whole dollars
-                                    showDonationValidity(donationInput);
-                                    if (!showDonationValidity(donationInput)) return;
                                     
                                     // Show spinner and disable button
                                     const originalText = nextBtn.innerHTML;
