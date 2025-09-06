@@ -2069,9 +2069,14 @@
                     
                     // Update button text based on panel visibility
                     if (!panel.classList.contains('hidden')) {
-                        btn.textContent = 'Cancel';
+                        btn.textContent = 'Cancel/Change Location';
+                        // Hide other location cards immediately when registration is opened
+                        const form = panel.querySelector('.reg-form');
+                        hideOtherLocationCards(form);
                     } else {
                         btn.textContent = 'Register';
+                        // Show other location cards when registration is cancelled
+                        showOtherLocationCards();
                     }
                     
                     if (!panel.classList.contains('hidden')) {
@@ -2161,9 +2166,6 @@
                                         populateReviewStep(form);
                                         await computeAndRenderPrice(id, form);
                                         showStep(form, 2);
-                                        
-                                        // Hide other location cards when advancing to review step
-                                        hideOtherLocationCards(form);
                                         
                                         // Re-enable button after successful transition
                                         nextBtn.disabled = false;
