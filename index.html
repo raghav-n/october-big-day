@@ -2032,6 +2032,32 @@
             reviewContent.innerHTML = details.join('<br>');
         }
 
+        function hideOtherLocationCards(currentForm) {
+            // Find the current event card that contains this form
+            const currentEventCard = currentForm.closest('.border.border-gray-200.rounded-xl');
+            
+            // Get all event cards in the eventsList
+            const eventsList = document.getElementById('eventsList');
+            const allEventCards = eventsList.querySelectorAll('.border.border-gray-200.rounded-xl');
+            
+            // Hide all other event cards
+            allEventCards.forEach(card => {
+                if (card !== currentEventCard) {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function showOtherLocationCards() {
+            // Show all event cards again
+            const eventsList = document.getElementById('eventsList');
+            const allEventCards = eventsList.querySelectorAll('.border.border-gray-200.rounded-xl');
+            
+            allEventCards.forEach(card => {
+                card.style.display = 'block';
+            });
+        }
+
         function renderEvents(list) {
             const container = document.getElementById('eventsList');
             container.innerHTML = list.map(eventCardHTML).join('');
@@ -2136,6 +2162,9 @@
                                         await computeAndRenderPrice(id, form);
                                         showStep(form, 2);
                                         
+                                        // Hide other location cards when advancing to review step
+                                        hideOtherLocationCards(form);
+                                        
                                         // Re-enable button after successful transition
                                         nextBtn.disabled = false;
                                         nextBtn.innerHTML = originalText;
@@ -2203,6 +2232,11 @@
                             prevBtn.addEventListener('click', () => {
                                 const prevStep = parseInt(prevBtn.getAttribute('data-prev'));
                                 showStep(form, prevStep);
+                                
+                                // Show other location cards when going back to step 1
+                                if (prevStep === 1) {
+                                    showOtherLocationCards();
+                                }
                             });
                         });
                         
