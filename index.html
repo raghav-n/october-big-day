@@ -1297,7 +1297,7 @@
             const data = await res.json();
             const filtered = (data || []).filter(e => {
                 const title = (e.title || '').toLowerCase();
-                return title.includes('october big day') && !title.includes('(test)');
+                return title.includes('october big day');// && !title.includes('(test)');
             });
             filtered.sort((a, b) => (a.location||'').localeCompare(b.location||''));
             return filtered;
@@ -1858,9 +1858,8 @@
                         </div>
                       </div>
                       
-                      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 md:mt-6 gap-3 sm:gap-0">
-                        <button type="button" data-ev="${ev.id}" class="reg-cancel text-gray-600 hover:text-primary order-2 sm:order-1">Cancel</button>
-                        <button type="button" class="next-step bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark order-1 sm:order-2" data-next="2">Continue to Review</button>
+                      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-end mt-4 md:mt-6 gap-3 sm:gap-0">
+                        <button type="button" class="next-step bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark" data-next="2">Continue to Review</button>
                       </div>
                     </div>
                   </div>
