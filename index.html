@@ -1297,7 +1297,7 @@
             const data = await res.json();
             const filtered = (data || []).filter(e => {
                 const title = (e.title || '').toLowerCase();
-                return title.includes('october big day');// && !title.includes('(test)');
+                return title.includes('october big day') && !title.includes('(test)');
             });
             filtered.sort((a, b) => (a.location||'').localeCompare(b.location||''));
             return filtered;
