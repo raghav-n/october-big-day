@@ -2508,6 +2508,25 @@
                     document.getElementById('eventsList').innerHTML = '';
                     return;
                 }
+                
+                // Check if global registration is closed
+                const isGlobalRegistrationClosed = events.some(event => event.global_registration_closed === true);
+                
+                if (isGlobalRegistrationClosed) {
+                    // Show closed message and hide event cards
+                    document.getElementById('eventsList').innerHTML = `
+                        <div class="bg-orange-50 border border-orange-200 rounded-xl p-6 text-center">
+                            <div class="text-orange-800 text-lg font-medium mb-2">
+                                Registration Temporarily Closed
+                            </div>
+                            <p class="text-orange-700">
+                                Sorry, registration is temporarily closed. We'll be back soon – sorry for the inconvenience!
+                            </p>
+                        </div>
+                    `;
+                    return;
+                }
+                
                 renderEvents(events);
             } catch (e) {
                 err.classList.remove('hidden');
