@@ -1295,7 +1295,10 @@
             const res = await fetch(`${API_BASE}/events`);
             if (!res.ok) throw new Error('Unable to load events');
             const data = await res.json();
-            const filtered = (data || []).filter(e => (e.title || '').toLowerCase().includes('october big day'));
+            const filtered = (data || []).filter(e => {
+                const title = (e.title || '').toLowerCase();
+                return title.includes('october big day') && !title.includes('(test)');
+            });
             filtered.sort((a, b) => (a.location||'').localeCompare(b.location||''));
             return filtered;
         }
