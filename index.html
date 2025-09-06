@@ -2017,6 +2017,14 @@
                     const id = btn.getAttribute('data-ev');
                     const panel = document.getElementById(`ev-${id}-panel`);
                     panel.classList.toggle('hidden');
+                    
+                    // Update button text based on panel visibility
+                    if (!panel.classList.contains('hidden')) {
+                        btn.textContent = 'Cancel';
+                    } else {
+                        btn.textContent = 'Register';
+                    }
+                    
                     if (!panel.classList.contains('hidden')) {
                         const form = panel.querySelector('.reg-form');
                         showStep(form, 1); // Start at step 1
