@@ -1297,7 +1297,13 @@
             const data = await res.json();
             const filtered = (data || []).filter(e => {
                 const title = (e.title || '').toLowerCase();
-                return title.includes('october big day') && !title.includes('(test)');
+                const host = location.hostname;
+                return title.includes('october big day') && (
+                    (!title.includes('(test)') || 
+                    host === 'localhost' || 
+                    host === '127.0.0.1') ||
+                    host === ''
+                );
             });
             filtered.sort((a, b) => (a.location||'').localeCompare(b.location||''));
             return filtered;
@@ -2203,26 +2209,150 @@
                                                 : (price && price.totals && price.totals.amount ? parseFloat(price.totals.amount) : 0);
                                             const ccy = price && price.currency ? price.currency : 'SGD';
                                             amtEl.textContent = currency(totalAmt, ccy);
-                                            // Generate or reuse the client-side reference
+                                            // Generate or reuse a client-side reference (used for server group reference)
                                             if (!form.dataset.groupReference) {
                                                 form.dataset.groupReference = generateClientReference('OBD25-');
                                             }
                                             const preRef = form.dataset.groupReference;
                                             refEl.textContent = preRef;
-                                            // Render QR with final amount and the client reference
+                                            // Render QR with final amount and the client reference (shown immediately)
                                             renderPayNow(canvas, totalAmt, preRef);
-                                            // Prepare file capture (no upload yet)
-                                            const fileInput = groupBox.querySelector('.group-file');
-                                            const uploadBtn = groupBox.querySelector('.group-upload');
-                                            const uploadStatus = groupBox.querySelector('.group-upload-status');
-                                            uploadBtn.onclick = () => fileInput.click();
-                                            fileInput.onchange = () => {
-                                                if (!fileInput.files || !fileInput.files[0]) return;
-                                                form._paymentProof = fileInput.files[0];
-                                                uploadStatus.className = 'group-upload-status text-sm text-green-700';
-                                                uploadStatus.textContent = 'Payment proof ready to submit.';
+
+                                            // If we already created a pending group for this form, don't create again
+                                            const alreadyCreated = form.dataset.groupCreated === '1';
+                                            if (!alreadyCreated) {
+                                                // Build participants payload (similar to submit flow)
+                                                const fd = new FormData(form);
+                                                const base = {
+                                                    first_name: String(fd.get('first_name') || '').trim(),
+                                                    last_name: String(fd.get('last_name') || '').trim(),
+                                                    email: String(fd.get('email') || '').trim(),
+                                                    phone_number: String(fd.get('phone_number') || '').trim() || undefined,
+                                                    emergency_contact_name: String(fd.get('emergency_contact_name') || '').trim() || undefined,
+                                                    emergency_contact_phone: String(fd.get('emergency_contact_phone') || '').trim() || undefined,
+                                                };
+                                                const count = Math.max(1, parseInt(fd.get('participants') || '1', 10));
+                                                const parts = [];
+                                                const schemaSections = form.querySelectorAll('.participants > [data-part]');
+                                                for (let i = 0; i < count; i++) {
+                                                    const sect = schemaSections[i];
+                                                    const extra = {};
+                                                    if (sect) {
+                                                        sect.querySelectorAll('[data-key]').forEach(input => {
+                                                            const key = input.getAttribute('data-key');
+                                                            let val = input.value;
+                                                            if (input.type === 'number') {
+                                                                val = input.step === '1' ? parseInt(val || '0', 10) : parseFloat(val || '0');
+                                                            }
+                                                            extra[key] = val;
+                                                        });
+                                                    }
+                                                    parts.push({
+                                                        first_name: base.first_name + (i > 0 ? ` (${i+1})` : ''),
+                                                        last_name: base.last_name,
+                                                        email: base.email,
+                                                        phone_number: base.phone_number,
+                                                        emergency_contact_name: base.emergency_contact_name,
+                                                        emergency_contact_phone: base.emergency_contact_phone,
+                                                        quantity: 1,
+                                                        extra_json: extra,
+                                                        is_main_contact: i === 0
+                                                    });
+                                                }
+                                                // Create the pending group immediately (JSON, no proof yet)
+                                                try {
+                                                    const body = {
+                    											participants: parts,
+                                                        payer_name: `${base.first_name} ${base.last_name}`.trim(),
+                                                        payer_email: base.email,
+                                                        payer_phone: base.phone_number,
+                                                        reference: preRef,
+                                                        donation: (function(){
+                                                            const donationInput = form.querySelector('input[name="donation"]');
+                                                            const parsed = parseDonation(donationInput);
+                                                            return parsed.valid ? parsed.value : 0;
+                                                        })()
+                                                    };
+                                                    const res = await fetch(`${API_BASE}/events/${id}/register/bulk`, {
+                                                        method: 'POST',
+                                                        headers: { 'Content-Type': 'application/json' },
+                                                        body: JSON.stringify(body)
+                                                    });
+                                                    const data = await res.json();
+                                                    if (!res.ok) throw new Error(data.detail || 'Registration failed');
+
+                                                    // Persist identifiers for subsequent actions
+                                                    const group = data.group || {};
+                                                    form.dataset.groupId = String(group.id || '');
+                                                    form.dataset.groupReference = String(group.reference || preRef);
+                                                    form.dataset.groupCreated = '1';
+
+                                                    // Update UI with server-assigned values if any
+                                                    const finalRef = form.dataset.groupReference;
+                                                    refEl.textContent = finalRef;
+                                                    const totals = data.totals || {};
+                                                    const finalAmt = (totals.amount_with_donation != null ? totals.amount_with_donation : (group.amount_total_with_donation != null ? group.amount_total_with_donation : (totals.amount || group.amount_total || '')));
+                                                    if (finalAmt) {
+                                                        try { amtEl.textContent = currency(parseFloat(finalAmt), ccy); } catch {}
+                                                    }
+
+                                                    // Participants summary
+                                                    try {
+                                                        const items = data.items || [];
+                                                        const listHtml = items.map((it, i) => {
+                                                            const p = it.participant || {};
+                                                            const reg = it.registration || {};
+                                                            // const rref = reg.reference ? ` • Ref: ${reg.reference}` : '';
+                                                            return `<div>Participant ${i+1}: ${p.first_name || ''} ${p.last_name || ''} – <span class="text-purple-700">pending payment</span></div>`;
+                                                        }).join('');
+                                                        groupBox.querySelector('.group-items').innerHTML = listHtml;
+                                                    } catch {}
+
+                                                    // Save pending group details locally to help users resume
+                                                    try {
+                                                        const pendingKey = `pendingGroup:${id}`;
+                                                        const payload = { group_id: group.id, reference: form.dataset.groupReference, created_at: Date.now() };
+                                                        localStorage.setItem(pendingKey, JSON.stringify(payload));
+                                                    } catch {}
+
+                                                    // Hook up upload to the created group endpoint
+                                                    const fileInput = groupBox.querySelector('.group-file');
+                                                    const uploadBtn = groupBox.querySelector('.group-upload');
+                                                    const uploadStatus = groupBox.querySelector('.group-upload-status');
+                                                    uploadBtn.onclick = () => fileInput.click();
+                                                    fileInput.onchange = async () => {
+                                                        if (!fileInput.files || !fileInput.files[0]) return;
+                                                        uploadStatus.textContent = 'Uploading…';
+                                                        uploadStatus.className = 'group-upload-status text-sm text-blue-700';
+                                                        const formData = new FormData();
+                                                        formData.append('payment_proof', fileInput.files[0]);
+                                                        try {
+                                                            const gid = form.dataset.groupId;
+                                                            const upRes = await fetch(`${API_BASE}/event-registration-groups/${gid}/payment/paynow-proof`, { method: 'POST', body: formData });
+                                                            const upData = await upRes.json();
+                                                            if (!upRes.ok) throw new Error(upData.detail || 'Upload failed');
+                                                            uploadStatus.className = 'group-upload-status text-sm text-green-700';
+                                                            uploadStatus.textContent = 'Payment proof uploaded successfully!';
+                                                            completeBtn.classList.remove('hidden');
+                                                        } catch (err) {
+                                                            uploadStatus.className = 'group-upload-status text-sm text-red-700';
+                                                            uploadStatus.textContent = (err && err.message) ? err.message : 'Upload failed';
+                                                        }
+                                                    };
+                                                    // Allow users to proceed even without uploading proof
+                                                    completeBtn.classList.remove('hidden');
+                                                } catch (err) {
+                                                    // Surface error but keep the Review step visible
+                                                    const statusEl = form.querySelector('.reg-status');
+                                                    if (statusEl) {
+                                                        statusEl.className = 'reg-status text-sm text-red-700';
+                                                        statusEl.textContent = (err && err.message) ? err.message : 'Registration failed';
+                                                    }
+                                                }
+                                            } else {
+                                                // Group already created; ensure Done is visible
                                                 completeBtn.classList.remove('hidden');
-                                            };
+                                            }
                                         }
                                     } catch (error) {
                                         // Re-enable button on error
@@ -2259,7 +2389,8 @@
                             // Remove any existing listeners to prevent duplicates
                             const newCompleteBtn = completeBtn.cloneNode(true);
                             completeBtn.parentNode.replaceChild(newCompleteBtn, completeBtn);
-                            // On Done, actually submit registration (with client reference and optional proof)
+                            // On Done: for paid events, the group is already created; just show confirmation.
+                            // For free events, submit now.
                             newCompleteBtn.addEventListener('click', async () => {
                                 // Prevent duplicate submissions
                                 if (newCompleteBtn.disabled) return;
@@ -2273,13 +2404,38 @@
                                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                         </svg>
-                                        Submitting...
+                                        Processing...
                                     </div>
                                 `;
                                 newCompleteBtn.classList.add('cursor-not-allowed', 'opacity-75');
-                                
                                 try {
-                                    await submitRegistration(form, id);
+                                    const price = form.dataset.priceData ? JSON.parse(form.dataset.priceData) : null;
+                                    const requiresPayment = !!(price && price.requires_payment);
+                                    if (requiresPayment) {
+                                        // Group should already be created in step 2. Just show confirmation.
+                                        const fd = new FormData(form);
+                                        const count = Math.max(1, parseInt(fd.get('participants') || '1', 10));
+                                        showStep(form, 3);
+                                        const confirmationDetails = form.querySelector('.confirmation-details');
+                                        const ref = form.dataset.groupReference || 'Pending';
+                                        const totals = price && price.totals ? price.totals : {};
+                                        const finalAmt = (totals.amount_with_donation != null ? totals.amount_with_donation : (totals.amount || ''));
+                                        if (confirmationDetails) {
+                                            const donationAmt = (totals && totals.donation != null) ? totals.donation : null;
+                                            const donationLine = donationAmt && parseFloat(donationAmt) > 0 ? `<div><strong>Donation:</strong> ${currency(parseFloat(donationAmt), 'SGD')}</div>` : '';
+                                            const finalLine = finalAmt ? currency(parseFloat(finalAmt), 'SGD') : '';
+                                            confirmationDetails.innerHTML = `
+                                                <div class="space-y-1">
+                                                  <div><strong>Reference:</strong> ${ref}</div>
+                                                  <div><strong>Participants:</strong> ${count}</div>
+                                                  ${donationLine}
+                                                  <div><strong>Total Amount:</strong> ${finalLine}</div>
+                                                </div>`;
+                                        }
+                                    } else {
+                                        // Free event: submit now
+                                        await submitRegistration(form, id);
+                                    }
                                 } catch (error) {
                                     // Re-enable button on error
                                     newCompleteBtn.disabled = false;
@@ -2475,8 +2631,8 @@
             const listHtml = items.map((it, i) => {
                 const p = it.participant || {};
                 const reg = it.registration || {};
-                const rref = reg.reference ? ` • Ref: ${reg.reference}` : '';
-                return `<div>Participant ${i+1}: ${p.first_name || ''} ${p.last_name || ''} – <span class="text-purple-700">pending payment</span>${rref}</div>`;
+                // const rref = reg.reference ? ` • Ref: ${reg.reference}` : '';
+                return `<div>Participant ${i+1}: ${p.first_name || ''} ${p.last_name || ''} – <span class="text-purple-700">pending payment</span></div>`;
             }).join('');
             groupBox.querySelector('.group-items').innerHTML = listHtml;
             
