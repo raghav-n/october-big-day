@@ -1668,7 +1668,7 @@
                     if (spotsEl) {
                         const remaining = data.capacity.remaining;
                         if (remaining <= 5) {
-                            spotsEl.textContent = `${remaining} spots left`;
+                            spotsEl.textContent = `${remaining} ${remaining === 1 ? 'spot' : 'spots'} left`;
                             spotsEl.className = 'spots-left inline-flex items-center px-2 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800';
                         } else {
                             spotsEl.classList.add('hidden');
@@ -1744,7 +1744,7 @@
                   <div class="font-hanken font-bold text-xl text-primary font-hanken font-bold leading-[1.25] mb-2 flex items-center gap-2 flex-wrap">
                     <span>${ev.location || ev.title}</span>
                     ${left !== null && left <= 5
-                      ? `<span class="spots-left inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800" data-ev="${ev.id}">${left} spots left</span>`
+                      ? `<span class="spots-left inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800" data-ev="${ev.id}">${left} ${left === 1 ? 'spot' : 'spots'} left</span>`
                       : `<span class="spots-left hidden" data-ev="${ev.id}"></span>`}
                   </div>
                   <div class="text-sm text-gray-600 leading-[1.25]">${fmtDates(ev.start_date, ev.end_date)}</div>
