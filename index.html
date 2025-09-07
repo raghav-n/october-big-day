@@ -1813,8 +1813,8 @@
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
-                            <label class="block text-gray-700 text-sm mb-1">Number of participants (max 5) *</label>
-                            <input type="number" name="participants" min="1" value="1" max="5" required class="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
+                            <label class="block text-gray-700 text-sm mb-1 participants-label" for="participants-count">Number of participants (max 5) *</label>
+                            <input id="participants-count" type="number" name="participants" min="1" value="1" max="5" required class="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" />
                             </div>
                             <div>
                             <label class="block text-gray-700 text-sm mb-1">Optional Donation (SGD, whole dollars)</label>
@@ -2104,6 +2104,27 @@
                         const participantsDiv = form.querySelector('.participants');
                         const countInput = form.querySelector('input[name="participants"]');
                         const donationInput = form.querySelector('input[name="donation"]');
+                        
+                        // Add validation for participants count to enforce max limit
+                        if (countInput) {
+                            // Default max participants before event detail fetched
+                            form.dataset.participantsMax = form.dataset.participantsMax || '5';
+                            const validateParticipants = () => {
+                                let maxAllowed = parseInt(form.dataset.participantsMax || '5', 10);
+                                if (Number.isNaN(maxAllowed) || maxAllowed < 1) maxAllowed = 5;
+                                const value = parseInt(countInput.value, 10);
+                                if (value > maxAllowed) {
+                                    countInput.value = maxAllowed;
+                                }
+                                if (value < 1 || Number.isNaN(value)) {
+                                    countInput.value = 1;
+                                }
+                            };
+                            countInput.addEventListener('input', validateParticipants);
+                            countInput.addEventListener('change', validateParticipants);
+                            countInput.addEventListener('blur', validateParticipants);
+                        }
+                        
                         if (donationInput) {
                             donationInput.addEventListener('input', () => {
                                 showDonationValidity(donationInput);
@@ -2449,6 +2470,32 @@
                         
                         try {
                             const ev = await fetchEventDetail(id);
+                            // Determine dynamic max participants (min of remaining slots and 5)
+                            (function(){
+                                let remaining = null;
+                                if (ev && ev.capacity && typeof ev.capacity.remaining === 'number') {
+                                    remaining = ev.capacity.remaining;
+                                } else if (typeof ev.max_participants === 'number' && typeof ev.participant_count === 'number') {
+                                    const left = ev.max_participants - ev.participant_count;
+                                    if (!Number.isNaN(left)) remaining = left;
+                                }
+                                let dynamicMax = 5;
+                                if (remaining != null) {
+                                    dynamicMax = Math.max(1, Math.min(5, remaining));
+                                }
+                                form.dataset.participantsMax = String(dynamicMax);
+                                if (countInput) {
+                                    countInput.setAttribute('max', String(dynamicMax));
+                                    if (parseInt(countInput.value, 10) > dynamicMax) {
+                                        countInput.value = String(dynamicMax);
+                                    }
+                                }
+                                const labelEl = form.querySelector('.participants-label');
+                                if (labelEl) {
+                                    const baseText = `Number of participants (max ${dynamicMax}) *`;
+                                    labelEl.textContent = baseText;
+                                }
+                            })();
                             const schema = ev.json_schema;
                             if (schema && schema.type === 'object' && schema.properties) {
                                 schemaWrap.classList.remove('hidden');
