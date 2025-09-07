@@ -2331,6 +2331,8 @@
                                                             const upRes = await fetch(`${API_BASE}/event-registration-groups/${gid}/payment/paynow-proof`, { method: 'POST', body: formData });
                                                             const upData = await upRes.json();
                                                             if (!upRes.ok) throw new Error(upData.detail || 'Upload failed');
+                                                            // Store the file reference on the form for later submission
+                                                            form._paymentProof = fileInput.files[0];
                                                             uploadStatus.className = 'group-upload-status text-sm text-green-700';
                                                             uploadStatus.textContent = 'Payment proof uploaded successfully!';
                                                             completeBtn.classList.remove('hidden');
