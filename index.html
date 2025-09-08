@@ -2313,6 +2313,12 @@
                                                     form.dataset.groupReference = String(group.reference || preRef);
                                                     form.dataset.groupCreated = '1';
 
+                                                    // If server indicates a payment proof already exists, mark it so the UI
+                                                    // can allow completion immediately.
+                                                    if (group && (group.payment_proof_present || group.payment_proof)) {
+                                                        try { form._paymentProof = true; } catch {}
+                                                    }
+
                                                     // Update UI with server-assigned values if any
                                                     const finalRef = form.dataset.groupReference;
                                                     refEl.textContent = finalRef;
@@ -2367,8 +2373,9 @@
                                                             uploadStatus.textContent = (err && err.message) ? err.message : 'Upload failed';
                                                         }
                                                     };
-                                                    // Allow users to proceed even without uploading proof
-                                                    completeBtn.classList.remove('hidden');
+                                                    // Do not allow users to proceed without uploading proof for paid events
+                                                    // completeBtn remains hidden until a proof file is uploaded and the upload handler
+                                                    // will reveal the button upon successful upload (see fileInput.onchange above).
                                                 } catch (err) {
                                                     // Surface error but keep the Review step visible
                                                     const statusEl = form.querySelector('.reg-status');
@@ -2378,8 +2385,27 @@
                                                     }
                                                 }
                                             } else {
-                                                // Group already created; ensure Done is visible
-                                                completeBtn.classList.remove('hidden');
+                                                // Group already created. Check server-side state: if the
+                                                // group already has a payment proof recorded, allow
+                                                // completion immediately; otherwise keep the Done button hidden
+                                                // until the user uploads proof.
+                                                const gid = form.dataset.groupId;
+                                                if (gid) {
+                                                    (async () => {
+                                                        try {
+                                                            const res = await fetch(`${API_BASE}/event-registration-groups/${gid}`);
+                                                            if (!res.ok) return;
+                                                            const gdata = await res.json();
+                                                            const grp = gdata.group || gdata || {};
+                                                            if (grp.payment_proof_present || grp.payment_proof) {
+                                                                try { form._paymentProof = true; } catch {}
+                                                                try { completeBtn.classList.remove('hidden'); } catch {}
+                                                            }
+                                                        } catch (e) {
+                                                            // Ignore errors; leave completeBtn hidden.
+                                                        }
+                                                    })();
+                                                }
                                             }
                                         }
                                     } catch (error) {
@@ -2440,6 +2466,26 @@
                                     const price = form.dataset.priceData ? JSON.parse(form.dataset.priceData) : null;
                                     const requiresPayment = !!(price && price.requires_payment);
                                     if (requiresPayment) {
+                                        // Ensure payment proof has been uploaded before allowing completion.
+                                        const proofFile = form._paymentProof;
+                                        if (!proofFile) {
+                                            const statusEl = form.querySelector('.reg-status');
+                                            const groupBox = form.querySelector('.group-paid');
+                                            const uploadStatus = groupBox && groupBox.querySelector('.group-upload-status');
+                                            if (uploadStatus) {
+                                                uploadStatus.className = 'group-upload-status text-sm text-red-700';
+                                                uploadStatus.textContent = 'Please upload payment proof before clicking Done.';
+                                            }
+                                            if (statusEl) {
+                                                statusEl.className = 'reg-status text-sm text-red-700';
+                                                statusEl.textContent = 'Payment proof required.';
+                                            }
+                                            // Re-enable the button so user can upload
+                                            newCompleteBtn.disabled = false;
+                                            newCompleteBtn.innerHTML = originalText;
+                                            newCompleteBtn.classList.remove('cursor-not-allowed', 'opacity-75');
+                                            return;
+                                        }
                                         // Group should already be created in step 2. Just show confirmation.
                                         const fd = new FormData(form);
                                         const count = Math.max(1, parseInt(fd.get('participants') || '1', 10));
