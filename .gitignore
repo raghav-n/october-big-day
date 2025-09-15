@@ -5,3 +5,4 @@ docs/*
 .DS_Store
 /node_modules
 /assets/img/processed/
+slide-*
