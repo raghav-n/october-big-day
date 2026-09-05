@@ -1,0 +1,40 @@
+name: Deploy (obd26.birdsociety.sg)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # assets/img/processed/ is gitignored (generated, not committed). Rebuild
+      # it from the source PNGs so the responsive <picture> variants that
+      # legacy-2025.html references exist in the deployed tree.
+      - name: Build responsive images
+        run: |
+          npm ci
+          node process-images.js
+
+      # az is preinstalled on GitHub-hosted ubuntu runners. deploy.sh stages the
+      # deployable files (the 3 HTML pages + assets/img, including the processed
+      # variants just built) and pushes them to the storage account's $web
+      # container with `az storage blob upload-batch`, authenticating with the
+      # account key from the secret below (data-plane RBAC isn't granted to any
+      # identity here). The VPS nginx vhost, DNS, and Let's Encrypt cert are
+      # one-time setup and untouched by a deploy.
+      - name: Deploy to Azure $web
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+        run: ./deploy.sh

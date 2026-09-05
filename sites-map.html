@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>October Big Day 2026 — birding sites</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=Caveat:wght@600&display=swap">
+<style>
+  html,body{margin:0;height:100%;background:#FBF7F0}
+  #map{position:absolute;inset:0}
+  .leaflet-tile-pane{filter:grayscale(0.85) sepia(0.25) brightness(1.04) contrast(0.92)}
+  .leaflet-container{font-family:"Hanken Grotesk",system-ui,sans-serif;background:#FBF7F0}
+  .pin{width:30px;height:30px;border-radius:50%;background:#C8611E;color:#fff;border:2px solid #FBF7F0;box-shadow:0 2px 6px rgba(24,36,54,.3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .pin.venue{background:#182436;width:34px;height:34px;border-radius:8px;font-size:11px;letter-spacing:.5px}
+  .leaflet-popup-content-wrapper{border-radius:8px;background:#FBF7F0;color:#182436;box-shadow:0 6px 20px rgba(24,36,54,.2)}
+  .leaflet-popup-content{margin:10px 14px;font-size:14px;line-height:1.4}
+  .leaflet-popup-content b{font-size:15px}
+  .leaflet-popup-content i{font-family:Caveat,cursive;font-size:17px;color:#8F4212;font-style:normal;display:block}
+  .leaflet-popup-tip{background:#FBF7F0}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  const sites = [
+    [1, 'Bidadari Park', 1.3395, 103.8720, 'migrant trap'],
+    [2, 'Bishan-AMK Park', 1.3620, 103.8460, 'riverine parkland'],
+    [3, 'Thomson Nature Park', 1.3830, 103.8170, 'secondary forest'],
+    [4, 'Fort Canning Park', 1.2940, 103.8460, 'walk out from the talks'],
+    [5, 'Jurong Lake Gardens', 1.3370, 103.7260, 'wetland & grassland'],
+    [6, 'Singapore Botanic Gardens', 1.3138, 103.8159, 'Eco-Lake & gardens'],
+  ];
+  const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors', maxZoom: 18 }).addTo(map);
+  const pts = [];
+  sites.forEach(([n, name, lat, lng, note]) => {
+    const m = L.marker([lat, lng], { icon: L.divIcon({ className: '', html: `<div class="pin">${n}</div>`, iconSize: [30, 30], iconAnchor: [15, 15] }) }).addTo(map);
+    m.bindPopup(`<b>${name}</b><br>Birding 4:00 – 6:00 pm<i>${note}</i>`);
+    pts.push([lat, lng]);
+  });
+  const venue = L.marker([1.2949, 103.8462], { icon: L.divIcon({ className: '', html: '<div class="pin venue">HQ</div>', iconSize: [34, 34], iconAnchor: [17, 17] }) }).addTo(map);
+  venue.bindPopup('<b>Fort Canning Centre</b><br>Lunch, talks and shuttles<i>1:00 – 3:30 pm</i>');
+  pts.push([1.2949, 103.8462]);
+  map.fitBounds(pts, { padding: [40, 40] });
+</script>
+</body>
+</html>
