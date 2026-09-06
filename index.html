@@ -91,6 +91,19 @@
   textarea.field { height: auto; padding: 10px 12px; resize: vertical; line-height: 1.5; }
   .reg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; border-top: 1px solid var(--rule-soft); }
 
+  /* Sponsor logos — each sits in an equal-sized box so logos of different aspect ratios
+     (near-square NParks, wide A Rocha wordmark, Mandai) read as the same visual size. */
+  .spon-logos { display: flex; flex-wrap: wrap; gap: 20px 32px; align-items: center; justify-content: center; }
+  .spon-cell { display: flex; align-items: center; justify-content: center; height: 52px; width: 132px; }
+  .spon-cell img { max-height: 100%; max-width: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+  /* Vertical rule between the three labelled groups; hidden once the strip stacks. */
+  .spon-sep { align-self: stretch; width: 1px; background: rgba(24,36,54,0.18); }
+  @media (max-width: 620px) {
+    .spon-logos { gap: 16px 20px; }
+    .spon-cell { height: 44px; width: 108px; }
+  }
+  @media (max-width: 860px) { .spon-sep { display: none; } }
+
   @media (max-width: 768px) { .nav-links { display: none !important; } }
   @media (max-width: 620px) { .hero-inner { padding-left: 10px !important; padding-right: 10px !important; } }
   @media (max-width: 620px) {
@@ -101,6 +114,19 @@
     /* Footer: keep the pitta perched bottom-right; shift the credits to its left to clear it */
     .foot-bird { height: 122px; right: 6px; bottom: -18px; }
     .foot-copy { justify-content: flex-start !important; padding-right: 108px; }
+  }
+  @media (max-width: 700px) {
+    /* Why: grid collapses to one column, so drop the heading's reserved space (that gap was
+       for the turnstone in the desktop left column) and give the section room at the bottom
+       so the bird sits below the text instead of overlapping "Community". */
+    .why-head { padding-bottom: 0 !important; }
+    .why-grid { padding-bottom: 150px !important; }
+    .why-bird { height: 128px !important; }
+    /* Register: same collapse — drop the reserved gap under the intro and give the section
+       room at the bottom so the thrush sits below the card instead of leaving a big gap. */
+    .reg-intro { padding-bottom: 0 !important; }
+    .reg-grid { padding-bottom: 170px !important; }
+    .reg-bird { height: 150px !important; }
   }
 </style>
 </head>
@@ -161,14 +187,16 @@
           <span style="font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--ink-mute)">Organised by</span>
           <a href="https://birdsociety.sg" target="_blank" rel="noopener"><img src="assets/img/birdsoc-logo.png" alt="Bird Society of Singapore" style="height:56px;width:auto;display:block"></a>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div class="spon-sep" aria-hidden="true"></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
           <span style="font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--ink-mute)">Sponsored by</span>
-          <img src="assets/img/mandai-nature.svg" alt="Mandai Nature" style="height:44px;width:auto;display:block">
+          <div class="spon-logos">
+            <div class="spon-cell"><img src="assets/img/mandai-nature.svg" alt="Mandai Nature"></div>
+            <div class="spon-cell"><img src="assets/img/nparks-logo.png" alt="National Parks Board"></div>
+            <div class="spon-cell"><img src="assets/img/a-rocha-singapore.png" alt="A Rocha Singapore"></div>
+          </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
-          <span style="font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--ink-mute)">Venue sponsor</span>
-          <span style="font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:22px;font-weight:700;letter-spacing:-0.4px;height:44px;display:flex;align-items:center">NParks</span>
-        </div>
+        <div class="spon-sep" aria-hidden="true"></div>
         <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
           <span style="font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--ink-mute)">In support of</span>
           <img src="assets/img/octoberbigday-cornell.svg" alt="eBird October Big Day" style="height:36px;width:auto;display:block">
@@ -348,10 +376,10 @@
   </section>
 
   <!-- Why -->
-  <section id="why" style="background:var(--sage);color:#EAF3EC;position:relative;overflow:hidden">
-    <img src="assets/img/turnstone.png" alt="" aria-hidden="true" style="position:absolute;left:clamp(-20px,3vw,60px);bottom:-14px;height:clamp(140px,15vw,200px);width:auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.3));pointer-events:none">
-    <div style="max-width:1100px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:28px;position:relative">
-      <div data-reveal style="display:flex;flex-direction:column;gap:10px;padding-bottom:clamp(140px,15vw,200px)">
+  <section id="why" class="why-section" style="background:var(--sage);color:#EAF3EC;position:relative;overflow:hidden">
+    <img class="why-bird" src="assets/img/turnstone.png" alt="" aria-hidden="true" style="position:absolute;left:clamp(-20px,3vw,60px);bottom:-14px;height:clamp(140px,15vw,200px);width:auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.3));pointer-events:none">
+    <div class="why-grid" style="max-width:1100px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:28px;position:relative">
+      <div class="why-head" data-reveal style="display:flex;flex-direction:column;gap:10px;padding-bottom:clamp(140px,15vw,200px)">
         <h2 style="font-size:clamp(36px,4vw,48px);line-height:1;color:#fff">Why join October Big Day?</h2>
       </div>
       <div data-reveal style="display:flex;flex-direction:column;gap:8px;border-left:2px solid rgba(255,255,255,0.35);padding-left:18px">
@@ -377,9 +405,9 @@
 
   <!-- Register -->
   <section id="register" style="background:var(--surface-hi);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);position:relative;overflow:hidden">
-    <img src="assets/img/thrush.png" alt="" aria-hidden="true" style="position:absolute;left:clamp(-60px,2vw,40px);bottom:-20px;height:clamp(170px,19vw,260px);width:auto;transform:scaleX(-1) rotate(-3deg);filter:drop-shadow(0 8px 16px rgba(24,36,54,0.18));pointer-events:none">
-    <div style="max-width:1100px;margin:0 auto;padding:88px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:40px;align-items:start;position:relative">
-      <div data-reveal style="display:flex;flex-direction:column;gap:16px;padding-bottom:clamp(150px,18vw,240px)">
+    <img class="reg-bird" src="assets/img/thrush.png" alt="" aria-hidden="true" style="position:absolute;left:clamp(-60px,2vw,40px);bottom:-20px;height:clamp(170px,19vw,260px);width:auto;transform:scaleX(-1) rotate(-3deg);filter:drop-shadow(0 8px 16px rgba(24,36,54,0.18));pointer-events:none">
+    <div class="reg-grid" style="max-width:1100px;margin:0 auto;padding:88px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:40px;align-items:start;position:relative">
+      <div class="reg-intro" data-reveal style="display:flex;flex-direction:column;gap:16px;padding-bottom:clamp(150px,18vw,240px)">
         <h2 id="registerHeading" style="font-size:clamp(40px,5.2vw,64px);line-height:0.98">Register now</h2>
         <p id="registerBody" style="font-size:17px;line-height:1.55;color:var(--ink-dim);text-wrap:pretty;max-width:440px">Slots are limited! The event starts at 1pm at Fort Canning Park and ends at your selected birding site at 6pm.</p>
         <div style="display:flex;gap:22px;flex-wrap:wrap;font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:15px;color:var(--ink-dim);padding-top:6px">
@@ -631,8 +659,7 @@
     ['What does the registration fee cover?', 'Lunch, the talks, shuttle transport from Fort Canning Centre to your birding site, and an event shirt. Fees go towards honoraria for site leaders and speakers, all of which are donated back to the Society.'],
     ['How many sites can I visit?', 'One. During registration  you\'ll pick a single site for the 4:00 – 6:00 pm bioblitz. '],
     ['Where does the event start and end?', 'The event starts at Fort Canning Centre, where lunch, activities and the talks take place. From 3:30 pm shuttles take groups out to the birding sites, and the day ends at your selected birding site at 6 pm. If you will be driving, please take note of the start and end locations for your site.'],
-    ['How do I get home afterwards?', 'Groups are dismissed from their birding sites at 6 pm and everyone makes their own way home from there. Sites are chosen to be reasonably accessible by public transport.'],
-    ['What should I bring?', 'Comfortable walking shoes, a water bottle and sun protection. Bring binoculars and a camera if you have them, and install the eBird app before the day.'],
+    ['What should I bring?', 'Comfortable walking shoes, a water bottle and sun protection. Bring binoculars and a camera if you have them. Please also make an eBird account if you don\'t have one yet, so we can include everyone in our checklists!'],
     ['What is eBird?', 'eBird is a global citizen-science platform run by the Cornell Lab of Ornithology, where bird observations are recorded and used for research and conservation. Your checklists on 10 October count towards the global October Big Day.'],
   ];
   let faqOpen = -1;
