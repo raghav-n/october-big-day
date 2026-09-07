@@ -11,6 +11,7 @@ const SIZES = [400, 800, 1200]; // Widths in pixels to generate
 const QUALITY = {
     webp: 80,
     png: { compressionLevel: 8 },
+    jpeg: { quality: 82, mozjpeg: true },
 };
 
 // --- Main Logic ---
@@ -20,8 +21,8 @@ async function processImages() {
     // Ensure the output directory exists and is empty
     await fs.emptyDir(OUTPUT_DIR);
 
-    // Find all PNG files in the source directory (excluding existing processed ones)
-    const imagePaths = glob.sync(`${SOURCE_DIR}/**/*.png`, {
+    // Find all raster source images (excluding the processed output itself)
+    const imagePaths = glob.sync(`${SOURCE_DIR}/**/*.{png,jpg,jpeg}`, {
         ignore: `${OUTPUT_DIR}/**/*`, // Don't re-process already processed images
     });
 
@@ -34,26 +35,38 @@ async function processImages() {
 
     // Process each image concurrently
     const processingTasks = imagePaths.map(async (imgPath) => {
-        const originalFileName = path.basename(imgPath, path.extname(imgPath));
+        const ext = path.extname(imgPath).toLowerCase();
+        const originalFileName = path.basename(imgPath, ext);
+        const isJpeg = ext === '.jpg' || ext === '.jpeg';
         const image = sharp(imgPath);
 
         // Generate different sizes
         for (const size of SIZES) {
+            // Never upscale: small source illustrations stay at their native size
+            // (the generated file may be smaller than `size`, but that is fine —
+            // the browser just never picks it for a display width it can't fill).
+            const resized = () => image.clone().resize({ width: size, withoutEnlargement: true });
+
             // --- Generate WebP (Modern format) ---
             const webpFileName = `${originalFileName}-${size}w.webp`;
-            await image
-                .resize({ width: size })
+            await resized()
                 .webp({ quality: QUALITY.webp })
                 .toFile(path.join(OUTPUT_DIR, webpFileName));
 
-            // --- Generate PNG (Fallback format) ---
-            const pngFileName = `${originalFileName}-${size}w.png`;
-            await image
-                .resize({ width: size })
-                .png(QUALITY.png)
-                .toFile(path.join(OUTPUT_DIR, pngFileName));
+            // --- Generate same-format fallback (PNG for PNG sources, JPEG for JPEG) ---
+            if (isJpeg) {
+                const jpegFileName = `${originalFileName}-${size}w.jpg`;
+                await resized()
+                    .jpeg(QUALITY.jpeg)
+                    .toFile(path.join(OUTPUT_DIR, jpegFileName));
+            } else {
+                const pngFileName = `${originalFileName}-${size}w.png`;
+                await resized()
+                    .png(QUALITY.png)
+                    .toFile(path.join(OUTPUT_DIR, pngFileName));
+            }
         }
-        
+
         console.log(`✓ Processed ${originalFileName}`);
     });
 
