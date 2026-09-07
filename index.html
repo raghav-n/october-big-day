@@ -112,6 +112,18 @@
   }
   @media (max-width: 860px) { .spon-sep { display: none; } }
 
+  /* Hero trio takes flight on scroll. Each .hero-bird holds the perched
+     illustration (.perch-bird) and, overlaid in register, its in-motion pose
+     (.move-bird, hidden at rest). As the hero scrolls away initFlock() slides
+     each bird straight off the left edge (all face left) while crossfading
+     perched -> moving, so the sitting birds become the flying/running versions
+     and leave. Staggered left-to-right: pitta first, thrush last (data-delay).
+     transform/opacity are JS-set. */
+  .hero-bird { will-change: transform, opacity; transform-origin: 50% 100%; }
+  .move-bird { position: absolute; bottom: 0; left: 50%; opacity: 0; pointer-events: none; max-width: none; }
+  .hero-bird-shadow { transition: none; }
+  @media (prefers-reduced-motion: reduce) { .move-bird { display: none; } }
+
   @media (max-width: 768px) { .nav-links { display: none !important; } }
   @media (max-width: 620px) { .hero-inner { padding-left: 10px !important; padding-right: 10px !important; } }
   @media (max-width: 620px) {
@@ -175,17 +187,20 @@
       </div>
     </div>
     <div style="width:100%;max-width:min(1040px,84svh);box-sizing:border-box;margin:16px auto clamp(-18px,-2.3vw,-7px);padding:0 24px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,2.2vw,20px)">
-      <div style="position:relative;flex:176 0 0;min-width:0;display:flex;justify-content:center;align-items:flex-end">
-        <div style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%) rotate(25deg);width:62%;height:clamp(6px,1.4vw,13px);border-radius:50%;background:rgba(24,36,54,0.34);filter:blur(6px)"></div>
-        <img src="assets/img/pitta.png" alt="Hooded Pitta" style="position:relative;width:100%;height:auto;display:block;transform:scaleX(-1)">
+      <div class="hero-bird" data-speed="1" data-delay="0" style="position:relative;flex:176 0 0;min-width:0;display:flex;justify-content:center;align-items:flex-end">
+        <div class="hero-bird-shadow" style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%) rotate(25deg);width:62%;height:clamp(6px,1.4vw,13px);border-radius:50%;background:rgba(24,36,54,0.34);filter:blur(6px)"></div>
+        <img class="perch-bird" src="assets/img/pitta.png" alt="Hooded Pitta" style="position:relative;width:100%;height:auto;display:block;transform:scaleX(-1)">
+        <img class="move-bird" src="assets/img/flock-pitta.png" alt="" aria-hidden="true" style="width:157%;height:auto;transform:translate(-46%,10%)">
       </div>
-      <div style="position:relative;flex:279 0 0;min-width:0;display:flex;justify-content:center;align-items:flex-end">
-        <div style="position:absolute;bottom:2px;left:54%;transform:translateX(-50%) rotate(20deg);width:56%;height:clamp(6px,1.4vw,13px);border-radius:50%;background:rgba(24,36,54,0.34);filter:blur(6px)"></div>
-        <img src="assets/img/turnstone.png" alt="Ruddy Turnstone" style="position:relative;width:100%;height:auto;display:block;transform:translateX(8%)">
+      <div class="hero-bird" data-speed="1" data-delay="0.14" style="position:relative;flex:279 0 0;min-width:0;display:flex;justify-content:center;align-items:flex-end">
+        <div class="hero-bird-shadow" style="position:absolute;bottom:2px;left:54%;transform:translateX(-50%) rotate(20deg);width:56%;height:clamp(6px,1.4vw,13px);border-radius:50%;background:rgba(24,36,54,0.34);filter:blur(6px)"></div>
+        <img class="perch-bird" src="assets/img/turnstone.png" alt="Ruddy Turnstone" style="position:relative;width:100%;height:auto;display:block;transform:translateX(8%)">
+        <img class="move-bird" src="assets/img/flock-plover.png" alt="" aria-hidden="true" style="width:133%;height:auto;transform:translate(-38%,19%)">
       </div>
-      <div style="position:relative;flex:316 0 0;min-width:0;display:flex;justify-content:center;align-items:flex-end">
-        <div style="position:absolute;bottom:2px;left:40%;transform:translateX(-50%) rotate(7deg);width:44%;height:clamp(6px,1.4vw,13px);border-radius:50%;background:rgba(24,36,54,0.34);filter:blur(6px)"></div>
-        <img src="assets/img/thrush.png" alt="Siberian Thrush" style="position:relative;width:100%;height:auto;display:block">
+      <div class="hero-bird" data-speed="1" data-delay="0.28" style="position:relative;flex:316 0 0;min-width:0;display:flex;justify-content:center;align-items:flex-end">
+        <div class="hero-bird-shadow" style="position:absolute;bottom:2px;left:40%;transform:translateX(-50%) rotate(7deg);width:44%;height:clamp(6px,1.4vw,13px);border-radius:50%;background:rgba(24,36,54,0.34);filter:blur(6px)"></div>
+        <img class="perch-bird" src="assets/img/thrush.png" alt="Siberian Thrush" style="position:relative;width:100%;height:auto;display:block">
+        <img class="move-bird" src="assets/img/flock-thrush.png" alt="" aria-hidden="true" style="width:117%;height:auto;transform:translate(-48%,26%)">
       </div>
     </div>
     </div>
@@ -755,12 +770,63 @@
     setTimeout(observe, 1200);
   }
 
+  // =====================================================================
+  //  Hero trio takes flight on scroll. As the hero scrolls away each perched
+  //  bird slides straight off the left edge while crossfading from its sitting
+  //  pose (.perch-bird) to its in-motion pose (.move-bird), so the sitting
+  //  birds seamlessly become the flying/running versions and leave. Progress
+  //  runs 0 -> 1 over the first ~0.8 viewport height; each bird eases out on
+  //  its own delay left-to-right (pitta first, thrush last).
+  // =====================================================================
+  function initFlock() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const birds = Array.prototype.slice.call(document.querySelectorAll('.hero-bird')).map(function (el) {
+      return {
+        el: el,
+        perch: el.querySelector('.perch-bird'),
+        move: el.querySelector('.move-bird'),
+        shadow: el.querySelector('.hero-bird-shadow'),
+        speed: parseFloat(el.dataset.speed) || 1,
+        delay: parseFloat(el.dataset.delay) || 0,
+      };
+    });
+    if (!birds.length) return;
+    // Smooth 0->1 ramp of x across [a,b].
+    function ramp(x, a, b) { const t = (x - a) / (b - a); return t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t); }
+    let ticking = false;
+    function update() {
+      ticking = false;
+      const vh = window.innerHeight || 1;
+      const vw = window.innerWidth || 1;
+      const p = Math.min(Math.max(window.scrollY / (vh * 0.8), 0), 1);
+      for (let i = 0; i < birds.length; i++) {
+        const b = birds[i];
+        // Per-bird progress, staggered by delay.
+        let t = (p - b.delay) / (1 - b.delay);
+        t = t < 0 ? 0 : (t > 1 ? 1 : t);
+        const fly = t * t; // ease-in: accelerate as they leave the ground
+        // Straight off the left edge (all birds face left). vw travel clears the frame.
+        const dx = -fly * (vw + 300) * b.speed;
+        b.el.style.transform = 'translateX(' + dx.toFixed(1) + 'px)';
+        // Crossfade sitting -> moving, then fade the flyer out as it exits.
+        if (b.perch) b.perch.style.opacity = (1 - ramp(t, 0, 0.32)).toFixed(3);
+        if (b.move) b.move.style.opacity = (ramp(t, 0.06, 0.34) * (1 - ramp(t, 0.82, 1))).toFixed(3);
+        if (b.shadow) b.shadow.style.opacity = (1 - ramp(t, 0, 0.2)).toFixed(3);
+      }
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
   function init() {
     loadRegistration();
     loadSites();
     renderFaq();
     initContact();
     initReveal();
+    initFlock();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
