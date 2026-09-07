@@ -847,6 +847,19 @@
   //  runs 0 -> 1 over the first ~1.28 viewport heights; each bird eases out on
   //  its own delay left-to-right (pitta first, thrush last).
   // =====================================================================
+  // Stable viewport height for the scroll-linked bird animations. Mobile
+  // browsers grow/shrink window.innerHeight as the URL bar hides on scroll and
+  // re-appears when you stop; because the birds' progress is normalised by vh,
+  // that live change re-maps the animation and makes them jump back the moment
+  // scrolling stops. Capture vh once and only refresh it on a real width change
+  // (orientation / window resize), never on the toolbar-driven height wobble.
+  let stableVh = window.innerHeight || 1;
+  let stableVw = window.innerWidth || 1;
+  function refreshStableVh() {
+    const vw = window.innerWidth || 1;
+    if (vw !== stableVw) { stableVw = vw; stableVh = window.innerHeight || 1; }
+  }
+
   function initFlock() {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const birds = Array.prototype.slice.call(document.querySelectorAll('.hero-bird')).map(function (el) {
@@ -865,8 +878,9 @@
     let ticking = false;
     function update() {
       ticking = false;
-      const vh = window.innerHeight || 1;
-      const vw = window.innerWidth || 1;
+      refreshStableVh();
+      const vh = stableVh;
+      const vw = stableVw;
       const p = Math.min(Math.max(window.scrollY / (vh * 1.28), 0), 1);
       for (let i = 0; i < birds.length; i++) {
         const b = birds[i];
@@ -914,8 +928,9 @@
     let ticking = false;
     function update() {
       ticking = false;
-      const vh = window.innerHeight || 1;
-      const vw = window.innerWidth || 1;
+      refreshStableVh();
+      const vh = stableVh;
+      const vw = stableVw;
       for (let i = 0; i < birds.length; i++) {
         const b = birds[i];
         // Vertical scroll progress from the bird's own viewport position. (rect.top
