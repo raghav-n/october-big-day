@@ -149,7 +149,15 @@
   @media (max-width: 620px) {
     /* Footer: keep the pitta perched bottom-right; shift the credits to its left to clear it */
     .foot-bird { height: 122px; right: 6px; bottom: -18px; }
-    .foot-copy { justify-content: flex-start !important; padding-right: 108px; }
+    /* The bird (~85px wide) overlaps the far right here, so replace the full-width
+       top border with a line that stops ~96px short of the right edge — otherwise
+       the divider cuts across the pitta's neck. */
+    .foot-copy {
+      justify-content: flex-start !important;
+      padding-right: 108px;
+      border-top: none !important;
+      background: linear-gradient(rgba(255,255,255,0.14), rgba(255,255,255,0.14)) top left / calc(100% - 96px) 1px no-repeat;
+    }
   }
   @media (max-width: 700px) {
     /* Why: grid collapses to one column, so drop the heading's reserved space (that gap was
@@ -446,7 +454,7 @@
 
   <!-- Why -->
   <section id="why" class="why-section" style="background:var(--sage);color:#EAF3EC;position:relative;overflow:hidden">
-    <div class="why-bird flight-bird" data-dir="left" style="position:absolute;left:clamp(-20px,3vw,60px);bottom:-14px;height:clamp(140px,15vw,200px);pointer-events:none">
+    <div class="why-bird flight-bird" data-dir="left" style="position:absolute;right:clamp(-20px,3vw,60px);bottom:-14px;height:clamp(140px,15vw,200px);pointer-events:none">
       <picture>
         <source type="image/webp" srcset="assets/img/processed/turnstone-400w.webp 400w, assets/img/processed/turnstone-800w.webp 800w" sizes="(min-width:1333px) 280px, 21vw">
         <img class="perch-bird" src="assets/img/processed/turnstone-400w.png" srcset="assets/img/processed/turnstone-400w.png 400w, assets/img/processed/turnstone-800w.png 800w" sizes="(min-width:1333px) 280px, 21vw" alt="" aria-hidden="true" style="filter:drop-shadow(0 8px 18px rgba(0,0,0,0.3))">
@@ -560,7 +568,7 @@
           <span>Raghav Narayanswamy · <a style="color:#F0A26B" href="https://github.com/raghav-n" target="_blank" rel="noopener">GitHub</a></span>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px">
-          <div style="font-size:12px;font-weight:600;color:rgba(244,238,227,0.5)">Part of</div>
+          <div style="font-size:12px;font-weight:600;color:rgba(244,238,227,0.5)">In support of</div>
           <a style="color:#F0A26B" href="https://ebird.org/octoberbigday" target="_blank" rel="noopener">eBird October Big Day</a>
         </div>
       </div>
@@ -836,7 +844,7 @@
   //  bird slides straight off the left edge while crossfading from its sitting
   //  pose (.perch-bird) to its in-motion pose (.move-bird), so the sitting
   //  birds seamlessly become the flying/running versions and leave. Progress
-  //  runs 0 -> 1 over the first ~0.8 viewport height; each bird eases out on
+  //  runs 0 -> 1 over the first ~1.28 viewport heights; each bird eases out on
   //  its own delay left-to-right (pitta first, thrush last).
   // =====================================================================
   function initFlock() {
@@ -859,7 +867,7 @@
       ticking = false;
       const vh = window.innerHeight || 1;
       const vw = window.innerWidth || 1;
-      const p = Math.min(Math.max(window.scrollY / (vh * 0.8), 0), 1);
+      const p = Math.min(Math.max(window.scrollY / (vh * 1.28), 0), 1);
       for (let i = 0; i < birds.length; i++) {
         const b = birds[i];
         // Per-bird progress, staggered by delay.
@@ -885,7 +893,7 @@
   //  The same take-flight effect for the decorative birds further down the
   //  page (.flight-bird). Each bird's progress is driven by its own position
   //  in the viewport rather than the page scroll: as the bird rises from the
-  //  lower part of the screen (top at ~0.75vh) up toward the top (~0.28vh) it
+  //  lower part of the screen (top at ~0.75vh) up past the top (~-0.19vh) it
   //  crossfades perched -> moving and slides off the edge it faces (data-dir).
   //  Same crossfade curve as the hero so the two effects read as one motif.
   // =====================================================================
@@ -897,8 +905,8 @@
         perch: el.querySelector('.perch-bird'),
         move: el.querySelector('.move-bird'),
         dir: el.dataset.dir === 'right' ? 1 : -1,
-        start: parseFloat(el.dataset.start) || 0.75, // rect.top / vh where it is still perched
-        end: parseFloat(el.dataset.end) || 0.28,      // rect.top / vh where it has flown off
+        start: parseFloat(el.dataset.start) || 0.75,  // rect.top / vh where it is still perched
+        end: parseFloat(el.dataset.end) || -0.19,      // rect.top / vh where it has flown off (span doubled to halve the speed)
       };
     });
     if (!birds.length) return;
