@@ -50,6 +50,12 @@
   html[data-reveal] [data-reveal].in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { html[data-reveal] [data-reveal] { opacity: 1; transform: none; transition: none; } }
 
+  /* Hero date/time chip */
+  .date-chip { position: relative; display: inline-flex; align-items: center; gap: clamp(9px,1.5vw,13px); font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 700; font-size: clamp(15px,2.5vw,21px); letter-spacing: -0.012em; color: var(--amber-dim); padding: clamp(8px,1vw,11px) clamp(15px,1.9vw,22px); border-radius: var(--radius-pill); background: linear-gradient(180deg, rgba(245,220,199,0.42), var(--amber-tint)); }
+  .date-chip-time { color: var(--amber); }
+  .date-chip-sep { width: 1px; align-self: stretch; margin: 3px 0; background: var(--amber-soft); }
+  @media (max-width: 400px) { .date-chip { flex-wrap: wrap; justify-content: center; row-gap: 1px; } .date-chip-sep { display: none; } }
+
   /* Buttons (design-system: Button) */
   .btn { border-radius: var(--radius-md); font-family: var(--font-body); font-weight: 600; letter-spacing: -0.1px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; white-space: nowrap; transition: background 0.12s, border-color 0.12s, opacity 0.12s; border: 1px solid transparent; }
   .btn-sm { height: 28px; font-size: 11.5px; padding: 0 10px; }
@@ -195,6 +201,7 @@
           <a href="#about" class="nav-link">About</a>
           <a href="#programme" class="nav-link">Programme</a>
           <a href="#sites" class="nav-link">Sites</a>
+          <a href="#ebird" class="nav-link">eBird</a>
           <a href="#faq" class="nav-link">FAQ</a>
           <a href="#contact" class="nav-link">Contact</a>
         </span>
@@ -208,15 +215,16 @@
     <div style="min-height:calc(100svh - 60px);display:flex;flex-direction:column">
     <div class="hero-inner" style="flex:1;width:100%;max-width:1240px;margin:0 auto;padding:32px 24px;position:relative;display:flex;align-items:center;justify-content:center">
       <div style="width:100%;max-width:820px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(18px,2.4vw,30px);min-width:0">
-        <div style="font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:clamp(20px,3.4vw,26px);font-weight:700;color:var(--amber-dim)">Saturday, 10 October 2026</div>
+        <div class="date-chip"><span>Saturday, 10 October 2026</span><span class="date-chip-sep" aria-hidden="true"></span><span class="date-chip-time">1&ndash;6 pm</span></div>
         <h1 class="wc-title" style="font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:800;line-height:0.86;letter-spacing:-0.045em;display:flex;flex-direction:column;align-items:center">
-          <span class="wc-clip" style="font-size:clamp(46px,min(16vw,20svh),196px)">OCTOBER</span>
-          <span class="wc-clip" style="font-size:clamp(44px,min(15.3vw,18svh),178px);margin-top:-4px">BIG DAY</span>
+          <span class="wc-clip" style="font-size:clamp(46px,min(16vw,17svh),196px)">OCTOBER</span>
+          <span class="wc-clip" style="font-size:clamp(44px,min(15.3vw,15svh),178px);margin-top:-4px">BIG DAY</span>
           <span style="font-size:clamp(31px,4.4vw,42px);color:var(--amber);letter-spacing:0.08em;margin-top:16px">2026</span>
         </h1>
+        <a href="#register" class="btn btn-primary btn-lg">Register now →</a>
       </div>
     </div>
-    <div style="width:100%;max-width:min(1040px,84svh);box-sizing:border-box;margin:16px auto clamp(-18px,-2.3vw,-7px);padding:0 24px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,2.2vw,20px)">
+    <div style="width:100%;max-width:min(1040px,74svh);box-sizing:border-box;margin:16px auto clamp(-18px,-2.3vw,-7px);padding:0 24px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,2.2vw,20px)">
       <div class="hero-bird" data-speed="1" data-delay="0" style="position:relative;flex:176 0 0;min-width:0;display:flex;justify-content:center;align-items:flex-end">
         <div class="hero-bird-shadow" style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%) rotate(25deg);width:62%;height:clamp(6px,1.4vw,13px);border-radius:50%;background:rgba(24,36,54,0.34);filter:blur(6px)"></div>
         <picture>
@@ -225,7 +233,7 @@
         </picture>
         <picture>
           <source type="image/webp" srcset="assets/img/processed/flock-pitta-400w.webp">
-          <img class="move-bird" src="assets/img/processed/flock-pitta-400w.png" alt="" aria-hidden="true" style="width:157%;height:auto;transform:translate(-46%,10%)">
+          <img class="move-bird" src="assets/img/processed/flock-pitta-400w.png" alt="" aria-hidden="true" style="width:157%;height:auto;transform:translate(-46%,0%)">
         </picture>
       </div>
       <div class="hero-bird" data-speed="1" data-delay="0.14" style="position:relative;flex:279 0 0;min-width:0;display:flex;justify-content:center;align-items:flex-end">
@@ -476,6 +484,43 @@
       <div data-reveal style="display:flex;flex-direction:column;gap:8px;border-left:2px solid rgba(255,255,255,0.35);padding-left:18px">
         <h3 style="font-size:20px;color:#fff">Community</h3>
         <p style="font-size:15px;line-height:1.55;color:rgba(234,243,236,0.85)">Experienced birders, scientists, and newer birders can all learn from one another, and grow the pool of people contributing to science here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is eBird -->
+  <section id="ebird" style="position:relative;overflow:hidden">
+    <div style="max-width:1100px;margin:0 auto;padding:88px 24px;display:flex;flex-direction:column;gap:36px">
+      <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px 56px;align-items:end">
+        <h2 style="font-size:clamp(36px,4.5vw,52px);line-height:1">What is eBird?</h2>
+        <p style="font-size:17px;line-height:1.6;color:var(--ink-dim);text-wrap:pretty">eBird is the world's largest citizen-science platform for birds — over two billion sightings from more than a million birders, run by the Cornell Lab of Ornithology. You log a checklist of what you saw, where and when, and eBird keeps it forever. It's always free, with a mobile app and website.</p>
+      </div>
+
+      <!-- For you / For science — the same checklist, two payoffs -->
+      <div data-reveal style="border:1px solid var(--rule);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))">
+        <div style="background:#fff;padding:clamp(28px,3.5vw,40px)">
+          <div style="font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--amber-dim)">For you</div>
+          <h3 style="font-size:23px;margin:8px 0 14px">Your birding, made easier</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:var(--ink-dim);text-wrap:pretty">A tidy, searchable record of your birding — your life list, your patch, your year. Find your target species by seeing exactly where and when others are reporting them, and plan trips with hotspot maps and recent-sighting alerts.</p>
+        </div>
+        <div style="background:var(--ink);color:#EAF3EC;padding:clamp(28px,3.5vw,40px)">
+          <div style="font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#F0A26B">For birds &amp; science</div>
+          <h3 style="font-size:23px;margin:8px 0 14px;color:#fff">Evidence for conservation</h3>
+          <p style="font-size:15.5px;line-height:1.6;color:rgba(234,243,236,0.82);text-wrap:pretty">Those same checklists join two billion others into the single largest dataset on bird distribution and abundance ever assembled — letting researchers model ranges, migration and abundance, and grounding conservation decisions in trends only large-scale data can reveal.</p>
+        </div>
+      </div>
+
+      <!-- Partnership + October Big Day tie-in + learn more -->
+      <div data-reveal style="background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:clamp(28px,3.5vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:24px 48px;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <h3 style="font-size:24px">Singapore's country partner</h3>
+          <p style="font-size:16px;line-height:1.6;color:var(--ink-dim);text-wrap:pretty">Since 2025, the Bird Society of Singapore has been eBird's official country partner for Singapore — keeping the island's records accurate and helping more birders get started. Every checklist you log on 10 October counts towards the global October Big Day.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+          <a href="https://singaporebirds.com/ebird" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Learn more about eBird →</a>
+          <a href="https://support.ebird.org/en/support/solutions/articles/48001158707-get-started-with-ebird" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">Get started with eBird ↗</a>
+          <a href="https://ebird.org/region/SG" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">Explore eBird Singapore ↗</a>
+        </div>
       </div>
     </div>
   </section>
@@ -752,7 +797,6 @@
     ['How many sites can I visit?', 'One. During registration  you\'ll pick a single site for the 4:00 – 6:00 pm bioblitz. '],
     ['Where does the event start and end?', 'The event starts at Fort Canning Centre, where lunch, activities and the talks take place. From 3:30 pm shuttles take groups out to the birding sites, and the day ends at your selected birding site at 6 pm. If you will be driving, please take note of the start and end locations for your site.'],
     ['What should I bring?', 'Comfortable walking shoes, a water bottle and sun protection. Bring binoculars and a camera if you have them. Please also make an eBird account if you don\'t have one yet, so we can include everyone in our checklists!'],
-    ['What is eBird?', 'eBird is a global citizen-science platform run by the Cornell Lab of Ornithology, where bird observations are recorded and used for research and conservation. Your checklists on 10 October count towards the global October Big Day.'],
   ];
   let faqOpen = -1;
   function renderFaq() {
