@@ -672,14 +672,20 @@
   }
   function eventUrl(ev) { return SHOP_EVENT_BASE + (ev.slug || ev.id); }
 
-  function setCopy(open) {
+  function setCopy(state) {
     const set = function (id, txt) { const el = document.getElementById(id); if (el) el.textContent = txt; };
-    if (open) {
+    if (state === 'open') {
       set('heroCta', 'Register now');
       set('placesHeading', 'places — register early');
       set('placesBody', 'Sites fill on a first-come basis. Confirmation is sent by email once payment is received.');
       set('registerHeading', 'Register now');
       set('registerBody', 'Slots are limited! The event starts at 1pm at Fort Canning Park and ends at your selected birding site at 6pm.');
+    } else if (state === 'full') {
+      set('heroCta', 'Registration full');
+      set('placesHeading', 'places — fully booked');
+      set('placesBody', 'Every site is full. Not registered? You can still take part from anywhere — submit an eBird checklist on 10 October.');
+      set('registerHeading', 'Fully booked');
+      set('registerBody', 'All sites are full — thank you! Not registered? You can still join in by submitting an eBird checklist on 10 October, wherever you are.');
     } else {
       set('heroCta', 'Registration opens soon');
       set('placesHeading', 'places — registration opens soon');
@@ -731,8 +737,14 @@
   function renderRegister() {
     const list = document.getElementById('registerList');
     if (!list) return;
-    const anyOpen = SITES.some(function (s) { return isBookable(siteEvent(s)); });
-    setCopy(anyOpen);
+    const events = SITES.map(siteEvent).filter(Boolean);
+    const anyOpen = events.some(isBookable);
+    // "full" = events are live but none are bookable and at least one is full.
+    // Otherwise (no events fetched yet / drafts) fall back to "soon".
+    const allFull = events.length > 0 && !anyOpen && events.every(function (ev) {
+      return ev.is_full || ev.global_registration_closed;
+    }) && events.some(function (ev) { return ev.is_full; });
+    setCopy(anyOpen ? 'open' : allFull ? 'full' : 'soon');
     list.innerHTML = SITES.map(rowHTML).join('');
   }
 
